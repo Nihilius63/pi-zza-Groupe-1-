@@ -9,7 +9,7 @@
 
 CREATE TABLE tables(
         idTables     Int  Auto_increment  NOT NULL ,
-        numeroPlaces Int NOT NULL
+        nbPlaces Int NOT NULL
 	,CONSTRAINT tables_PK PRIMARY KEY (idTables)
 )ENGINE=InnoDB;
 
