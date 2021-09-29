@@ -50,9 +50,10 @@ CREATE TABLE ingredient(
 CREATE TABLE historique(
         idHistorique Int  Auto_increment  NOT NULL ,
         nomProduit   Varchar (50) NOT NULL ,
+        quantite Int NOT NULL,
         prixProduit  Float NOT NULL ,
         dateCommande Date NOT NULL ,
-        nbTable      Int NOT NULL
+        numeroTable      Int NOT NULL
 	,CONSTRAINT historique_PK PRIMARY KEY (idHistorique)
 )ENGINE=InnoDB;
 
@@ -63,7 +64,8 @@ CREATE TABLE historique(
 
 CREATE TABLE commande(
         idProduit Int NOT NULL ,
-        idTables   Int NOT NULL
+        idTables   Int NOT NULL,
+        quantite Int NOT NULL
 	,CONSTRAINT commande_PK PRIMARY KEY (idProduit,idTables)
 
 	,CONSTRAINT commande_produit_FK FOREIGN KEY (idProduit) REFERENCES produit(idProduit)
