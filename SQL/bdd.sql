@@ -4,18 +4,18 @@
 
 SET NAMES utf8mb4;
 
-DROP DATABASE IF EXISTS pi-zza;
-CREATE DATABASE pi-zza;
-USE pi-zza;
+DROP DATABASE IF EXISTS pi_zza;
+CREATE DATABASE pi_zza;
+USE pi_zza;
 
 #------------------------------------------------------------
 # Table: table
 #------------------------------------------------------------
 
-CREATE TABLE table(
-        idTable  Int  Auto_increment  NOT NULL ,
+CREATE TABLE tables(
+        idTables  Int  Auto_increment  NOT NULL ,
         nbPlaces Int NOT NULL
-	,CONSTRAINT table_PK PRIMARY KEY (idTable)
+	,CONSTRAINT table_PK PRIMARY KEY (idTables)
 )ENGINE=InnoDB;
 
 
@@ -63,11 +63,11 @@ CREATE TABLE historique(
 
 CREATE TABLE commande(
         idProduit Int NOT NULL ,
-        idTable   Int NOT NULL
-	,CONSTRAINT commande_PK PRIMARY KEY (idProduit,idTable)
+        idTables   Int NOT NULL
+	,CONSTRAINT commande_PK PRIMARY KEY (idProduit,idTables)
 
 	,CONSTRAINT commande_produit_FK FOREIGN KEY (idProduit) REFERENCES produit(idProduit)
-	,CONSTRAINT commande_table0_FK FOREIGN KEY (idTable) REFERENCES table(idTable)
+	,CONSTRAINT commande_table0_FK FOREIGN KEY (idTables) REFERENCES tables(idTables)
 )ENGINE=InnoDB;
 
 
