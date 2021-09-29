@@ -1,16 +1,6 @@
 <?php
+include_once('DTO/contientDTO.php');
+class contientDAO 
+{
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of contientDAO
- *
- * @author lucas
- */
-class contientDAO {
-    //put your code here
 }

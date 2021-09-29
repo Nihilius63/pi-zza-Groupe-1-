@@ -3,9 +3,29 @@ class produitDTO
 {
     private $idProduit;
     private $nomProduit;
+    private $imageProduit;
     private $prixProduit;
     private $tailleProduit;
-    public function getIdProduit() 
+    
+    public function __construct($nomProduit, $imageProduit, $prixProduit, $tailleProduit) 
+    {
+        $this->nomProduit = $nomProduit;
+        $this->imageProduit = $imageProduit;
+        $this->prixProduit = $prixProduit;
+        $this->tailleProduit = $tailleProduit;
+    }
+
+    public function getImageProduit() 
+    {
+        return $this->imageProduit;
+    }
+
+    public function setImageProduit($imageProduit): void 
+    {
+        $this->imageProduit = $imageProduit;
+    }
+
+        public function getIdProduit() 
     {
         return $this->idProduit;
     }

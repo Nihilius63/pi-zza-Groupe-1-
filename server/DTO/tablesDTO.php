@@ -2,7 +2,12 @@
 class tablesDTO 
 {
     private $idTables;
-    private $nbPlaces;
+    private $numeroPlaces;
+    public function __construct($numeroPlaces) 
+    {
+        $this->numeroPlaces = $numeroPlaces;
+    }
+
     public function getIdTables() 
     {
         return $this->idTables;
@@ -10,7 +15,7 @@ class tablesDTO
 
     public function getNbPlaces() 
     {
-        return $this->nbPlaces;
+        return $this->numeroPlaces;
     }
 
     public function setIdTables($idTables): void 
@@ -18,8 +23,8 @@ class tablesDTO
         $this->idTables = $idTables;
     }
 
-    public function setNbPlaces($nbPlaces): void 
+    public function setNbPlaces($numeroPlaces): void 
     {
-        $this->nbPlaces = $nbPlaces;
+        $this->numeroPlaces = $numeroPlaces;
     }
 }

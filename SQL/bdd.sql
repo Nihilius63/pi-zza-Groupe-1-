@@ -14,7 +14,7 @@ USE pi_zza;
 
 CREATE TABLE tables(
         idTables  Int  Auto_increment  NOT NULL ,
-        nbPlaces Int NOT NULL
+        numeroPlaces Int NOT NULL
 	,CONSTRAINT table_PK PRIMARY KEY (idTables)
 )ENGINE=InnoDB;
 
@@ -27,6 +27,7 @@ CREATE TABLE produit(
         idProduit   Int  Auto_increment  NOT NULL ,
         nomProduit  Varchar (50) NOT NULL ,
         prixProduit Float NOT NULL,
+        imageProduit Varchar(50) NOT NULL,
 	tailleProduit Varchar (50) NOT NULL
 	,CONSTRAINT produit_PK PRIMARY KEY (idProduit)
 )ENGINE=InnoDB;

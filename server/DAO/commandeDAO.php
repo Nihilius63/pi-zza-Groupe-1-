@@ -1,16 +1,6 @@
 <?php
+include_once('DTO/commandeDTO.php');
+class commandeDAO 
+{
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of commandeDAO
- *
- * @author lucas
- */
-class commandeDAO {
-    //put your code here
 }
