@@ -3,54 +3,51 @@
 include_once('tools/DataBaseLinker.php');
 include_once('DAO/ProduitDAO.php');
 
-class produitControllers {
-
+class produitControllers 
+{
     private $requestMethod;
     private $produitId = null;
-
     public function __construct($requestMethod, $id) 
     {
         $this->requestMethod = $requestMethod;
 		$this->produitId = $id;
     }
 
-    public function processRequest() {
-		
-	$response = $this->notFoundResponse();
-		
-        switch ($this->requestMethod) {
-            case 'GET':
-                if ($this->CarteId) {
-                    $response = $this->getproduit($this->produitId);
-                } else 
-                {
-                    $response = $this->getAllproduit();
-                };
-                break;
-            case 'POST':
-                if (empty($this->produitId)) 
-                {
-                    $response = $this->createproduit();
-                }
-                break;
-            case 'PUT':
-                if (empty($this->produitId))
-                {
-                    $reponse=$this->updateproduit($this->produitId);
-                }
-                break;
-            case 'DELETE':
-                if($this->produitId)
-                {
-                    $reponse=$this->deleteproduit($this->produitId);
-                }
-                break;
-            default:
-                $response = $this->notFoundResponse();
-                break;
-        }
+public function processRequest() 
+{	
+    $response = $this->notFoundResponse();	
+    switch ($this->requestMethod) {
+        case 'GET':
+            if ($this->tablesId) {
+                $response = $this->getproduit($this->produitId);
+            } else 
+            {
+                $response = $this->getAllproduit();
+            };
+            break;
+        case 'POST':
+            if (empty($this->produitId)) 
+            {
+                $response = $this->createproduit();
+            }
+            break;
+        case 'PUT':
+            if (empty($this->produitId))
+            {
+                $reponse=$this->updateproduit($this->produitId);
+            }
+            break;
+        case 'DELETE':
+            if($this->produitId)
+            {
+                $reponse=$this->deleteproduit($this->produitId);
+            }
+            break;
+        default:
+            $response = $this->notFoundResponse();
+            break;
     }
-
+}
     public function getAllproduit() {		
         $result = produitDAO::getList();
         $response['body'] = json_encode($result);
@@ -88,7 +85,7 @@ class produitControllers {
         {
             $produit=new produitDTO($input["nomProduit"],$input["prixProduit"],$input["tailleProduit"]);
             $produit->setIdProduit($input["idProduit"]);
-            CarteDAO::update($Carte);
+            produitDAO::update($produit);
         }
         return null;
     }

@@ -63,7 +63,8 @@ CREATE TABLE commande(
 
 CREATE TABLE contient(
         idCommande Int NOT NULL ,
-        idProduit  Int NOT NULL
+        idProduit  Int NOT NULL ,
+        quantite   Int NOT NULL
 	,CONSTRAINT contient_PK PRIMARY KEY (idCommande,idProduit)
 
 	,CONSTRAINT contient_commande_FK FOREIGN KEY (idCommande) REFERENCES commande(idCommande)

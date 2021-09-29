@@ -14,7 +14,7 @@ class produitDAO
         if (sizeof($resultats) > 0)
         {
             $result = $resultats[0];
-            $Produit = new produiteDTO($result["nomProduit"],$result["prixProduit"],$result["imageProduit"],$result["tailleProduit"]);
+            $Produit = new produitDTO($result["nomProduit"],$result["prixProduit"],$result["imageProduit"],$result["tailleProduit"]);
             $Produit->setIdProduit($result["idProduit"]);
         }
         return $Produit;

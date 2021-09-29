@@ -43,20 +43,20 @@ class tablesDAO
         $state->execute();
     }
 
-    public static function insert($Produit)
+    public static function insert($table)
     {
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('INSERT INTO tables(numeroPlaces) VALUES(:numeroPlaces)');
-        $state->bindValue(":numeroPlaces", $Produit->getNumeroPlaces());
+        $state->bindValue(":numeroPlaces", $table->getNumeroPlaces());
         $state->execute();
     }
 
-    public static function update($Produit)
+    public static function update($table)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE Marque SET numeroPlaces=:numeroPlaces WHERE idProduit = :idProduit');
-        $state->bindValue(":numeroPlaces",$Produit->getnumeroPlaces());
-        $state->bindValue(":idTables", $Produit->getIdTables());
+        $state = $connex->prepare('UPDATE tables SET numeroPlaces=:numeroPlaces WHERE idTables = :idTables');
+        $state->bindValue(":numeroPlaces",$table->getnumeroPlaces());
+        $state->bindValue(":idTables", $table->getIdTables());
         $state->execute();
     }
 }
