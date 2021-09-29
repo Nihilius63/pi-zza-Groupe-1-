@@ -26,7 +26,8 @@ CREATE TABLE table(
 CREATE TABLE produit(
         idProduit   Int  Auto_increment  NOT NULL ,
         nomProduit  Varchar (50) NOT NULL ,
-        prixProduit Float NOT NULL
+        prixProduit Float NOT NULL,
+	tailleProduit Varchar (50) NOT NULL
 	,CONSTRAINT produit_PK PRIMARY KEY (idProduit)
 )ENGINE=InnoDB;
 
