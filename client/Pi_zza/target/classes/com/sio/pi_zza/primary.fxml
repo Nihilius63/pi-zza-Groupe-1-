@@ -9,14 +9,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PrimaryController">
    <children>
@@ -88,19 +86,19 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ScrollPane prefHeight="200.0" prefWidth="300.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                          </content>
+                           <content>
+                              <Label prefHeight="102.0" prefWidth="295.0" text="PIZZA" />
+                           </content>
                         </ScrollPane>
                         <ScrollPane prefHeight="712.0" prefWidth="300.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                          </content>
+                           <content>
+                              <Label prefHeight="102.0" prefWidth="295.0" text="BOISSONS" />
+                           </content>
                         </ScrollPane>
                         <ScrollPane prefHeight="712.0" prefWidth="300.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                          </content>
+                           <content>
+                              <Label prefHeight="102.0" prefWidth="295.0" text="DESSERTS" />
+                           </content>
                         </ScrollPane>
                         <VBox prefHeight="712.0" prefWidth="311.0">
                            <children>
@@ -154,7 +152,10 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" text="PULL" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="270.0" text="PULL">
+                                 <VBox.margin>
+                                    <Insets left="100.0" right="100.0" />
+                                 </VBox.margin></Button>
                            </children>
                         </VBox>
                      </children>
