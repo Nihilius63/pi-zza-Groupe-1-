@@ -1,11 +1,11 @@
 <?php
 class contientDTO 
 {
-    private $idIngredient;
+    private $idCommande;
     private $idProduit;
-    public function getIdIngredient() 
+    public function getIdCommande() 
     {
-        return $this->idIngredient;
+        return $this->idCommande;
     }
 
     public function getIdProduit() 
@@ -13,9 +13,9 @@ class contientDTO
         return $this->idProduit;
     }
 
-    public function setIdIngredient($idIngredient): void 
+    public function setIdCommande($idCommande): void 
     {
-        $this->idIngredient = $idIngredient;
+        $this->idCommande = $idCommande;
     }
 
     public function setIdProduit($idProduit): void 

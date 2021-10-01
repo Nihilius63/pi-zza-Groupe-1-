@@ -1,37 +1,30 @@
 <?php
 class commandeDTO 
 {
-    private $idProduit;
     private $idTables;
-    private $quantite;
-    public function getQuantite() 
+    private $idCommande;
+    public function __construct($idTables) 
     {
-        return $this->quantite;
+        $this->idTables = $idTables;
     }
-
-    public function setQuantite($quantite): void 
-    {
-        $this->quantite = $quantite;
-    }
-
-        public function getIdProduit() 
-    {
-        return $this->idProduit;
-    }
-
-    public function getIdTables() 
+        public function getIdTables() 
     {
         return $this->idTables;
     }
 
-    public function setIdProduit($idProduit): void 
+    public function getIdCommande() 
     {
-        $this->idProduit = $idProduit;
+        return $this->idCommande;
     }
 
     public function setIdTables($idTables): void 
     {
-        $this->idTables = $idTables;
+        $this->idTables = $$idTables;
+    }
+
+    public function setIdCommande($idCommande): void 
+    {
+        $this->idCommande = $idCommande;
     }
 
 
