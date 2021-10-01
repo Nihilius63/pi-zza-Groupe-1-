@@ -6,7 +6,16 @@ class historiqueDTO
     private $quantite;
     private $prixProduit;
     private $dateCommande;
-    private $numeroTable;
+    private $numeroTables;
+    public function __construct($nomProduit, $quantite, $prixProduit, $dateCommande, $numeroTable) 
+    {
+        $this->nomProduit = $nomProduit;
+        $this->quantite = $quantite;
+        $this->prixProduit = $prixProduit;
+        $this->dateCommande = $dateCommande;
+        $this->numeroTables = $numeroTable;
+    }
+
     public function getIdHistorique() 
     {
         return $this->idHistorique;
@@ -34,7 +43,7 @@ class historiqueDTO
 
     public function getNumeroTable() 
     {
-        return $this->numeroTable;
+        return $this->numeroTables;
     }
 
     public function setIdHistorique($idHistorique): void 
@@ -64,7 +73,7 @@ class historiqueDTO
 
     public function setNumeroTable($numeroTable): void 
     {
-        $this->numeroTable = $numeroTable;
+        $this->numeroTables = $numeroTable;
     }
 
 

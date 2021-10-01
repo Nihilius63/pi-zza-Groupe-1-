@@ -32,7 +32,7 @@ class commandeDAO
 
         foreach ($resultats as $result)
         {
-                $Commande = new CommandeDTO($result["idTables"]);
+                $Commande = new commandeDTO($result["idTables"]);
                 $Commande->setIdCommande($result["idCommande"]);
                 $Commandes[] = $Commande;
         }
@@ -54,7 +54,6 @@ class commandeDAO
         $state->bindValue(":idCommande", $Commande->getIdCommande());
         $state->bindValue(":idTables", $Commande->getIdTables());
         $state->execute();
-        $marque->setIdMarque($connex->lastInsertId());
     }
 
     public static function update($Commande)

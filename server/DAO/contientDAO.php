@@ -2,11 +2,11 @@
 include_once('DTO/contientDTO.php');
 class contientDAO 
 {
-           public static function get($id)
+    public static function get($id)
     {
-        $Commande = null;
+        $contient = null;
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('SELECT * FROM commande WHERE idCommande = :idCommande');
+        $state = $connex->prepare('SELECT * FROM contient WHERE idCommande = :idCommande');
         $state->bindValue(":idCommande", $id);
         $state->execute();
         $resultats = $state->fetchAll();
@@ -14,15 +14,15 @@ class contientDAO
         if (sizeof($resultats) > 0)
         {
             $result = $resultats[0];
-            $Commande = new commandeDTO($result["idTables"],$result["quantite"]);
-            $Commande->setIdProduit($result["idCommande"]);
+            $contient = new commandeDTO($result["idProduit"],$result["quantite"]);
+            $contient->setIdCommande($result["idCommande"]);
         }
-        return $Commande;
+        return $contient;
     }
 
     public static function getList()
     {
-        $Commande = array();
+        $contient = array();
 
         $connex = DatabaseLinker::getConnexion();
 
@@ -32,41 +32,39 @@ class contientDAO
 
         foreach ($resultats as $result)
         {
-                $Commande = new CommandeDTO($result["idProduit"],$result["quantite"]);
-                $Commande->setIdProduit($result["idProduit"]);
+                $contient = new contientDTO($result["idProduit"],$result["quantite"]);
+                $contient->setIdCommande($result["idCommande"]);
 
-                $Commandes[] = $Commande;
+                $contients[] = $contient;
         }
-        return $Commandes;
+        return $contient;
     }
 
     public static function delete($id)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('DELETE FROM commande WHERE idCommande = :idCommande');
+        $state = $connex->prepare('DELETE FROM contient WHERE idCommande = :idCommande');
         $state->bindValue(":idCommande", $id);
         $state->execute();
     }
 
-    public static function insert($Commande)
+    public static function insert($contient)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('INSERT INTO commande(idCommande,idProduit,quantite) VALUES(:idCommande,:idProduit,:quantite)');
-        $state->bindValue(":idCommande", $Commande->getIdCommande());
-        $state->bindValue(":idProduit", $Commande->getIdProduit());
-        $state->bindValue(":quantite", $Commande->getQuantite());
-        $state->execute();
-        $marque->setIdMarque($connex->lastInsertId());
+        $state = $connex->prepare('INSERT INTO contient(idCommande,idProduit,quantite) VALUES(:idCommande,:idProduit,:quantite)');
+        $state->bindValue(":idCommande", $contient->getIdCommande());
+        $state->bindValue(":idProduit", $contient->getIdProduit());
+        $state->bindValue(":quantite", $contient->getQuantite());
     }
 
-    public static function update($Commande)
+    public static function update($contient)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE Marque SET idProduit=:idProduit,idCommande=:idCommande,quantite=:quantite WHERE idCommande = :idCommande');
-        $state->bindValue(":idProduit",$Commande->getIdProduit());
-        $state->bindValue(":idCommande", $Commande->getIdCommande());
-        $state->bindValue(":quantite", $Commande->getQuantite());
-        $state->bindValue(":idCommande", $Commande->getIdCommande());
+        $state = $connex->prepare('UPDATE Contient SET idProduit=:idProduit,idCommande=:idCommande,quantite=:quantite WHERE idCommande = :idCommande');
+        $state->bindValue(":idProduit",$contient->getIdProduit());
+        $state->bindValue(":idCommande", $contient->getIdCommande());
+        $state->bindValue(":quantite", $contient->getQuantite());
+        $state->bindValue(":idCommande", $contient->getIdCommande());
         $state->execute();
     }
 }

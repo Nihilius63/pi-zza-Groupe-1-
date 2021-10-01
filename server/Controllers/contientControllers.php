@@ -1,14 +1,15 @@
 <?php
+
 include_once('tools/DataBaseLinker.php');
-include_once('DAO/tablesDAO.php');
-class tablesControllers 
+include_once('DAO/contientDAO.php');
+class contientControllers 
 {
     private $requestMethod;
-    private $tablesId = null;
+    private $contientId = null;
     public function __construct($requestMethod, $id) 
     {
         $this->requestMethod = $requestMethod;
-        $this->tablesId = $id;
+        $this->contientId = $id;
     }
 
     public function processRequest() 
@@ -16,29 +17,29 @@ class tablesControllers
         $response = $this->notFoundResponse();	
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->tablesId) {
-                    $response = $this->getTable($this->tableId);
+                if ($this->contientId) {
+                    $response = $this->getContient($this->contientId);
                 } else 
                 {
-                    $response = $this->getAllTables();
+                    $response = $this->getAllContient();
                 };
                 break;
             case 'POST':
-                if (empty($this->tablesId)) 
+                if (empty($this->contientId)) 
                 {
-                    $response = $this->createTables();
+                    $response = $this->createContient();
                 }
                 break;
             case 'PUT':
-                if (empty($this->tablesId))
+                if (empty($this->contientId))
                 {
-                    $reponse=$this->updateTables($this->tablesId);
+                    $reponse=$this->updateContient($this->contientId);
                 }
                 break;
             case 'DELETE':
-                if($this->tablesId)
+                if($this->contientId)
                 {
-                    $reponse=$this->deleteTables($this->tablesId);
+                    $reponse=$this->deleteContient($this->contientId);
                 }
                 break;
             default:
@@ -47,14 +48,14 @@ class tablesControllers
         }
     }
 
-        public function getAllTables() {		
-            $result = tablesDAO::getList();
+        public function getAllContient() {		
+            $result = contientDAO::getList();
             $response['body'] = json_encode($result);
             return $response;
         }
 
-        private function getTable($id) {	
-            $result = tablesDAO::get($id);
+        private function getContient($id) {	
+            $result = contientDAO::get($id);
             if ($result == null) 
             {
                 return null;
@@ -62,35 +63,35 @@ class tablesControllers
             return $response;
         }
 
-        private function createTables()
+        private function createContient()
         {
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-            if (!isset($input["numeroPlaces"])) 
+            if (!isset($input["idCommande"],$input["idProduit"],$input["quantite"])) 
             {
                 return $this->unprocessableEntityResponse();
             }
             else
             {
-                $tables=new tablesDTO($input["numeroPlaces"]);
-                tablesDAO::insert($tables);
-                $response['body'] = json_encode($Carte);
+                $contient=new contientDTO($input["idProduit"],$input["quantite"]);
+                contientDAO::insert($contient);
+                $response['body'] = json_encode($contient);
                 return $response;
             }
         }
-        private function updateTables() 
+        private function updateContient() 
         {
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-            if (isset($input["numeroPlaces"]))
+            if (isset($input["idCommande"],$input["idProduit"],$input["quantite"]))
             {
-                $tables=new tablesDTO($input["numeroPlaces"]);
-                $tables->setIdTables($input["idTables"]);
-                tablesDAO::update($tables);
+                $this->contientId=contientDTO($input["idProduit"],$input["quantite"]);
+                $this->contientId->setIdCommande($input["idCommande"]);
+                commandeDAO::update($this->contientId);
             }
             return null;
         }
-        private function deleteTables($id) 
+        private function deleteContient($id) 
         {
-            tablesDAO::delete($id);	
+            contientDAO::delete($id);	
             $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
             $response['body'] = null;
             return $response;

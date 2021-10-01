@@ -17,7 +17,7 @@ class commandeControllers
         switch ($this->requestMethod) {
             case 'GET':
                 if ($this->commandeId) {
-                    $response = $this->getCommandes($this->tableId);
+                    $response = $this->getCommandes($this->commandeId);
                 } else 
                 {
                     $response = $this->getAllCommandes();
@@ -90,7 +90,7 @@ class commandeControllers
         }
         private function deleteTables($id) 
         {
-            tablesDAO::delete($id);	
+            commandeDAO::delete($id);	
             $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
             $response['body'] = null;
             return $response;

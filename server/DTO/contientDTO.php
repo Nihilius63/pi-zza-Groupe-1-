@@ -3,7 +3,24 @@ class contientDTO
 {
     private $idCommande;
     private $idProduit;
-    public function getIdCommande() 
+    private $quantite;
+    public function __construct($idProduit, $quantite) 
+    {
+        $this->idProduit = $idProduit;
+        $this->quantite = $quantite;
+    }
+
+    public function getQuantite() 
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite($quantite): void 
+    {
+        $this->quantite = $quantite;
+    }
+
+        public function getIdCommande() 
     {
         return $this->idCommande;
     }

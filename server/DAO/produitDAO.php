@@ -43,7 +43,7 @@ class produitDAO
     public static function delete($id)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('DELETE FROM Produit WHERE idProduit = :idProduit');
+        $state = $connex->prepare('DELETE FROM produit WHERE idProduit = :idProduit');
         $state->bindValue(":idProduit", $id);
         $state->execute();
     }
@@ -51,19 +51,18 @@ class produitDAO
     public static function insert($Produit)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('INSERT INTO Produit(nomProduit,prixProduit,imageProduit,tailleProduit) VALUES(:nomProduit,:prixProduit,:imageProduit,:tailleProduit)');
+        $state = $connex->prepare('INSERT INTO produit(nomProduit,prixProduit,imageProduit,tailleProduit) VALUES(:nomProduit,:prixProduit,:imageProduit,:tailleProduit)');
         $state->bindValue(":nomProduit", $Produit->getNomProduit());
         $state->bindValue(":prixProduit", $Produit->getPrixProduit());
         $state->bindValue(":imageProduit", $Produit->getImageProduit());
         $state->bindValue(":tailleProduit", $Produit->getTailleProduit());
         $state->execute();
-        $marque->setIdMarque($connex->lastInsertId());
     }
 
     public static function update($Produit)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE Marque SET nomProduit=:nomProduit,prixProduit=:prixProduit,imageProduit=:imageProduit,tailleProduit=:tailleProduit WHERE idProduit = :idProduit');
+        $state = $connex->prepare('UPDATE produit SET nomProduit=:nomProduit,prixProduit=:prixProduit,imageProduit=:imageProduit,tailleProduit=:tailleProduit WHERE idProduit = :idProduit');
         $state->bindValue(":nomProduit",$Produit->getNomProduit());
         $state->bindValue(":prixProduit", $Produit->getPrixProduit());
         $state->bindValue(":imageProduit", $Produit->getImageProduit());

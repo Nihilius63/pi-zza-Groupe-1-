@@ -1,7 +1,7 @@
 <?php
 
 include_once('tools/DataBaseLinker.php');
-include_once('DAO/ProduitDAO.php');
+include_once('DAO/produitDAO.php');
 
 class produitControllers 
 {

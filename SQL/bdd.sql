@@ -42,7 +42,7 @@ CREATE TABLE historique(
         quantite     Int NOT NULL ,
         prixProduit  Float NOT NULL ,
         dateCommande Date NOT NULL ,
-        numeroTable  Int NOT NULL
+        numeroTables  Int NOT NULL
 	,CONSTRAINT historique_PK PRIMARY KEY (idHistorique)
 )ENGINE=InnoDB;
 
