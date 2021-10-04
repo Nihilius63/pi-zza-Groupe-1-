@@ -1,34 +1,112 @@
+package com.sio.pi_zza;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import org.json.JSONObject;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.Form;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.MultivaluedHashMap;
-import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
-import org.glassfish.jersey.client.ClientResponse;
+import java.io.File;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import org.json.JSONObject;
+import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
     @FXML
-    private ScrollPane srollView;
+    private TextField inputNom; 
+    
+    @FXML
+    private TextField inputPrix;
+    
+    @FXML
+    private TextField inputTaille;
+    
+    @FXML
+    private TextField inputCatégorie;
+    
+    @FXML
+    private Button addProduit;
+    
+    @FXML
+    private Button insertImage;
+    
+    @FXML
+    private VBox vbox;
+    
+    private String inputImage = "";
+    
+    @FXML
+    private void clickOnAddProduit() {
+        
+        if(inputNom.getText() == null || inputPrix.getText() == null || inputTaille.getText() == null || inputCatégorie.getText() == null || inputImage == null) {
+            System.out.println("Veuillez remplir toute les cases");
+        }
+        
+        // Requete vers l'URL
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target("http://localhost/WebserviceTD/server/carte");
+        
+        // Méthode GET
+        Invocation.Builder invocationBuilder
+                = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationBuilder.header("some-header", "true");
+        Response response = invocationBuilder.get();
+        System.out.println(response.readEntity(String.class));
+        
+        // Methode POST
+        JSONObject jo = new JSONObject();
+        jo.put("nomCarte", inputNom.getText());
+        jo.put("prix",inputPrix.getText());
+        jo.put("idMarque",inputTaille.getText());
+        Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
+        System.out.println("Form response " + larep.getStatus());
+        inputImage = "";
+        
+    }
+    
+    @FXML
+    private void inputAddImageProduit() {
+            
+        Stage newStage = new Stage();
+            
+        FileChooser fileChooser2 = new FileChooser();
+        fileChooser2.setTitle("Open Resource File");
+        fileChooser2.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser2.showOpenDialog(newStage);
+        
+        inputImage = selectedFile.toURI().toString();
+        
+        
+            
+    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    
         
-     // Requete vers l'URL
+        ImageView closeButton = new ImageView("https://icon-library.com/images/close-icon-png/close-icon-png-19.jpg");
+        closeButton.setFitHeight(250);
+        closeButton.setFitWidth(250);
+        
+        closeButton.setTranslateX(10);
+        closeButton.setTranslateY(10);
+        
+        vbox.getChildren().add(closeButton);
+        
+        /*
+        // Requete vers l'URL
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target("http://localhost/Webservice/server/carte");
+        WebTarget webTarget = client.target("http://localhost/WebserviceTD/server/carte");
         
         // Méthode GET
         Invocation.Builder invocationBuilder
@@ -71,7 +149,7 @@ public class PrimaryController implements Initializable {
         jo.put("prix","300");
         jo.put("idMarque","1");
         Response larep2=webTarget.request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
-        System.out.println("Form response " + larep.getStatus());
+        System.out.println("Form response " + larep.getStatus());*/
 
 }
 }
