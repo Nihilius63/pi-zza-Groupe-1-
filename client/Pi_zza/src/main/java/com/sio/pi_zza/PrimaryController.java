@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.event.EventHandler;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -15,39 +16,21 @@ import java.io.File;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import org.json.JSONObject;
 import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
-
-    @FXML
-    private TextField inputNom; 
-    
-    @FXML
-    private TextField inputPrix;
-    
-    @FXML
-    private TextField inputTaille;
-    
-    @FXML
-    private TextField inputCatégorie;
-    
-    @FXML
-    private Button addProduit;
-    
-    @FXML
-    private Button insertImage;
-    
-    @FXML
-    private VBox vbox;
     
     private String inputImage = "";
-    
+
     @FXML
+    private ImageView close;
+
     private void clickOnAddProduit() {
-        
+        /*
         if(inputNom.getText() == null || inputPrix.getText() == null || inputTaille.getText() == null || inputCatégorie.getText() == null || inputImage == null) {
             System.out.println("Veuillez remplir toute les cases");
         }
@@ -70,13 +53,12 @@ public class PrimaryController implements Initializable {
         jo.put("idMarque",inputTaille.getText());
         Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
         System.out.println("Form response " + larep.getStatus());
-        inputImage = "";
+        inputImage = "";*/
         
     }
-    
-    @FXML
+
     private void inputAddImageProduit() {
-            
+            /*
         Stage newStage = new Stage();
             
         FileChooser fileChooser2 = new FileChooser();
@@ -86,14 +68,32 @@ public class PrimaryController implements Initializable {
         File selectedFile = fileChooser2.showOpenDialog(newStage);
         
         inputImage = selectedFile.toURI().toString();
-        
+        */
         
             
     }
-    
+
+    @FXML
+    private void closeButton() {
+        App.close();
+    }
+
+    public void startController() {
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                closeButton();
+            }
+        };
+        close.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
+        startController();
+
+        /*
         ImageView closeButton = new ImageView("https://icon-library.com/images/close-icon-png/close-icon-png-19.jpg");
         closeButton.setFitHeight(250);
         closeButton.setFitWidth(250);
@@ -102,7 +102,7 @@ public class PrimaryController implements Initializable {
         closeButton.setTranslateY(10);
         
         vbox.getChildren().add(closeButton);
-        
+        */
         /*
         // Requete vers l'URL
         Client client = ClientBuilder.newClient();

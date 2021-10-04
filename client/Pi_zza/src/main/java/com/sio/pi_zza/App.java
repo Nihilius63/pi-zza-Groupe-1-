@@ -33,6 +33,10 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    static void close() {
+        stages.close();
+    }
+
     public static void main(String[] args) {
         launch();
     }

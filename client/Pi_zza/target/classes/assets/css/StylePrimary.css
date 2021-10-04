@@ -5,3 +5,16 @@
 .sidebar{
     -fx-background-color: #333645;
 }
+
+.btns {
+    -fx-background-color: transparent;
+}
+
+.btns:hover {
+    -fx-background-color: #202332;
+}
+
+.box {
+    -fx-border-color: #7C8184;
+    -fx-border-width: 1px 0px 0px 0px;
+}
