@@ -33,29 +33,49 @@ class contientControllers
             case 'PUT':
                 if (empty($this->contientId))
                 {
-                    $reponse=$this->updateContient($this->contientId);
+                    $response=$this->updateContient($this->contientId);
+                    $response['status_code_header'] = 'HTTP/1.1 200 Successfull Update';
                 }
                 break;
             case 'DELETE':
                 if($this->contientId)
                 {
-                    $reponse=$this->deleteContient($this->contientId);
+                    $response=$this->deleteContient($this->contientId);
                 }
                 break;
             default:
                 $response = $this->notFoundResponse();
                 break;
         }
+        if (isset($response['body']))
+        {
+            if ($response['body'] != null && $response['status_code_header'] === "HTTP/1.1 200 OK") 
+            {
+                echo $response['body'];
+            }
+            else 
+            {
+                echo $response['status_code_header'];
+                echo $response['body'];
+            }
+        }
+        else
+        {
+            echo $response['status_code_header'];
+        }
     }
 
         public function getAllContient() {		
             $result = contientDAO::getList();
             $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
             return $response;
         }
 
         private function getContient($id) {	
             $result = contientDAO::get($id);
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
             if ($result == null) 
             {
                 return null;
@@ -66,15 +86,18 @@ class contientControllers
         private function createContient()
         {
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-            if (!isset($input["idCommande"],$input["idProduit"],$input["quantite"])) 
-            {
-                return $this->unprocessableEntityResponse();
-            }
-            else
+            if (isset($input["idCommande"],$input["idProduit"],$input["quantite"])) 
             {
                 $contient=new contientDTO($input["idProduit"],$input["quantite"]);
+                $contient->setIdCommande($input["idCommande"]);
                 contientDAO::insert($contient);
                 $response['body'] = json_encode($contient);
+                $response['status_code_header'] = 'HTTP/1.1 200 Successfull';
+                return $response;
+            }
+            else 
+            {
+                $response['status_code_header'] = 'HTTP/1.1 200 Error';
                 return $response;
             }
         }
@@ -83,9 +106,9 @@ class contientControllers
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
             if (isset($input["idCommande"],$input["idProduit"],$input["quantite"]))
             {
-                $this->contientId=contientDTO($input["idProduit"],$input["quantite"]);
-                $this->contientId->setIdCommande($input["idCommande"]);
-                commandeDAO::update($this->contientId);
+                $contient=new contientDTO($input["idProduit"],$input["quantite"]);
+                $contient->setIdCommande($input["idCommande"]);
+                contientDAO::update($contient);
             }
             return null;
         }
@@ -96,4 +119,10 @@ class contientControllers
             $response['body'] = null;
             return $response;
         }
+            private function notFoundResponse() 
+    {
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
+    }
 }

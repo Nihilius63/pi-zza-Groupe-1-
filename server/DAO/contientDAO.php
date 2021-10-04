@@ -14,7 +14,7 @@ class contientDAO
         if (sizeof($resultats) > 0)
         {
             $result = $resultats[0];
-            $contient = new commandeDTO($result["idProduit"],$result["quantite"]);
+            $contient = new contientDTO($result["idProduit"],$result["quantite"]);
             $contient->setIdCommande($result["idCommande"]);
         }
         return $contient;
@@ -26,18 +26,16 @@ class contientDAO
 
         $connex = DatabaseLinker::getConnexion();
 
-        $state = $connex->prepare('SELECT * FROM commande');
+        $state = $connex->prepare('SELECT * FROM contient');
         $state->execute();
         $resultats = $state->fetchAll();
-
         foreach ($resultats as $result)
         {
-                $contient = new contientDTO($result["idProduit"],$result["quantite"]);
-                $contient->setIdCommande($result["idCommande"]);
-
-                $contients[] = $contient;
+            $contient = new contientDTO($result["idProduit"],$result["quantite"]);
+            $contient->setIdCommande($result["idCommande"]);
+            $contients[] = $contient;
         }
-        return $contient;
+        return $contients;
     }
 
     public static function delete($id)
@@ -55,16 +53,18 @@ class contientDAO
         $state->bindValue(":idCommande", $contient->getIdCommande());
         $state->bindValue(":idProduit", $contient->getIdProduit());
         $state->bindValue(":quantite", $contient->getQuantite());
+        $state->execute();
     }
 
     public static function update($contient)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE Contient SET idProduit=:idProduit,idCommande=:idCommande,quantite=:quantite WHERE idCommande = :idCommande');
+        $state = $connex->prepare('UPDATE Contient SET idProduit=:idProduit,idCommande=:idCommande,quantite=:quantite WHERE idCommande = :idCommande AND idProduit=:idProduit');
         $state->bindValue(":idProduit",$contient->getIdProduit());
         $state->bindValue(":idCommande", $contient->getIdCommande());
         $state->bindValue(":quantite", $contient->getQuantite());
         $state->bindValue(":idCommande", $contient->getIdCommande());
+        $state->bindValue(":idProduit",$contient->getIdProduit());
         $state->execute();
     }
 }

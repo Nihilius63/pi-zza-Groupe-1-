@@ -13,11 +13,11 @@ class tablesControllers
 
     public function processRequest() 
     {
-        $response = $this->notFoundResponse();	
+        $response=$this->notFoundResponse();
         switch ($this->requestMethod) {
             case 'GET':
                 if ($this->tablesId) {
-                    $response = $this->getTable($this->tableId);
+                    $response = $this->getTable($this->tablesId);
                 } else 
                 {
                     $response = $this->getAllTables();
@@ -32,29 +32,49 @@ class tablesControllers
             case 'PUT':
                 if (empty($this->tablesId))
                 {
-                    $reponse=$this->updateTables($this->tablesId);
+                    $reponse=$this->updateTables();
+                    $response['status_code_header'] = 'HTTP/1.1 200 Succes';
                 }
                 break;
             case 'DELETE':
                 if($this->tablesId)
                 {
-                    $reponse=$this->deleteTables($this->tablesId);
+                    $response=$this->deleteTables($this->tablesId);
                 }
                 break;
             default:
                 $response = $this->notFoundResponse();
                 break;
         }
+                header($response['status_code_header']);
+        if (isset($response['body']))
+        {
+            if ($response['body'] != null && $response['status_code_header'] === "HTTP/1.1 200 OK") 
+            {
+                echo $response['body'];
+            }
+            else 
+            {
+                echo $response['status_code_header'];
+                echo $response['body'];
+            }
+        }
+        else
+        {
+            echo $response['status_code_header'];
+        }
     }
-
         public function getAllTables() {		
             $result = tablesDAO::getList();
             $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
             return $response;
         }
 
         private function getTable($id) {	
             $result = tablesDAO::get($id);
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
             if ($result == null) 
             {
                 return null;
@@ -65,24 +85,26 @@ class tablesControllers
         private function createTables()
         {
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-            if (!isset($input["numeroPlaces"])) 
+            if (isset($input["nbPlaces"])) 
             {
-                return $this->unprocessableEntityResponse();
+                $tables=new tablesDTO($input["nbPlaces"]);
+                tablesDAO::insert($tables);
+                $response['status_code_header'] = 'Success';
+                return $response;
             }
             else
             {
-                $tables=new tablesDTO($input["numeroPlaces"]);
-                tablesDAO::insert($tables);
-                $response['body'] = json_encode($Carte);
+                $response['status_code_header'] = 'Error';
                 return $response;
             }
+
         }
         private function updateTables() 
         {
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-            if (isset($input["numeroPlaces"]))
+            if (isset($input["nbPlaces"]))
             {
-                $tables=new tablesDTO($input["numeroPlaces"]);
+                $tables=new tablesDTO($input["nbPlaces"]);
                 $tables->setIdTables($input["idTables"]);
                 tablesDAO::update($tables);
             }
@@ -95,4 +117,10 @@ class tablesControllers
             $response['body'] = null;
             return $response;
         }
+         private function notFoundResponse() 
+    {
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        $response['body'] = null;
+        return $response;
+    }
 }

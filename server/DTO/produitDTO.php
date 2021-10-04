@@ -1,21 +1,29 @@
 <?php
-class produitDTO 
+class produitDTO implements JsonSerializable
 {
     private $idProduit;
     private $nomProduit;
     private $imageProduit;
     private $prixProduit;
     private $tailleProduit;
+    private $categorieProduit;
     
-    public function __construct($nomProduit, $imageProduit, $prixProduit, $tailleProduit) 
-    {
+    public function __construct($nomProduit, $imageProduit, $prixProduit, $tailleProduit, $categorieProduit) {
         $this->nomProduit = $nomProduit;
         $this->imageProduit = $imageProduit;
         $this->prixProduit = $prixProduit;
         $this->tailleProduit = $tailleProduit;
+        $this->categorieProduit = $categorieProduit;
+    }
+    public function getCategorieProduit() {
+        return $this->categorieProduit;
     }
 
-    public function getImageProduit() 
+    public function setCategorieProduit($categorieProduit): void {
+        $this->categorieProduit = $categorieProduit;
+    }
+
+            public function getImageProduit() 
     {
         return $this->imageProduit;
     }
@@ -64,6 +72,17 @@ class produitDTO
     {
         $this->tailleProduit = $tailleProduit;
     }
-
+    public function jsonSerialize()
+    {
+        return array
+        (
+            'idProduit' => $this->idProduit,
+            'nomProduit' => $this->nomProduit,
+            'prixProduit'=>$this->prixProduit,
+            'tailleProduit'=>$this->tailleProduit,
+            'imageProduit'=>$this->imageProduit,
+            'categorieProduit'=>$this->categorieProduit
+        );
+    }
 
 }

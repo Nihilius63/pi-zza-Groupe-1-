@@ -1,11 +1,11 @@
 <?php
-class tablesDTO 
+class tablesDTO implements JsonSerializable
 {
     private $idTables;
-    private $numeroPlaces;
-    public function __construct($numeroPlaces) 
+    private $nbPlaces;
+    public function __construct($nbPlaces) 
     {
-        $this->numeroPlaces = $numeroPlaces;
+        $this->nbPlaces = $nbPlaces;
     }
 
     public function getIdTables() 
@@ -15,7 +15,7 @@ class tablesDTO
 
     public function getNbPlaces() 
     {
-        return $this->numeroPlaces;
+        return $this->nbPlaces;
     }
 
     public function setIdTables($idTables): void 
@@ -23,8 +23,16 @@ class tablesDTO
         $this->idTables = $idTables;
     }
 
-    public function setNbPlaces($numeroPlaces): void 
+    public function setNbPlaces($nbPlaces): void 
     {
-        $this->numeroPlaces = $numeroPlaces;
+        $this->nbPlaces = $nbPlaces;
+    }
+    public function jsonSerialize()
+    {
+        return array
+        (
+            'idTables' => $this->idTables,
+            'nbPlaces' => $this->nbPlaces,
+        );
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class commandeDTO 
+class commandeDTO implements JsonSerializable
 {
     private $idTables;
     private $idCommande;
@@ -26,6 +26,13 @@ class commandeDTO
     {
         $this->idCommande = $idCommande;
     }
-
+    public function jsonSerialize()
+    {
+        return array
+        (
+            'idCommande' => $this->idCommande,
+            'idTables' => $this->idTables,
+        );
+    }
 
 }

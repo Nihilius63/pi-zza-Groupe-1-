@@ -59,10 +59,9 @@ class commandeDAO
     public static function update($Commande)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE Marque SET idTables=:idTables,idCommande=:idCommande WHERE idCommande = :idCommande');
-        $state->bindValue(":idTables",$Commande->getIdTables());
-        $state->bindValue(":idCommande", $Commande->getIdCommande());
-        $state->bindValue(":idCommande", $Commande->getIdCommande());
+        $state = $connex->prepare('UPDATE commande SET idTables=:idTables WHERE idCommande = :idCommande');
+        $state->bindValue(":idTables",$Commande->getIdTables($Commande));
+        $state->bindValue(":idCommande", $Commande->getIdCommande($Commande));
         $state->execute();
     }
 }

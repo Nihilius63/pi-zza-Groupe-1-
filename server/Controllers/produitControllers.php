@@ -15,10 +15,10 @@ class produitControllers
 
 public function processRequest() 
 {	
-    $response = $this->notFoundResponse();	
+    $response=$this->notFoundResponse();
     switch ($this->requestMethod) {
         case 'GET':
-            if ($this->tablesId) {
+            if ($this->produitId) {
                 $response = $this->getproduit($this->produitId);
             } else 
             {
@@ -34,28 +34,49 @@ public function processRequest()
         case 'PUT':
             if (empty($this->produitId))
             {
-                $reponse=$this->updateproduit($this->produitId);
+                $reponse=$this->updateproduit();
+                $response['status_code_header'] = 'HTTP/1.1 200 Succes';
             }
             break;
         case 'DELETE':
             if($this->produitId)
             {
-                $reponse=$this->deleteproduit($this->produitId);
+                $response=$this->deleteproduit($this->produitId);
             }
             break;
         default:
             $response = $this->notFoundResponse();
             break;
     }
-}
+        header($response['status_code_header']);
+        if (isset($response['body']))
+        {
+            if ($response['body'] != null && $response['status_code_header'] === "HTTP/1.1 200 OK") 
+            {
+                echo $response['body'];
+            }
+            else 
+            {
+                echo $response['status_code_header'];
+                echo $response['body'];
+            }
+        }
+        else
+        {
+            echo $response['status_code_header'];
+        }
+    }
     public function getAllproduit() {		
         $result = produitDAO::getList();
         $response['body'] = json_encode($result);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
         return $response;
     }
 
     private function getproduit($id) {	
 	$result = produitDAO::get($id);
+        $response['body'] = json_encode($result);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
         if ($result == null) 
         {
             return null;
@@ -66,26 +87,32 @@ public function processRequest()
     private function createproduit()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (!isset($input["nomProduit"],$input["prixProduit"],$input["tailleProduit"])) 
+        if (isset($input["nomProduit"],$input["prixProduit"],$input["tailleProduit"],$input['imageProduit'],$input['categorieProduit'])) 
         {
-            return $this->unprocessableEntityResponse();
+            $Produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input["tailleProduit"],$input['categorieProduit']);
+            produitDAO::insert($Produit);
+            $response['body'] = json_encode($Produit);
+            $response['status_code_header'] = 'Succes';
+            return $response;
         }
         else
         {
-            $Produit=new produitDTO($input["nomProduit"],$input["prixProduit"],$input["tailleProduit"]);
-            produitDAO::insert($Produit);
-            $response['body'] = json_encode($Carte);
+            $response['status_code_header'] = 'Error';
             return $response;
         }
     }
     private function updateproduit() 
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (isset($input["nomProduit"],$input["prixProduit"],$input["idProduit"],$input["tailleProduit"]))
+        if (isset($input["nomProduit"],$input["prixProduit"],$input["idProduit"],$input["tailleProduit"],$input['imageProduit'],$input['categorieProduit']))
         {
-            $produit=new produitDTO($input["nomProduit"],$input["prixProduit"],$input["tailleProduit"]);
+            $produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input["tailleProduit"],$input['categorieProduit']);
             $produit->setIdProduit($input["idProduit"]);
             produitDAO::update($produit);
+        }
+        else 
+        {
+            $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
         }
         return null;
     }
@@ -93,6 +120,12 @@ public function processRequest()
     {
 	produitDAO::delete($id);	
         $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
+        $response['body'] = null;
+        return $response;
+    }
+        private function notFoundResponse() 
+    {
+        $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
         $response['body'] = null;
         return $response;
     }

@@ -14,7 +14,7 @@ class produitDAO
         if (sizeof($resultats) > 0)
         {
             $result = $resultats[0];
-            $Produit = new produitDTO($result["nomProduit"],$result["prixProduit"],$result["imageProduit"],$result["tailleProduit"]);
+            $Produit = new produitDTO($result["nomProduit"],$result["imageProduit"],$result["prixProduit"],$result["tailleProduit"],$result["categorieProduit"]);
             $Produit->setIdProduit($result["idProduit"]);
         }
         return $Produit;
@@ -32,7 +32,7 @@ class produitDAO
 
         foreach ($resultats as $result)
         {
-                $Produit = new produitDTO($result["nomProduit"],$result["prixProduit"],$result["imageProduit"],$result["tailleProduit"]);
+                $Produit = new produitDTO($result["nomProduit"],$result["imageProduit"],$result["prixProduit"],$result["tailleProduit"],$result["categorieProduit"]);
                 $Produit->setIdProduit($result["idProduit"]);
 
                 $Produits[] = $Produit;
@@ -51,10 +51,11 @@ class produitDAO
     public static function insert($Produit)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('INSERT INTO produit(nomProduit,prixProduit,imageProduit,tailleProduit) VALUES(:nomProduit,:prixProduit,:imageProduit,:tailleProduit)');
+        $state = $connex->prepare('INSERT INTO produit(nomProduit,prixProduit,imageProduit,tailleProduit,categorieProduit) VALUES(:nomProduit,:prixProduit,:imageProduit,:tailleProduit,:categorieProduit)');
         $state->bindValue(":nomProduit", $Produit->getNomProduit());
         $state->bindValue(":prixProduit", $Produit->getPrixProduit());
         $state->bindValue(":imageProduit", $Produit->getImageProduit());
+        $state->bindValue(":categorieProduit", $Produit->getCategorieProduit());
         $state->bindValue(":tailleProduit", $Produit->getTailleProduit());
         $state->execute();
     }
@@ -62,11 +63,12 @@ class produitDAO
     public static function update($Produit)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE produit SET nomProduit=:nomProduit,prixProduit=:prixProduit,imageProduit=:imageProduit,tailleProduit=:tailleProduit WHERE idProduit = :idProduit');
+        $state = $connex->prepare('UPDATE produit SET nomProduit=:nomProduit,prixProduit=:prixProduit,imageProduit=:imageProduit,tailleProduit=:tailleProduit,categorieProduit=:categorieProduit WHERE idProduit = :idProduit');
         $state->bindValue(":nomProduit",$Produit->getNomProduit());
         $state->bindValue(":prixProduit", $Produit->getPrixProduit());
         $state->bindValue(":imageProduit", $Produit->getImageProduit());
         $state->bindValue(":tailleProduit", $Produit->getTailleProduit());
+        $state->bindValue(":categorieProduit", $Produit->getCategorieProduit());
         $state->bindValue(":idProduit", $Produit->getIdProduit());
         $state->execute();
     }

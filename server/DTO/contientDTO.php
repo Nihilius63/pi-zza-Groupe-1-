@@ -1,5 +1,5 @@
 <?php
-class contientDTO 
+class contientDTO implements JsonSerializable
 {
     private $idCommande;
     private $idProduit;
@@ -38,6 +38,15 @@ class contientDTO
     public function setIdProduit($idProduit): void 
     {
         $this->idProduit = $idProduit;
+    }
+    public function jsonSerialize()
+    {
+        return array
+        (
+            'idCommande' => $this->idCommande,
+            'idProduit' => $this->idProduit,
+            'quantite'=>$this->quantite
+        );
     }
 
 

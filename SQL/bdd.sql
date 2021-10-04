@@ -1,7 +1,7 @@
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
-
+SET NAMES utf8mb4;
 DROP DATABASE IF EXISTS pi_zza;
 CREATE DATABASE pi_zza;
 USE pi_zza;
