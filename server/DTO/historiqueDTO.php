@@ -1,5 +1,5 @@
 <?php
-class historiqueDTO 
+class historiqueDTO implements JsonSerializable
 {
     private $idHistorique;
     private $nomProduit;
@@ -41,7 +41,7 @@ class historiqueDTO
         return $this->dateCommande;
     }
 
-    public function getNumeroTable() 
+    public function getNumeroTables() 
     {
         return $this->numeroTables;
     }
@@ -71,10 +71,21 @@ class historiqueDTO
         $this->dateCommande = $dateCommande;
     }
 
-    public function setNumeroTable($numeroTable): void 
+    public function setNumeroTables($numeroTable): void 
     {
         $this->numeroTables = $numeroTable;
     }
 
-
+    public function jsonSerialize()
+    {
+        return array
+        (
+            'idHistorique' => $this->idHistorique,
+            'nomProduit' => $this->nomProduit,
+            'quantite'=>$this->quantite,
+            'prixProduit'=>$this->prixProduit,
+            'dateCommande'=>$this->dateCommande,
+            'numeroTables'=>$this->numeroTables
+        );
+    }
 }

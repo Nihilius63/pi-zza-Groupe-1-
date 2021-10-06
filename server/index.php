@@ -7,7 +7,7 @@
 	// durée d'expiration du cache
 	header("Access-Control-Max-Age: 3600");
 	header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-	$pathWs = "testpizza/";
+	$pathWs = "pi-zza Groupe 1/";
 	$fullUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 	$url = str_replace($pathWs . "server/", "", $fullUrl);
 	$urlParts = explode( '/', $url );

@@ -23,9 +23,7 @@ class contientDAO
     public static function getList()
     {
         $contient = array();
-
         $connex = DatabaseLinker::getConnexion();
-
         $state = $connex->prepare('SELECT * FROM contient');
         $state->execute();
         $resultats = $state->fetchAll();

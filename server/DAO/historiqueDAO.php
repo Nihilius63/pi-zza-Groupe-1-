@@ -23,21 +23,18 @@ class historiqueDAO
     public static function getList()
     {
         $historique = array();
-
         $connex = DatabaseLinker::getConnexion();
-
         $state = $connex->prepare('SELECT * FROM historique');
         $state->execute();
         $resultats = $state->fetchAll();
-
         foreach ($resultats as $result)
         {
                 $historique = new historiqueDTO($result["nomProduit"],$result["quantite"],$result["prixProduit"],$result["dateCommande"],$result["numeroTables"]);
                 $historique->setIdHistorique($result["idHistorique"]);
 
-                $Produits[] = $historique;
+                $historiques[] = $historique;
         }
-        return $Produits;
+        return $historiques;
     }
 
     public static function delete($id)
@@ -63,7 +60,7 @@ class historiqueDAO
     public static function update($historique)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE historique SET nomProduit=:nomProduit,quantie=:quanite,prixProduit=:prixProduit,dateCommande=:dateCommande,numeroTablees=:numeroTables WHERE idHistorique = :idHistorique');
+        $state = $connex->prepare('UPDATE historique SET nomProduit=:nomProduit,quantite=:quantite,prixProduit=:prixProduit,dateCommande=:dateCommande,numeroTables=:numeroTables WHERE idHistorique = :idHistorique');
         $state->bindValue(":nomProduit", $historique->getNomProduit());
         $state->bindValue(":quantite", $historique->getQuantite());
         $state->bindValue(":prixProduit", $historique->getPrixProduit());

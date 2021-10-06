@@ -115,7 +115,7 @@ class contientControllers
         private function deleteContient($id) 
         {
             contientDAO::delete($id);	
-            $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
+            $response['status_code_header'] = 'HTTP/1.1 200 Successfull deletion';
             $response['body'] = null;
             return $response;
         }
