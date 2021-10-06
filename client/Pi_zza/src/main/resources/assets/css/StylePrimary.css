@@ -18,3 +18,18 @@
     -fx-border-color: #7C8184;
     -fx-border-width: 1px 0px 0px 0px;
 }
+
+.boxAll {
+}
+
+.boxDashboard {
+    -fx-background-color: #fff;
+}
+
+.boxProduits {
+    -fx-background-color: #fff;
+}
+
+.boxHistorique {
+    -fx-background-color: #fff;
+}

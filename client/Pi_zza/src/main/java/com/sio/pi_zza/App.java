@@ -5,9 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.application.Platform;
 import java.io.IOException;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 /**
  * JavaFX App
@@ -34,7 +35,7 @@ public class App extends Application {
     }
 
     static void close() {
-        stages.close();
+        Platform.exit();
     }
 
     public static void main(String[] args) {
