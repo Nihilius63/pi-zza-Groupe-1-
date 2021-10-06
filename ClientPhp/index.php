@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Titre de la page</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="script.js"></script>
+    <script src="js/tables.js"></script>
+    <script src="https://kit.fontawesome.com/de5caafa4a.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -15,75 +16,17 @@
 </header>
 
 <div class="content">
-    <div class="gauche">
+    <div class="droite">
         <h1> Toutes les tables </h1>
         <div class="affichageTable">
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-            <div class="carte">
-                <img src="img/table.png" alt="">
-                <p> Table 1</p>
-            </div>
-
+            <?php
+            include_once ("php/DAOTables.php");
+            $tab= DAOTables::affichageTable();
+            foreach ($tab as $value) {
+                echo $value;
+            }
+            ?>
         </div>
-    </div>
-    <div class="droite">
-            <p>Ajouter une table</p>
-            <form action="action.php" method="post">
-                <input type="text" name="nomMarque" placeholder="Nombres de personnes"/>
-                <input id="ajouter" type="submit" value="Ajouter" />
-            </form>
-
     </div>
 </div>
 
