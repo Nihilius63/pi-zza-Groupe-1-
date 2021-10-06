@@ -87,7 +87,7 @@ class tablesControllers
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
             if (isset($input["nbPlaces"])) 
             {
-                $tables=new tablesDTO($input["nbPlaces"]);
+                $tables=new tablesDTO($input["nbPlaces"],$input["nbPersonne"]);
                 tablesDAO::insert($tables);
                 $response['status_code_header'] = 'Success';
                 return $response;
@@ -104,7 +104,7 @@ class tablesControllers
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
             if (isset($input["nbPlaces"]))
             {
-                $tables=new tablesDTO($input["nbPlaces"]);
+                $tables=new tablesDTO($input["nbPlaces"],$input["nbPersonne"]);
                 $tables->setIdTables($input["idTables"]);
                 tablesDAO::update($tables);
             }

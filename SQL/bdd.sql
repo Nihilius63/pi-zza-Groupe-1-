@@ -12,7 +12,8 @@ USE pi_zza;
 
 CREATE TABLE tables(
         idTables     Int  Auto_increment  NOT NULL ,
-        nbPlaces Int NOT NULL
+        nbPlaces Int NOT NULL,
+        nbPersonne Int NOT NULL
 	,CONSTRAINT tables_PK PRIMARY KEY (idTables)
 )ENGINE=InnoDB;
 
@@ -69,7 +70,6 @@ CREATE TABLE contient(
         idProduit  Int NOT NULL ,
         quantite   Int NOT NULL
 	,CONSTRAINT contient_PK PRIMARY KEY (idCommande,idProduit)
-
 	,CONSTRAINT contient_commande_FK FOREIGN KEY (idCommande) REFERENCES commande(idCommande)
 	,CONSTRAINT contient_produit0_FK FOREIGN KEY (idProduit) REFERENCES produit(idProduit)
 )ENGINE=InnoDB;

@@ -13,7 +13,7 @@ class tablesDAO
         if (sizeof($resultats) > 0)
         {
             $result = $resultats[0];
-            $Table = new tablesDTO($result["nbPlaces"]);
+            $Table = new tablesDTO($result["nbPlaces"],$result["nbPersonne"]);
             $Table->setIdTables($result["idTables"]);
         }
         return $Table;
@@ -28,7 +28,7 @@ class tablesDAO
         $resultats = $state->fetchAll();
         foreach ($resultats as $result)
         {
-                $Tables = new tablesDTO($result["nbPlaces"]);
+                $Tables = new tablesDTO($result["nbPlaces"],$result["nbPersonne"]);
                 $Tables->setIdTables($result["idTables"]);
                 $Table[] = $Tables;
         }
@@ -46,7 +46,7 @@ class tablesDAO
     public static function insert($table)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('INSERT INTO tables(nbPlaces) VALUES(:numeroPlaces)');
+        $state = $connex->prepare('INSERT INTO tables(nbPlaces,nbPersonne) VALUES(:numeroPlaces,0)');
         $state->bindValue(":numeroPlaces", $table->getNbPlaces());
         $state->execute();
     }
@@ -54,8 +54,9 @@ class tablesDAO
     public static function update($table)
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('UPDATE tables SET nbPlaces=:nbPlaces WHERE idTables = :idTables');
+        $state = $connex->prepare('UPDATE tables SET nbPlaces=:nbPlaces,nbPersonne=:nbPersonne WHERE idTables = :idTables');
         $state->bindValue(":nbPlaces",$table->getNbPlaces());
+        $state->bindValue(":nbPersonne",$table->getNbPersonne());
         $state->bindValue(":idTables", $table->getIdTables());
         $state->execute();
     }

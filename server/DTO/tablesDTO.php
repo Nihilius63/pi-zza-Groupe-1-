@@ -3,9 +3,21 @@ class tablesDTO implements JsonSerializable
 {
     private $idTables;
     private $nbPlaces;
-    public function __construct($nbPlaces) 
+    private $nbPersonne;
+    public function __construct($nbPlaces, $nbPersonne) 
     {
         $this->nbPlaces = $nbPlaces;
+        $this->nbPersonne = $nbPersonne;
+    }
+
+    public function getNbPersonne() 
+    {
+        return $this->nbPersonne;
+    }
+
+    public function setNbPersonne($nbPersonne): void 
+    {
+        $this->nbPersonne = $nbPersonne;
     }
 
     public function getIdTables() 
@@ -33,6 +45,7 @@ class tablesDTO implements JsonSerializable
         (
             'idTables' => $this->idTables,
             'nbPlaces' => $this->nbPlaces,
+            'nbPersonne'=>$this->nbPersonne,
         );
     }
 }
