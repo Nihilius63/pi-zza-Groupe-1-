@@ -22,7 +22,7 @@ class historiqueDAO
 
     public static function getList()
     {
-        $historique = array();
+        $historiques = array();
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM historique');
         $state->execute();

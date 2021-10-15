@@ -34,48 +34,48 @@
         {
 		
 		case "produit" :
-                    $marqueId = null;
+                    $produitId = null;
                     if (isset($urlParts[2])) 
                     {
-                            $marqueId = (int) $urlParts[2];
+                            $produitId = (int) $urlParts[2];
                     }
-                    $controller = new produitControllers($requestMethod, $marqueId);
+                    $controller = new produitControllers($requestMethod, $produitId);
                     $controller->processRequest();
                     break;
 		case "commande" : 
-                    $CarteId = null;
+                    $commandeId = null;
                     if (isset($urlParts[2])) 
                     {
-                            $CarteId = (int) $urlParts[2];
+                        $commandeId = (int) $urlParts[2];
                     }
-                    $controller = new commandeControllers($requestMethod, $CarteId);
+                    $controller = new commandeControllers($requestMethod, $commandeId);
                     $controller->processRequest();
                     break;
                 case "contient" : 
-                    $CarteId = null;
+                    $contientId = null;
                     if (isset($urlParts[2])) 
                     {
-                            $CarteId = (int) $urlParts[2];
+                            $contientId = (int) $urlParts[2];
                     }
-                    $controller = new contientControllers($requestMethod, $CarteId);
+                    $controller = new contientControllers($requestMethod, $contientId);
                     $controller->processRequest();
                     break;
                 case "historique" : 
-                    $CarteId = null;
+                    $historiqueId = null;
                     if (isset($urlParts[2])) 
                     {
-                            $CarteId = (int) $urlParts[2];
+                            $historiqueId = (int) $urlParts[2];
                     }
-                    $controller = new historiqueControllers($requestMethod, $CarteId);
+                    $controller = new historiqueControllers($requestMethod, $historiqueId);
                     $controller->processRequest();
                     break;
                 case "tables" : 
-                    $CarteId = null;
+                    $tablesId = null;
                     if (isset($urlParts[2])) 
                     {
-                            $CarteId = (int) $urlParts[2];
+                            $tablesId = (int) $urlParts[2];
                     }
-                    $controller = new tablesControllers($requestMethod, $CarteId);
+                    $controller = new tablesControllers($requestMethod, $tablesId);
                     $controller->processRequest();
                     break;
 		default :
