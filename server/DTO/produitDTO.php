@@ -5,8 +5,6 @@ class produitDTO implements JsonSerializable
     private $nomProduit;
     private $imageProduit;
     private $prixProduit;
-    private $tailleProduit;
-    private $categorieProduit;
     
     public function __construct($nomProduit, $imageProduit, $prixProduit, $tailleProduit, $categorieProduit) {
         $this->nomProduit = $nomProduit;

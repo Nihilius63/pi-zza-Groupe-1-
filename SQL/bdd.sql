@@ -51,7 +51,7 @@ CREATE TABLE commande(
 
 CREATE TABLE Taille(
         idTaille  Int  Auto_increment  NOT NULL ,
-        NomTaille Varchar (50) NOT NULL
+        nomTaille Varchar (50) NOT NULL
 	,CONSTRAINT Taille_PK PRIMARY KEY (idTaille)
 )ENGINE=InnoDB;
 
@@ -101,7 +101,7 @@ CREATE TABLE contient(
 # Table: Avoir
 #------------------------------------------------------------
 
-CREATE TABLE Avoir(
+CREATE TABLE Taille_Produit(
         idTaille  Int NOT NULL ,
         idProduit Int NOT NULL
 	,CONSTRAINT Avoir_PK PRIMARY KEY (idTaille,idProduit)
