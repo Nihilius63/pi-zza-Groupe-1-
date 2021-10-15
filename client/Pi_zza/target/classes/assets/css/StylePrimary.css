@@ -23,13 +23,13 @@
 }
 
 .boxDashboard {
-    -fx-background-color: #fff;
+    -fx-background-color: transparent;
 }
 
 .boxProduits {
-    -fx-background-color: #fff;
+    -fx-background-color: transparent;
 }
 
 .boxHistorique {
-    -fx-background-color: #fff;
+    -fx-background-color: transparent;
 }

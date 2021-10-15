@@ -5,31 +5,23 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.event.EventHandler;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.io.File;
-
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import javafx.stage.Stage;
+import org.json.JSONTokener;
+
 
 public class PrimaryController implements Initializable {
 
@@ -58,6 +50,9 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private GridPane boxHistorique;
+
+    @FXML
+    private Label labs;
 
     private void clickOnAddProduit() {
         /*
@@ -136,40 +131,52 @@ public class PrimaryController implements Initializable {
     }
 
     public void dashboardWindow() {
-        boxDashboard.setStyle("-fx-background-color: green");
-        boxProduits.setStyle("-fx-background-color: #fff");
-        boxHistorique.setStyle("-fx-background-color: #fff");
+        boxDashboard.setVisible(true);
+        boxProduits.setVisible(false);
+        boxHistorique.setVisible(false);
     }
 
     public void produitsWindow() {
-        boxDashboard.setStyle("-fx-background-color: #fff");
-        boxProduits.setStyle("-fx-background-color: blue");
-        boxHistorique.setStyle("-fx-background-color: #fff");
+        boxDashboard.setVisible(false);
+        boxProduits.setVisible(true);
+        boxHistorique.setVisible(false);
     }
 
     public void historiqueWindow() {
-        boxDashboard.setStyle("-fx-background-color: #fff");
-        boxProduits.setStyle("-fx-background-color: #fff");
-        boxHistorique.setStyle("-fx-background-color: red");
+        boxDashboard.setVisible(false);
+        boxProduits.setVisible(false);
+        boxHistorique.setVisible(true);
+
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/historique");
+
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationBuilder.header("some-header", "true");
+        Response response = invocationBuilder.get();
+
+        JSONArray jsonArray = new JSONArray(response.readEntity(String.class));
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject json = new JSONObject(jsonArray.get(i).toString());
+            String nomProduit = (String) json.get("nomProduit");
+            int quantite = Integer.parseInt((String) json.get("quantite"));
+            String date = (String) json.get("dateCommande");
+            int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
+
+            Label lab = new Label("" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"");
+
+            boxDashboard.add(lab,1,1);
+
+            System.out.println("f");
+
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         startController();
-
         dashboardWindow();
 
-        /*
-        ImageView closeButton = new ImageView("https://icon-library.com/images/close-icon-png/close-icon-png-19.jpg");
-        closeButton.setFitHeight(250);
-        closeButton.setFitWidth(250);
-
-        closeButton.setTranslateX(10);
-        closeButton.setTranslateY(10);
-
-        vbox.getChildren().add(closeButton);
-        */
         /*
         // Requete vers l'URL
         Client client = ClientBuilder.newClient();
