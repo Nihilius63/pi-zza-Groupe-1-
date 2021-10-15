@@ -21,7 +21,7 @@ class tablesDAO
 
     public static function getList()
     {
-        $Tables = array();
+        $Table = array();
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM tables');
         $state->execute();

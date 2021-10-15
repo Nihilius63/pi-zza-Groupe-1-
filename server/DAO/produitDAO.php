@@ -22,7 +22,7 @@ class produitDAO
 
     public static function getList()
     {
-        $Produit = array();
+        $Produits = array();
 
         $connex = DatabaseLinker::getConnexion();
 

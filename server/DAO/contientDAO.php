@@ -22,7 +22,7 @@ class contientDAO
 
     public static function getList()
     {
-        $contient = array();
+        $contients = array();
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM contient');
         $state->execute();

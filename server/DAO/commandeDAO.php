@@ -22,10 +22,8 @@ class commandeDAO
 
     public static function getList()
     {
-        $Commande = array();
-
+        $Commandes = array();
         $connex = DatabaseLinker::getConnexion();
-
         $state = $connex->prepare('SELECT * FROM commande');
         $state->execute();
         $resultats = $state->fetchAll();
