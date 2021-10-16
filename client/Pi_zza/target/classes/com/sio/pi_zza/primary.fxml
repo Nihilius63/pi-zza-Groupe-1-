@@ -142,6 +142,11 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="labs" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="250.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                      </children>

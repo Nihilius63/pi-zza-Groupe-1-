@@ -162,9 +162,15 @@ public class PrimaryController implements Initializable {
             String date = (String) json.get("dateCommande");
             int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
 
-            Label lab = new Label("" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"");
+            /*Label lab = new Label("" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"");*/
 
-            boxDashboard.add(lab,1,1);
+            /*boxDashboard.add(lab,1,1);*/
+
+            String var = "" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"";
+
+            System.out.println(var);
+
+            labs.setText(var);
 
             System.out.println("f");
 
