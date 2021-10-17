@@ -154,7 +154,10 @@ public class PrimaryController implements Initializable {
         invocationBuilder.header("some-header", "true");
         Response response = invocationBuilder.get();
 
+
         JSONArray jsonArray = new JSONArray(response.readEntity(String.class));
+
+
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject json = new JSONObject(jsonArray.get(i).toString());
             String nomProduit = (String) json.get("nomProduit");
@@ -162,17 +165,15 @@ public class PrimaryController implements Initializable {
             String date = (String) json.get("dateCommande");
             int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
 
-            /*Label lab = new Label("" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"");*/
+            /*Label lab = new Label("" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"");
 
-            /*boxDashboard.add(lab,1,1);*/
+            boxDashboard.add(lab,1,1);*/
 
             String var = "" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"";
 
             System.out.println(var);
 
             labs.setText(var);
-
-            System.out.println("f");
 
         }
     }

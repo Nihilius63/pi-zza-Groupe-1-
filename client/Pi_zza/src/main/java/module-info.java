@@ -8,4 +8,6 @@ module com.sio.pi_zza {
     requires json;
     requires jersey.client;
     requires jersey.hk2;
+    requires jakarta.annotation;
+    requires jakarta.activation;
 }
