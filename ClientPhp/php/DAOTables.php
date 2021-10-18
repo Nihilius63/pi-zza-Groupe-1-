@@ -10,26 +10,11 @@ class DAOTables {
         return json_decode($output);
     }
 
-    public static function addTable($data) {
-        $json=json_encode($data);
-        $ch = curl_init(DAOTables::$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-        curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
-
-        $response = curl_exec($ch);
-
-        if (!$response)
-        {
-            return false;
-        }
-    }
-
     public static function affichageTable() {
         $liste=DAOTables::getTables();
         $tab=array();
         foreach($liste as $value){
-            $string ="<a href=''>";
+            $string ="<a href='table.php?idTable=".$value->idTables."'>";
             $string=$string.'<div class="carte">';
             if ($value->nbPlaces>3 && $value->nbPlaces<6){
                 $string=$string.'<img src="img/table4p.png" alt="">';
@@ -45,7 +30,7 @@ class DAOTables {
                 $string=$string. '<i class="fas fa-exclamation-triangle red"> Occupé</i> </div>';
             }
             else {
-                $string=$string. '</div>';
+                $string=$string. '</div></a>';
             }
             $tab[]=$string;
         }
