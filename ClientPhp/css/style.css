@@ -5,12 +5,12 @@ body header a .header { display: flex; color: white; font-size: 60px; }
 body header a .header img { max-height: 75px; margin-left: 30px; }
 body header a .header p { margin: 0; margin-left: 30px; }
 body .content { display: flex; }
-body .content .gauche { display: flex; width: 70%; flex-direction: column; text-align: center; }
-body .content .gauche .produit { display: flex; flex-direction: column; }
-body .content .gauche .produit .ligne { display: flex; margin-left: 60px; margin-top: 20px; align-items: center; }
-body .content .gauche .produit .ligne .imgdelete { width: 30px; height: 30px; }
-body .content .gauche .produit .ligne .colonne { width: 15%; }
-body .content .gauche .produit .ligne img { width: 75px; height: 75px; border-radius: 50px; margin-right: 20px; }
+body .content #gauche { display: flex; width: 70%; flex-direction: column; text-align: center; }
+body .content #gauche .produit { display: flex; flex-direction: column; width: 80%; align-self: center; }
+body .content #gauche .produit .ligne { display: flex; margin-left: 60px; margin-top: 20px; align-items: center; }
+body .content #gauche .produit .ligne .imgdelete { width: 30px; height: 30px; cursor: pointer; }
+body .content #gauche .produit .ligne .colonne { width: 15%; }
+body .content #gauche .produit .ligne img { width: 75px; height: 75px; border-radius: 50px; margin-right: 20px; }
 body .content .droite { background: white; margin-top: 20px; height: 100%; width: 100%; display: flex; justify-content: center; flex-direction: column; text-align: center; border-radius: 15px 15px 0px 0px; }
 body .content .droite .affichageTable { margin-left: 40px; margin-right: 40px; display: flex; flex-wrap: wrap; margin-bottom: 30px; }
 body .content .droite .affichageTable a { text-decoration: none; color: black; }
@@ -18,6 +18,13 @@ body .content .droite .affichageTable .carte { margin-top: 20px; height: 150px; 
 body .content .droite .affichageTable .carte .red { color: #d51919; }
 body .content .droite .affichageTable .carte p { margin: 0; padding: 0; }
 body .content .droite .affichageTable .carte img { height: 80%; width: 80%; }
-body .droitetable .ligne { display: flex; margin: 10px 0px 10px 0px; }
+body .droitetable { background-color: #202332; width: 30%; height: 10000px; color: white; text-align: center; }
+body .droitetable .nbPersonne { justify-content: center; align-items: center; display: flex; }
+body .droitetable .nbPersonne p { margin-right: 10px; }
+body .droitetable .nbPersonne .inputFondBlanc { background: white; }
+body .droitetable .nbPersonne input { background: #00A2D3; border: none; color: white; }
+body .droitetable .ligne { display: flex; margin: 10px 0px 10px 15px; align-items: center; }
+body .droitetable .ligne .ajouterProduit { width: 30px; height: 30px; align-self: center; cursor: pointer; }
 body .droitetable .ligne img { width: 50px; height: 50px; border-radius: 50px; }
-body .droitetable .ligne .colonne { display: flex; margin-left: 10px; width: 70%; }
+body .droitetable .ligne .colonne { display: flex; margin-left: 10px; margin-right: 10px; width: 70%; }
+body .droitetable .ligne .colonne p { margin-left: 10px; }

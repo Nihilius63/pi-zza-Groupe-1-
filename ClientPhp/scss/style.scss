@@ -26,7 +26,7 @@ body {
   }
   .content {
     display: flex;
-    .gauche {
+    #gauche {
       display: flex;
       width: 70%;
       flex-direction: column;
@@ -34,6 +34,8 @@ body {
       .produit {
         display: flex;
         flex-direction: column;
+        width: 80%;
+        align-self: center;
         .ligne {
           display: flex;
           margin-left: 60px;
@@ -42,6 +44,7 @@ body {
           .imgdelete {
             width: 30px;
             height: 30px;
+            cursor: pointer;
           }
           .colonne {
             width: 15%;
@@ -98,18 +101,52 @@ body {
     }
   }
   .droitetable{
-    .ligne {
+    background-color: #202332;
+    width: 30%;
+    height: 10000px;
+    color: white;
+    text-align: center;
+    .nbPersonne {
+      justify-content: center;
+      align-items: center;
       display: flex;
-      margin: 10px 0px 10px 0px;
+      p {
+        margin-right: 10px;
+      }
+      .inputFondBlanc {
+        background: white;
+      }
+      input {
+        background: #00A2D3;
+        border: none;
+        color: white;
+      }
+    }
+    .ligne {
+
+      display: flex;
+      margin: 10px 0px 10px 15px;
+      align-items: center;
+      .ajouterProduit {
+        width: 30px;
+        height: 30px;
+        align-self: center;
+        cursor: pointer;
+      }
       img{
-        width: 50px;
-        height: 50px;
-        border-radius: 50px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+
       }
       .colonne {
         display: flex;
         margin-left: 10px;
+        margin-right: 10px;
         width: 70%;
+        p {
+          margin-left: 10px;
+        }
       }
     }
 

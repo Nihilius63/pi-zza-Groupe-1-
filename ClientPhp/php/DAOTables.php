@@ -10,6 +10,15 @@ class DAOTables {
         return json_decode($output);
     }
 
+    public static function getTableById($id) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, DAOTables::$url."/".$id);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($output);
+    }
+
     public static function affichageTable() {
         $liste=DAOTables::getTables();
         $tab=array();
