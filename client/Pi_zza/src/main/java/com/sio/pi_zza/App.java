@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import javafx.application.Platform;
 import java.io.IOException;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 
 /**
  * JavaFX App

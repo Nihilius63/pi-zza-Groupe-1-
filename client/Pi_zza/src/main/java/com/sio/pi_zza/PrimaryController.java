@@ -9,50 +9,28 @@ import javafx.fxml.Initializable;
 import javafx.event.EventHandler;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 
-public class PrimaryController implements Initializable {
+public class PrimaryController extends ProduitsController implements Initializable{
 
-    private String inputImage = "";
+    Client client = ClientBuilder.newClient();
 
-    @FXML
-    private Button dashboard;
+    @FXML private Button dashboardButton;
+    @FXML private Button produitsButton;
+    @FXML private Button historiqueButton;
 
-    @FXML
-    private Button produits;
+    @FXML private ImageView close;
 
-    @FXML
-    private Button historique;
+    @FXML private AnchorPane boxAll;
 
-    @FXML
-    private ImageView close;
-
-    @FXML
-    private AnchorPane boxAll;
-
-    @FXML
-    private GridPane boxDashboard;
-
-    @FXML
-    private GridPane boxProduits;
-
-    @FXML
-    private GridPane boxHistorique;
-
-    @FXML
-    private Label labs;
+    @FXML private GridPane boxDashboard;
+    @FXML private GridPane boxProduits;
+    @FXML private GridPane boxHistorique;
+    @FXML private VBox vboxAdd;
 
     private void clickOnAddProduit() {
         /*
@@ -100,15 +78,15 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void handleClicks(ActionEvent event) {
-        if(event.getSource() == dashboard) {
+        if(event.getSource() == dashboardButton) {
             dashboardWindow();
         }
 
-        if(event.getSource() == produits) {
+        if(event.getSource() == produitsButton) {
             produitsWindow();
         }
 
-        if(event.getSource() == historique) {
+        if(event.getSource() == historiqueButton) {
             historiqueWindow();
         }
 
@@ -119,7 +97,29 @@ public class PrimaryController implements Initializable {
         App.close();
     }
 
-    public void startController() {
+    public void dashboardWindow() {
+        vboxAdd.setVisible(false);
+        boxDashboard.setVisible(true);
+        boxProduits.setVisible(false);
+        boxHistorique.setVisible(false);
+    }
+
+    public void produitsWindow() {
+        vboxAdd.setVisible(true);
+        boxDashboard.setVisible(false);
+        boxProduits.setVisible(true);
+        boxHistorique.setVisible(false);
+    }
+
+    public void historiqueWindow() {
+        vboxAdd.setVisible(false);
+        boxDashboard.setVisible(false);
+        boxProduits.setVisible(false);
+        boxHistorique.setVisible(true);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
@@ -128,61 +128,11 @@ public class PrimaryController implements Initializable {
             }
         };
         close.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
-    }
 
-    public void dashboardWindow() {
-        boxDashboard.setVisible(true);
-        boxProduits.setVisible(false);
-        boxHistorique.setVisible(false);
-    }
-
-    public void produitsWindow() {
-        boxDashboard.setVisible(false);
-        boxProduits.setVisible(true);
-        boxHistorique.setVisible(false);
-    }
-
-    public void historiqueWindow() {
-        boxDashboard.setVisible(false);
-        boxProduits.setVisible(false);
-        boxHistorique.setVisible(true);
-
-        Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/historique");
-
-        Invocation.Builder invocationBuilder = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
-        invocationBuilder.header("some-header", "true");
-        Response response = invocationBuilder.get();
-
-
-        JSONArray jsonArray = new JSONArray(response.readEntity(String.class));
-
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject json = new JSONObject(jsonArray.get(i).toString());
-            String nomProduit = (String) json.get("nomProduit");
-            int quantite = Integer.parseInt((String) json.get("quantite"));
-            String date = (String) json.get("dateCommande");
-            int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
-
-            /*Label lab = new Label("" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"");
-
-            boxDashboard.add(lab,1,1);*/
-
-            String var = "" + nomProduit + " et " + quantite + " et " + date + " et " + numeroTable +"";
-
-            System.out.println(var);
-
-            labs.setText(var);
-
-        }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        startController();
         dashboardWindow();
+        DashboardController:dashboard(client);
+        ProduitsController:produits(client);
+        HistoriquesController:historiques(client);
 
         /*
         // Requete vers l'URL
