@@ -32,50 +32,6 @@ public class PrimaryController extends ProduitsController implements Initializab
     @FXML private GridPane boxHistorique;
     @FXML private VBox vboxAdd;
 
-    private void clickOnAddProduit() {
-        /*
-        if(inputNom.getText() == null || inputPrix.getText() == null || inputTaille.getText() == null || inputCatégorie.getText() == null || inputImage == null) {
-            System.out.println("Veuillez remplir toute les cases");
-        }
-
-        // Requete vers l'URL
-        Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target("http://localhost/WebserviceTD/server/carte");
-
-        // Méthode GET
-        Invocation.Builder invocationBuilder
-                = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
-        invocationBuilder.header("some-header", "true");
-        Response response = invocationBuilder.get();
-        System.out.println(response.readEntity(String.class));
-
-        // Methode POST
-        JSONObject jo = new JSONObject();
-        jo.put("nomCarte", inputNom.getText());
-        jo.put("prix",inputPrix.getText());
-        jo.put("idMarque",inputTaille.getText());
-        Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
-        System.out.println("Form response " + larep.getStatus());
-        inputImage = "";*/
-
-    }
-
-    private void inputAddImageProduit() {
-            /*
-        Stage newStage = new Stage();
-
-        FileChooser fileChooser2 = new FileChooser();
-        fileChooser2.setTitle("Open Resource File");
-        fileChooser2.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-        File selectedFile = fileChooser2.showOpenDialog(newStage);
-
-        inputImage = selectedFile.toURI().toString();
-        */
-
-
-    }
-
     @FXML
     private void handleClicks(ActionEvent event) {
         if(event.getSource() == dashboardButton) {
@@ -129,7 +85,7 @@ public class PrimaryController extends ProduitsController implements Initializab
         };
         close.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-        dashboardWindow();
+        produitsWindow();
         DashboardController:dashboard(client);
         ProduitsController:produits(client);
         HistoriquesController:historiques(client);

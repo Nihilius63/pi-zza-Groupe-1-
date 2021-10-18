@@ -1,13 +1,14 @@
 package com.sio.pi_zza;
 
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,12 +16,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import org.json.JSONArray;
-import jakarta.ws.rs.client.Client;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ProduitsController extends HistoriquesController {
 
@@ -54,13 +58,67 @@ public class ProduitsController extends HistoriquesController {
         }
     }
 
-    public void addProduits(MouseEvent event, String nomProduits, String prixProduits, String imageProduits, ObservableList categorieProduits) {
+    public void addProduits(MouseEvent event, String nomProduits, String prixProduits, String imageProduits, String categorieProduits) {
 
-        System.out.println(categorieProduits);
+        if(nomProduits == "" || prixProduits == "" || imageProduits == "" || categorieProduits == "") {
+
+            VBox box = new VBox();
+
+            Stage ajoutProduit = new Stage();
+            ajoutProduit.initStyle(StageStyle.UNDECORATED);
+            Scene ajoutProduitScene = new Scene(box, 300, 50);
+            ajoutProduit.setScene(ajoutProduitScene);
+
+            ajoutProduit.show();
+
+            Label text = new Label("Erreur, veuillez remplir toute les cases correctement!");
+            box.getChildren().add(text);
+
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(time -> {
+                    ajoutProduit.hide();
+                    img2 = "";
+                }
+            );
+
+            pause.play();
+
+        }
+
+        else {
+            try {
+
+                Client client = ClientBuilder.newClient();
+                WebTarget webTarget = client.target("http://localhost/WebserviceTD/server/produit");
+
+                Invocation.Builder invocationBuilder
+                        = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
+                invocationBuilder.header("some-header", "true");
+                Response response = invocationBuilder.get();
+                System.out.println(response.readEntity(String.class));
+
+                float prix = Float.parseFloat(prixProduits);
+                String image = "file:/assets/img/" + nomProduits;
+
+                JSONObject jo = new JSONObject();
+                jo.put("nomProduit", nomProduits);
+                jo.put("prixProduit", prix);
+                jo.put("imageProduit", image);
+                Response larep = webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
+                System.out.println("Form response " + larep.getStatus());
+
+                App.setRoot("primary");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 
     public void produits(Client client) {
+
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
         {
             @Override
