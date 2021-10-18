@@ -53,12 +53,37 @@
                 break;
             case "contient" : 
                 $contientId = null;
-                if (isset($urlParts[2])) 
+                if (isset($urlParts[2]))
                 {
-                        $contientId = (int) $urlParts[2];
+                    if ($urlParts[2]=="produit")
+                    {
+                        $controller = new contientControllers();
+                        $controller->setRequestMethod($requestMethod);
+                        $controller->setProduitId((int) $urlParts[3]);
+                        $controller->processRequest();
+                    }
+                    else if ($urlParts[2]=="commande")
+                    {
+                        $controller = new contientControllers();
+                        $controller->setRequestMethod($requestMethod);
+                        $controller->setCommandeId((int) $urlParts[3]);
+                        $controller->processRequest();
+                    }
+                    else 
+                    {
+                        $controller = new contientControllers();
+                        $controller->setRequestMethod($requestMethod);
+                        $controller->setCommandeId((int) $urlParts[2]);
+                        $controller->setCommandeId((int) $urlParts[3]);
+                        $controller->processRequest();
+                    }
                 }
-                $controller = new contientControllers($requestMethod, $contientId);
-                $controller->processRequest();
+                else
+                {
+                    $controller = new contientControllers();
+                    $controller->setRequestMethod($requestMethod);
+                    $controller->processRequest();
+                }
                 break;
             case "historique" : 
                 $historiqueId = null;
@@ -88,13 +113,37 @@
                 $controller->processRequest();
                 break;
             case "taille_produit" : 
-                $taille_produitId = null;
-                if (isset($urlParts[2])) 
+                if (isset($urlParts[2]))
                 {
-                        $taille_produitId = (int) $urlParts[2];
+                    if ($urlParts[2]=="taille")
+                    {
+                        $controller = new taille_produitControllers();
+                        $controller->setRequestMethod($requestMethod);
+                        $controller->setTailleId((int) $urlParts[3]);
+                        $controller->processRequest();
+                    }
+                    else if ($urlParts[2]=="produit")
+                    {
+                        $controller = new taille_produitControllers();
+                        $controller->setRequestMethod($requestMethod);
+                        $controller->setProduitId((int) $urlParts[3]);
+                        $controller->processRequest();
+                    }
+                    else 
+                    {
+                        $controller = new taille_produitControllers();
+                        $controller->setRequestMethod($requestMethod);
+                        $controller->setProduitId((int) $urlParts[3]);
+                        $controller->setTailleId((int) $urlParts[2]);
+                        $controller->processRequest();
+                    }
                 }
-                $controller = new taille_produitControllers($requestMethod, $taille_produitId);
-                $controller->processRequest();
+                else
+                {
+                    $controller = new taille_produitControllers();
+                    $controller->setRequestMethod($requestMethod);
+                    $controller->processRequest();
+                }
                 break;
             case "categorie" : 
                 $categorieId = null;

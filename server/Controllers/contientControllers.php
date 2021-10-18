@@ -5,42 +5,79 @@ include_once('DAO/contientDAO.php');
 class contientControllers 
 {
     private $requestMethod;
-    private $contientId = null;
-    public function __construct($requestMethod, $id) 
-    {
-        $this->requestMethod = $requestMethod;
-        $this->contientId = $id;
+    private $CommandeId = null;
+    private $ProduitId = null;
+    public function getRequestMethod() {
+        return $this->requestMethod;
     }
 
-    public function processRequest() 
+    public function getCommandeId() {
+        return $this->CommandeId;
+    }
+
+    public function getProduitId() {
+        return $this->ProduitId;
+    }
+
+    public function setRequestMethod($requestMethod): void {
+        $this->requestMethod = $requestMethod;
+    }
+
+    public function setCommandeId($CommandeId): void {
+        $this->CommandeId = $CommandeId;
+    }
+
+    public function setProduitId($ProduitId): void {
+        $this->ProduitId = $ProduitId;
+    }
+
+        public function processRequest() 
     {
         $response = $this->notFoundResponse();	
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->contientId) {
-                    $response = $this->getContient($this->contientId);
-                } else 
+                if (isset($this->CommandeId,$this->ProduitId)) 
+                {
+                    $response = $this->getContient($this->CommandeId,$this->ProduitId);
+                } 
+                else if ($this->ProduitId)
+                {
+                    $response = $this->getContientProduit($this->ProduitId);
+                }
+                else if ($this->CommandeId)
+                {
+                    $response=$this->getContientCommande($this->CommandeId);
+                }
+                else 
                 {
                     $response = $this->getAllContient();
-                };
+                }
                 break;
             case 'POST':
-                if (empty($this->contientId)) 
+                if (empty($this->CommandeId)) 
                 {
                     $response = $this->createContient();
                 }
                 break;
             case 'PUT':
-                if (empty($this->contientId))
+                if (empty($this->CommandeId))
                 {
-                    $response=$this->updateContient($this->contientId);
+                    $response=$this->updateContient($this->CommandeId);
                     $response['status_code_header'] = 'HTTP/1.1 200 Successfull Update';
                 }
                 break;
             case 'DELETE':
-                if($this->contientId)
+               if (isset($this->CommandeId,$this->ProduitId)) 
                 {
-                    $response=$this->deleteContient($this->contientId);
+                    $response = $this->deleteContient($this->CommandeId,$this->ProduitId);
+                } 
+                else if ($this->ProduitId)
+                {
+                    $response = $this->deleteByProduit($this->ProduitId);
+                }
+                else if ($this->CommandeId)
+                {
+                    $response=$this->deleteByCommande($this->CommandeId);
                 }
                 break;
             default:
@@ -72,6 +109,26 @@ class contientControllers
             return $response;
         }
 
+        private function getContientCommande($id) {	
+            $result = contientDAO::getByCommande($id);
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            if ($result == null) 
+            {
+                return null;
+            }
+            return $response;
+        }
+        private function getContientProduit($id) {	
+            $result = contientDAO::getByProduit($id);
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            if ($result == null) 
+            {
+                return null;
+            }
+            return $response;
+        }
         private function getContient($id) {	
             $result = contientDAO::get($id);
             $response['body'] = json_encode($result);
@@ -112,9 +169,23 @@ class contientControllers
             }
             return null;
         }
-        private function deleteContient($id) 
+        private function deleteContient($id1,$id2) 
         {
             contientDAO::delete($id);	
+            $response['status_code_header'] = 'HTTP/1.1 200 Successfull deletion';
+            $response['body'] = null;
+            return $response;
+        }
+        private function deleteByProduit($id) 
+        {
+            contientDAO::deleteByProduit($id);	
+            $response['status_code_header'] = 'HTTP/1.1 200 Successfull deletion';
+            $response['body'] = null;
+            return $response;
+        }
+        private function deleteByCommande($id) 
+        {
+            contientDAO::deleteByCommande($id);	
             $response['status_code_header'] = 'HTTP/1.1 200 Successfull deletion';
             $response['body'] = null;
             return $response;

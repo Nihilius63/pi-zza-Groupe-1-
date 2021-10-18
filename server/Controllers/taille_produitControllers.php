@@ -4,24 +4,56 @@ include_once('DAO/taille_produitDAO.php');
 class taille_produitControllers 
 {
     private $requestMethod;
-    private $Taille_produitId = null;
-    public function __construct($requestMethod, $id) 
+    private $tailleId = null;
+    private $produitId=null;
+    public function getTailleId() 
     {
-        $this->requestMethod = $requestMethod;
-        $this->Taille_produitId = $id;
+        return $this->tailleId;
     }
 
-    public function processRequest() 
+    public function getProduitId() 
+    {
+        return $this->produitId;
+    }
+
+    public function setTailleId($tailleId): void 
+    {
+        $this->tailleId = $tailleId;
+    }
+
+    public function setProduitId($produitId): void 
+    {
+        $this->produitId = $produitId;
+    }
+    public function getRequestMethod() {
+        return $this->requestMethod;
+    }
+
+    public function setRequestMethod($requestMethod): void {
+        $this->requestMethod = $requestMethod;
+    }
+
+        public function processRequest() 
     {
         $response=$this->notFoundResponse();
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->Taille_produitId) {
-                    $response = $this->getTaille_Produit($this->Taille_produitId);
-                } else 
+                if (isset($this->tailleId,$this->produitId)) 
+                {
+                    $response = $this->getTaille_Produit($this->tailleId,$this->produitId);
+                } 
+                else if ($this->produitId)
+                {
+                    $response = $this->getTaille_ProduitByProduit($this->produitId);
+                }
+                else if ($this->tailleId)
+                {
+                    $response=$this->getTaille_ProduitByTaille($this->tailleId);
+                }
+                else 
                 {
                     $response = $this->getAllTaille_Produit();
-                };
+                }
                 break;
             case 'POST':
                 if (empty($this->Taille_produitId)) 
@@ -37,16 +69,24 @@ class taille_produitControllers
                 }
                 break;
             case 'DELETE':
-                if($this->Taille_produitId)
+                if (isset($this->tailleId,$this->produitId)) 
                 {
-                    $response=$this->deleteCategorie($this->Taille_produitId);
+                    $response = $this->deleteTaille_produit($this->tailleId,$this->produitId);
+                } 
+                else if ($this->produitId)
+                {
+                    $response = $this->deleteTaille_produitByProduit($this->produitId);
+                }
+                else if ($this->tailleId)
+                {
+                    $response=$this->deleteTaille_produitByTaille($this->tailleId);
                 }
                 break;
             default:
                 $response = $this->notFoundResponse();
                 break;
         }
-                header($response['status_code_header']);
+        header($response['status_code_header']);
         if (isset($response['body']))
         {
             if ($response['body'] != null && $response['status_code_header'] === "HTTP/1.1 200 OK") 
@@ -71,8 +111,28 @@ class taille_produitControllers
             return $response;
         }
 
-        private function getTaille_Produit($id) {	
-            $result = taille_produitDAO::get($id);
+        private function getTaille_Produit($id1,$id2) {	
+            $result = taille_produitDAO::get($id1,$id2);
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            if ($result == null) 
+            {
+                return null;
+            }
+            return $response;
+        }
+        private function getTaille_ProduitByProduit($id) {	
+            $result = taille_produitDAO::getByProduit($id);
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            if ($result == null) 
+            {
+                return null;
+            }
+            return $response;
+        }
+        private function getTaille_ProduitByTaille($id) {	
+            $result = taille_produitDAO::getByTaille($id);
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
             if ($result == null) 
@@ -113,9 +173,23 @@ class taille_produitControllers
             }
             return null;
         }
-        private function deleteTaille_produit($id) 
+        private function deleteTaille_produit($id1,$id2) 
         {
-            taillle_produitDAO::delete($id);	
+            taille_produitDAO::delete($id1,$id2);	
+            $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
+            $response['body'] = null;
+            return $response;
+        }
+        private function deleteTaille_produitByTaille($id) 
+        {
+            taille_produitDAO::deleteByTaille($id);	
+            $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
+            $response['body'] = null;
+            return $response;
+        }
+        private function deleteTaille_produitByProduit($id) 
+        {
+            taille_produitDAO::deleteByProduit($id);	
             $response['status_code_header'] = 'HTTP/1.1 200 Successful deletion';
             $response['body'] = null;
             return $response;

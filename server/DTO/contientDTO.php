@@ -4,11 +4,6 @@ class contientDTO implements JsonSerializable
     private $idCommande;
     private $idProduit;
     private $quantite;
-    public function __construct($idProduit, $quantite) 
-    {
-        $this->idProduit = $idProduit;
-        $this->quantite = $quantite;
-    }
 
     public function getQuantite() 
     {
