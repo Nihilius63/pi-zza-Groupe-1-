@@ -1,5 +1,5 @@
 <?php
-class Taille_ProduitDTO implements JsonSerializable
+class taille_produitDTO implements JsonSerializable
 {
     private $idTaille;
     private $idProduit;

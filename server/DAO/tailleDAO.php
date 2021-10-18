@@ -23,7 +23,7 @@ class tailleDAO
     {
         $Taille = array();
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('SELECT * FROM tables');
+        $state = $connex->prepare('SELECT * FROM taille');
         $state->execute();
         $resultats = $state->fetchAll();
         foreach ($resultats as $result)
@@ -47,7 +47,7 @@ class tailleDAO
     {
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('INSERT INTO taille(nomTaille) VALUES(:nomTaille)');
-        $state->bindValue(":nomTaille", $table->getNomTaille());
+        $state->bindValue(":nomTaille", $taille->getNomTaille());
         $state->execute();
     }
 
@@ -55,9 +55,8 @@ class tailleDAO
     {
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('UPDATE taille SET nomTaille=:nomTaille WHERE idTaille = :idTaille');
-        $state->bindValue(":nbPlaces",$taille->getNbPlaces());
-        $state->bindValue(":nbPersonne",$taille->getNbPersonne());
-        $state->bindValue(":idTables", $taille->getIdTables());
+        $state->bindValue(":idTaille",$taille->getIdTaille());
+        $state->bindValue(":nomTaille",$taille->getNomTaille());
         $state->execute();
     }
 }
