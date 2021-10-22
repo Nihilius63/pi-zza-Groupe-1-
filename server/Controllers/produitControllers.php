@@ -104,9 +104,10 @@ public function processRequest()
     private function updateproduit() 
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (isset($input["nomProduit"],$input["prixProduit"],$input["idProduit"],$input["tailleProduit"],$input['imageProduit'],$input['categorieProduit']))
+        if (isset($input["nomProduit"],$input["prixProduit"],$input["idProduit"],$input['imageProduit'],$input['idCategorie']))
         {
-            $produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input["tailleProduit"],$input['categorieProduit']);
+            echo "test";
+            $produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input['idCategorie']);
             $produit->setIdProduit($input["idProduit"]);
             produitDAO::update($produit);
         }
