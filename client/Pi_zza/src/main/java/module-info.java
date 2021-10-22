@@ -10,4 +10,5 @@ module com.sio.pi_zza {
     requires jersey.hk2;
     requires jakarta.annotation;
     requires jakarta.activation;
+    requires java.logging;
 }

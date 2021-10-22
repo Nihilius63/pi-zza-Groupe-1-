@@ -1,5 +1,13 @@
 package com.sio.pi_zza;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -25,6 +33,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class ProduitsController extends HistoriquesController {
 
@@ -87,26 +96,33 @@ public class ProduitsController extends HistoriquesController {
 
         else {
             try {
+                if(Objects.equals(categorieProduits, "Pizza")) {
+                    categorieProduits = "1";
+                } else if(Objects.equals(categorieProduits, "Boissons")) {
+                    categorieProduits = "2";
+                } else {
+                    categorieProduits = "3";
+                }
 
                 Client client = ClientBuilder.newClient();
-                WebTarget webTarget = client.target("http://localhost/WebserviceTD/server/produit");
+                WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
 
-                Invocation.Builder invocationBuilder
-                        = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
-                invocationBuilder.header("some-header", "true");
-                Response response = invocationBuilder.get();
-                System.out.println(response.readEntity(String.class));
-
-                float prix = Float.parseFloat(prixProduits);
-                String image = "file:/assets/img/" + nomProduits;
+                String image = "file:images/" + nomProduits.replace(" ", "_") + ".png";
 
                 JSONObject jo = new JSONObject();
                 jo.put("nomProduit", nomProduits);
-                jo.put("prixProduit", prix);
+                jo.put("prixProduit", prixProduits);
                 jo.put("imageProduit", image);
+                jo.put("idCategorie", categorieProduits);
                 Response larep = webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
                 System.out.println("Form response " + larep.getStatus());
 
+                Path copied = Paths.get("images/"+nomProduits.replace(" ", "_")+".png");
+                Path originalPath = Paths.get(img2.replace("file:/", ""));
+
+                Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                img2 = "";
                 App.setRoot("primary");
 
             } catch (IOException e) {
@@ -141,9 +157,10 @@ public class ProduitsController extends HistoriquesController {
 
         importImage.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler1);
 
-        importCategorie.setItems(FXCollections.observableArrayList("Premier", "Deuxieme", "Troisieme"));
-
         int compteur = 0;
+        String nomCategorie1="";
+        String nomCategorie2="";
+        String nomCategorie3="";
 
         WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/categorie");
 
@@ -162,20 +179,25 @@ public class ProduitsController extends HistoriquesController {
             switch (idCategorie) {
                 case 1:
                     label1.setText(nomCategorie);
+                    nomCategorie1 = nomCategorie;
                     break;
 
                 case 2:
                     label2.setText(nomCategorie);
+                    nomCategorie2 = nomCategorie;
                     break;
 
                 case 3:
                     label3.setText(nomCategorie);
+                    nomCategorie3 = nomCategorie;
                     break;
 
                 default:
                     break;
             }
         }
+
+        importCategorie.setItems(FXCollections.observableArrayList(nomCategorie1, nomCategorie2, nomCategorie3));
 
         WebTarget webTarget2 = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
 
@@ -195,8 +217,7 @@ public class ProduitsController extends HistoriquesController {
             Label nameProduits = new Label(nomProduit);
             Label prixProduits = new Label(""+prixProduit+"");
 
-            Image imageAfter = new Image(getClass().getResourceAsStream(img.replace("file:", "")));
-            ImageView image = new ImageView(imageAfter);
+            ImageView image = new ImageView(img.replace("file:/", ""));
             image.setFitHeight(50);
             image.setFitWidth(50);
 

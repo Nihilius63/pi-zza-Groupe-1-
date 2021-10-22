@@ -3,6 +3,10 @@ package com.sio.pi_zza;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import org.json.JSONObject;
 
 
 public class PrimaryController extends ProduitsController implements Initializable{
@@ -126,7 +131,7 @@ public class PrimaryController extends ProduitsController implements Initializab
         jo.put("nomCarte", "La max corporation");
         jo.put("prix","300");
         jo.put("idMarque","1");
-        Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
+        Response larep= ((WebTarget) webTarget).request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
         System.out.println("Form response " + larep.getStatus());
 
         // Méthode PUT
