@@ -55,8 +55,7 @@ class produitDAO
         $state->bindValue(":nomProduit", $Produit->getNomProduit());
         $state->bindValue(":prixProduit", $Produit->getPrixProduit());
         $state->bindValue(":imageProduit", $Produit->getImageProduit());
-        $state->bindValue(":categorieProduit", $Produit->getCategorieProduit());
-        $state->bindValue(":tailleProduit", $Produit->getTailleProduit());
+        $state->bindValue(":idCategorie", $Produit->getidCategorie());
         $state->execute();
     }
 

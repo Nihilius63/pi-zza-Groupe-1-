@@ -87,9 +87,9 @@ public function processRequest()
     private function createproduit()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (isset($input["nomProduit"],$input["prixProduit"],$input["tailleProduit"],$input['imageProduit'],$input['categorieProduit'])) 
+        if (isset($input["nomProduit"],$input["prixProduit"],$input['imageProduit'],$input['idCategorie'])) 
         {
-            $Produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input["tailleProduit"],$input['categorieProduit']);
+            $Produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input['idCategorie']);
             produitDAO::insert($Produit);
             $response['body'] = json_encode($Produit);
             $response['status_code_header'] = 'Succes';
