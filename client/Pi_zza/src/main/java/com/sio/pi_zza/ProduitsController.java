@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -52,6 +53,7 @@ public class ProduitsController extends HistoriquesController {
     @FXML private TextField prixProduits;
 
     private String img2 = "";
+    private String img3 = "";
 
     public void importImages(MouseEvent event, Button importImage) {
         FileChooser fileChooser = new FileChooser();
@@ -133,6 +135,175 @@ public class ProduitsController extends HistoriquesController {
 
     }
 
+    public void modifProduit(MouseEvent event, String idProduit, String nomProduit, int prixProduit, String imageProduit, int categorieProduit) {
+
+        img3 = imageProduit;
+        img2 = imageProduit;
+
+        String categorieName = "";
+
+        if(categorieProduit == 1) {
+            categorieName = "Pizza";
+        } else if(categorieProduit == 2) {
+            categorieName = "Boissons";
+        } else {
+            categorieName = "Desserts";
+        }
+
+        Stage newStage = new Stage();
+
+        VBox box = new VBox();
+
+        TextField nomProduitText = new TextField(nomProduit);
+        TextField prixProduitText = new TextField(""+prixProduit);
+        ComboBox categorieProduitText = new ComboBox();
+        categorieProduitText.setItems(FXCollections.observableArrayList("Pizza", "Boissons", "Desserts"));
+        categorieProduitText.getSelectionModel().select(categorieProduit-1);
+
+        HBox huBox = new HBox();
+        Label nom = new Label("Nom du produit:");
+        box.getChildren().add(nom);
+        box.getChildren().add(nomProduitText);
+
+        Label prix = new Label("Prix du produit:");
+        box.getChildren().add(prix);
+        box.getChildren().add(prixProduitText);
+
+        Label imageSerieT = new Label("Image du produit:");
+        ImageView imageSerie = new ImageView(""+imageProduit);
+        imageSerie.setFitHeight(100);
+        imageSerie.setFitWidth(100);
+        box.getChildren().add(imageSerieT);
+        box.getChildren().add(imageSerie);
+        Button addImage = new Button("Modifier l'image");
+
+        EventHandler<MouseEvent> eventHandler2 = new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent e)
+            {
+                importImages(e, addImage);
+            }
+        };
+
+        addImage.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler2);
+
+        box.getChildren().add(addImage);
+
+        Label categorieT = new Label("Categorie du produit:");
+        box.getChildren().add(categorieT);
+        box.getChildren().add(categorieProduitText);
+
+        Button modif = new Button("Modifier");
+        Button retour = new Button("Retour");
+
+        box.getChildren().add(huBox);
+
+        huBox.getChildren().add(modif);
+        huBox.getChildren().add(retour);
+
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent e)
+            {
+                clickModif(e, newStage, nomProduitText.getText(), prixProduitText.getText(), img2, categorieProduitText.getSelectionModel().getSelectedItem().toString(), idProduit);
+            }
+        };
+
+        modif.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        retour.setOnAction(actionEvent -> newStage.hide());
+
+        Scene stageScene = new Scene(box, 500, 550);
+        newStage.setScene(stageScene);
+        newStage.show();
+
+    }
+
+    public void clickModif(MouseEvent event, Stage newStage, String nomProduit, String prixProduit, String imageProduit, String categorieProduit, String idProduit) {
+
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
+
+        JSONObject update = new JSONObject();
+        update.put("idProduit", idProduit);
+        update.put("nomProduit", nomProduit);
+        update.put("prixProduit",prixProduit);
+        update.put("imageProduit",imageProduit);
+        update.put("idCategorie",categorieProduit);
+
+        System.out.println("Id Produit : "+idProduit+"\nNom Produit : "+nomProduit+"\nPrix Produit : "+prixProduit+"\nImage Produit : "+imageProduit+"\nCategorie Produit : "+categorieProduit);
+
+        Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(update.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
+        System.out.println("Form response " + larep.getStatus());
+
+        System.out.println("Modification réussi!");
+
+        newStage.hide();
+
+        try {
+            if(img2 != img3) {
+                Path copied = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
+                Path originalPath = Paths.get(img2.replace("file:/", ""));
+
+                Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                img2 = "";
+                App.setRoot("primary");
+            } else {
+                App.setRoot("primary");
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void suprProduit(MouseEvent event, String idProduit) {
+
+        Stage newStage = new Stage();
+        VBox box = new VBox();
+        HBox bo = new HBox();
+        Label title = new Label("Vous êtes sur de vouloir suprimmé ?");
+        Button yes = new Button("Oui");
+        Button no = new Button("Non");
+
+        title.getStyleClass().add("suprLabel");
+        yes.getStyleClass().add("but");
+        no.getStyleClass().add("but");
+        bo.getStyleClass().add("boBOX");
+        box.getStyleClass().add("boxSupr");
+
+        box.getChildren().add(title);
+        box.getChildren().add(bo);
+        bo.getChildren().add(yes);
+        bo.getChildren().add(no);
+
+        //String name = serie.getNom();
+
+        /*EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent e)
+            {
+                clickDelete(e, newStage, serie.getIdSerie(), name);
+            }
+        };*/
+
+        //yes.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+
+        no.setOnAction(actionEvent -> newStage.hide());
+
+        Scene stageScene = new Scene(box, 500, 200);
+        newStage.setScene(stageScene);
+        newStage.show();
+
+    }
+
+
     public void produits(Client client) {
 
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
@@ -210,12 +381,16 @@ public class ProduitsController extends HistoriquesController {
 
         for (int i = 0; i < jsonArray2.length(); i++) {
             JSONObject json = new JSONObject(jsonArray2.get(i).toString());
+            String idProduit = (String) json.get("idProduit");
             String nomProduit = (String) json.get("nomProduit");
             int prixProduit = Integer.parseInt((String) json.get("prixProduit"));
             String img = (String) json.get("imageProduit");
             int idCategorie = Integer.parseInt((String) json.get("idCategorie"));
             Label nameProduits = new Label(nomProduit);
             Label prixProduits = new Label(""+prixProduit+"");
+
+            Button buttonModif = new Button("Modifier");
+            Button buttonSupr = new Button("Supprimer");
 
             ImageView image = new ImageView(img.replace("file:/", ""));
             image.setFitHeight(50);
@@ -227,6 +402,31 @@ public class ProduitsController extends HistoriquesController {
                     vboxPizza.getChildren().add(nameProduits);
                     vboxPizza.getChildren().add(prixProduits);
                     vboxPizza.getChildren().add(image);
+                    HBox hbox = new HBox();
+                    hbox.getChildren().add(buttonModif);
+                    hbox.getChildren().add(buttonSupr);
+
+                    EventHandler<MouseEvent> eventModif1 = new EventHandler<MouseEvent>()
+                    {
+                        @Override
+                        public void handle(MouseEvent e)
+                        {
+                            modifProduit(e, idProduit, nomProduit, prixProduit, img.replace("file:/", ""), idCategorie);
+                        }
+                    };
+                    buttonModif.addEventHandler(MouseEvent.MOUSE_CLICKED, eventModif1);
+
+                    EventHandler<MouseEvent> eventSupr1 = new EventHandler<MouseEvent>()
+                    {
+                        @Override
+                        public void handle(MouseEvent e)
+                        {
+                            suprProduit(e, idProduit);
+                        }
+                    };
+                    buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr1);
+
+                    vboxPizza.getChildren().add(hbox);
                     produitsGrid.add(vboxPizza, 0, compteur);
                     break;
 
@@ -235,6 +435,33 @@ public class ProduitsController extends HistoriquesController {
                     vboxBoissons.getChildren().add(nameProduits);
                     vboxBoissons.getChildren().add(prixProduits);
                     vboxBoissons.getChildren().add(image);
+
+                    HBox hbox2 = new HBox();
+                    hbox2.getChildren().add(buttonModif);
+                    hbox2.getChildren().add(buttonSupr);
+
+                    EventHandler<MouseEvent> eventModif2 = new EventHandler<MouseEvent>()
+                    {
+                        @Override
+                        public void handle(MouseEvent e)
+                        {
+                            modifProduit(e, idProduit, nomProduit, prixProduit, img.replace("file:/", ""), idCategorie);
+                        }
+                    };
+                    buttonModif.addEventHandler(MouseEvent.MOUSE_CLICKED, eventModif2);
+
+                    EventHandler<MouseEvent> eventSupr2 = new EventHandler<MouseEvent>()
+                    {
+                        @Override
+                        public void handle(MouseEvent e)
+                        {
+                            suprProduit(e, idProduit);
+                        }
+                    };
+                    buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr2);
+
+                    vboxBoissons.getChildren().add(hbox2);
+
                     produitsGrid.add(vboxBoissons, 1, compteur);
                     break;
 
@@ -243,6 +470,33 @@ public class ProduitsController extends HistoriquesController {
                     vboxDesserts.getChildren().add(nameProduits);
                     vboxDesserts.getChildren().add(prixProduits);
                     vboxDesserts.getChildren().add(image);
+
+                    HBox hbox3 = new HBox();
+                    hbox3.getChildren().add(buttonModif);
+                    hbox3.getChildren().add(buttonSupr);
+
+                    EventHandler<MouseEvent> eventModif3 = new EventHandler<MouseEvent>()
+                    {
+                        @Override
+                        public void handle(MouseEvent e)
+                        {
+                            modifProduit(e, idProduit, nomProduit, prixProduit, img.replace("file:/", ""), idCategorie);
+                        }
+                    };
+                    buttonModif.addEventHandler(MouseEvent.MOUSE_CLICKED, eventModif3);
+
+                    EventHandler<MouseEvent> eventSupr3 = new EventHandler<MouseEvent>()
+                    {
+                        @Override
+                        public void handle(MouseEvent e)
+                        {
+                            suprProduit(e, idProduit);
+                        }
+                    };
+                    buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr3);
+
+                    vboxDesserts.getChildren().add(hbox3);
+
                     produitsGrid.add(vboxDesserts, 2, compteur);
                     break;
 
