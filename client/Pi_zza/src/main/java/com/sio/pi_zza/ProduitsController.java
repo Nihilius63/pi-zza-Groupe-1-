@@ -207,7 +207,7 @@ public class ProduitsController extends HistoriquesController {
             @Override
             public void handle(MouseEvent e)
             {
-                clickModif(e, newStage, nomProduitText.getText(), prixProduitText.getText(), img2, categorieProduitText.getSelectionModel().getSelectedItem().toString(), idProduit);
+                clickModif(e, newStage, nomProduit, nomProduitText.getText(), prixProduitText.getText(), img2, categorieProduitText.getSelectionModel().getSelectedItem().toString(), idProduit);
             }
         };
 
@@ -220,19 +220,31 @@ public class ProduitsController extends HistoriquesController {
 
     }
 
-    public void clickModif(MouseEvent event, Stage newStage, String nomProduit, String prixProduit, String imageProduit, String categorieProduit, String idProduit) {
+    public void clickModif(MouseEvent event, Stage newStage, String namePr, String nomProduit, String prixProduit, String imageProduit, String categorieProduit, String idProduit) {
 
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
+
+        String categorieId = "";
+
+        if(categorieProduit == "Pizza") {
+            categorieId = "1";
+        } else if(categorieProduit == "Boissons") {
+            categorieId = "2";
+        } else {
+            categorieId = "3";
+        }
+
+        System.out.println("Id Produit : "+idProduit+"\nNom Produit : "+nomProduit+"\nPrix Produit : "+prixProduit+"\nImage Produit : "+imageProduit+"\nCategorie Produit : "+categorieId);
+
+        String image = "file:images/" + nomProduit.replace(" ", "_") + ".png";
 
         JSONObject update = new JSONObject();
         update.put("idProduit", idProduit);
         update.put("nomProduit", nomProduit);
         update.put("prixProduit",prixProduit);
-        update.put("imageProduit",imageProduit);
-        update.put("idCategorie",categorieProduit);
-
-        System.out.println("Id Produit : "+idProduit+"\nNom Produit : "+nomProduit+"\nPrix Produit : "+prixProduit+"\nImage Produit : "+imageProduit+"\nCategorie Produit : "+categorieProduit);
+        update.put("imageProduit",image);
+        update.put("idCategorie",categorieId);
 
         Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(update.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
         System.out.println("Form response " + larep.getStatus());
@@ -242,16 +254,42 @@ public class ProduitsController extends HistoriquesController {
         newStage.hide();
 
         try {
-            if(img2 != img3) {
-                Path copied = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
-                Path originalPath = Paths.get(img2.replace("file:/", ""));
+            if(!img2.equals(img3)) {
+                if(!namePr.equals(nomProduit)) {
+                    Path pathDelete = Paths.get("images/"+namePr.replace(" ", "_")+".png");
+                    Files.delete(pathDelete);
 
-                Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+                    Path copied = Paths.get("images/" + nomProduit.replace(" ", "_") + ".png");
+                    Path originalPath = Paths.get(img2.replace("file:/", ""));
 
-                img2 = "";
-                App.setRoot("primary");
+                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                    img2 = "";
+                    App.setRoot("primary");
+                } else {
+                    Path copied = Paths.get("images/" + nomProduit.replace(" ", "_") + ".png");
+                    Path originalPath = Paths.get(img2.replace("file:/", ""));
+
+                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                    img2 = "";
+                    App.setRoot("primary");
+                }
             } else {
+                if(!namePr.equals(nomProduit)) {
+                    Path originalPath = Paths.get("images/"+namePr.replace(" ", "_")+".png");
+                    Path copied = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
+
+                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                    Path pathDelete = Paths.get("images/"+namePr.replace(" ", "_")+".png");
+                    Files.delete(pathDelete);
+
+                    img2 = "";
+                }
+
                 App.setRoot("primary");
+
             }
 
 
@@ -262,7 +300,34 @@ public class ProduitsController extends HistoriquesController {
 
     }
 
-    public void suprProduit(MouseEvent event, String idProduit) {
+    public void clickDelete(MouseEvent event, Stage newStage, String idProduit, String nomProduit) {
+        try {
+            Path pathDelete = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
+            Files.delete(pathDelete);
+
+            Client client = ClientBuilder.newClient();
+            WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
+
+            Invocation.Builder invocationBuilder
+                    = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
+            invocationBuilder.header("some-header", "true");
+            Response response = invocationBuilder.get();
+
+            WebTarget parametreDel = webTarget.path("/"+idProduit);
+            Invocation.Builder delete
+                    = parametreDel.request(MediaType.TEXT_PLAIN_TYPE);
+            invocationBuilder.header("some-header", "true");
+            Response deletePost = delete.delete();
+
+            newStage.hide();
+            App.setRoot("primary");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void suprProduit(MouseEvent event, String idProduit, String nomProduit) {
 
         Stage newStage = new Stage();
         VBox box = new VBox();
@@ -282,18 +347,16 @@ public class ProduitsController extends HistoriquesController {
         bo.getChildren().add(yes);
         bo.getChildren().add(no);
 
-        //String name = serie.getNom();
-
-        /*EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent e)
             {
-                clickDelete(e, newStage, serie.getIdSerie(), name);
+                clickDelete(e, newStage, nomProduit, idProduit);
             }
-        };*/
+        };
 
-        //yes.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        yes.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
         no.setOnAction(actionEvent -> newStage.hide());
 
@@ -421,7 +484,7 @@ public class ProduitsController extends HistoriquesController {
                         @Override
                         public void handle(MouseEvent e)
                         {
-                            suprProduit(e, idProduit);
+                            suprProduit(e, nomProduit, idProduit);
                         }
                     };
                     buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr1);
@@ -455,7 +518,7 @@ public class ProduitsController extends HistoriquesController {
                         @Override
                         public void handle(MouseEvent e)
                         {
-                            suprProduit(e, idProduit);
+                            suprProduit(e, nomProduit, idProduit);
                         }
                     };
                     buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr2);
@@ -490,7 +553,7 @@ public class ProduitsController extends HistoriquesController {
                         @Override
                         public void handle(MouseEvent e)
                         {
-                            suprProduit(e, idProduit);
+                            suprProduit(e, nomProduit, idProduit);
                         }
                     };
                     buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr3);

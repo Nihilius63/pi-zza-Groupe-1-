@@ -90,7 +90,7 @@ public class PrimaryController extends ProduitsController implements Initializab
         };
         close.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-        produitsWindow();
+        dashboardWindow();
         DashboardController:dashboard(client);
         ProduitsController:produits(client);
         HistoriquesController:historiques(client);
