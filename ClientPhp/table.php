@@ -3,7 +3,8 @@ include_once("view/header.html");
 include_once ("php/DAOCommande.php");
 include_once ("php/DAOContenir.php");
 include_once ("php/DAOProduit.php");
-include_once ("php/DAOTables.php")
+include_once ("php/DAOTables.php");
+include_once ("php/DAOCategorie.php");
 
 ?>
 <div class="content" >
@@ -44,7 +45,7 @@ foreach ($commandes as $commande) {
 ?>
     </div>
     <div class="droitetable">
-        <h1>Nombres de personnes</h1>
+        <h1>Nombre de personnes</h1>
         <div class="nbPersonne">
         <?php
         $table=DAOTables::getTableById($_GET['idTable']);
@@ -55,7 +56,18 @@ foreach ($commandes as $commande) {
 
 
         <H1> Ajouter produit</H1>
-        <H3>Pizzas</H3>
+        <form method="post" action="traitement.php">
+            <p>
+                <select name="pays" id="pays">
+                    <?php
+                    $categorie=DAOCategorie::getCategorie();
+                    foreach ($categorie as $value) {
+                        echo "<option value='".$value->nomCategorie."'>".$value->nomCategorie."</option>";
+                    }
+                    ?>
+                </select>
+            </p>
+        </form>
         <?php
         $produit=DAOProduit::getProduits();
         foreach ($produit as $prod) {
