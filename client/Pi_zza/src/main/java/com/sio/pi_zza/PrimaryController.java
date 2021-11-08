@@ -101,24 +101,21 @@ public class PrimaryController extends ProduitsController implements Initializab
         WebTarget webTarget = client.target("http://localhost/WebserviceTD/server/carte");
 
         // Méthode GET
-        Invocation.Builder invocationBuilder
-                = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
+        Invocation.Builder invocationBuilder = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
         invocationBuilder.header("some-header", "true");
         Response response = invocationBuilder.get();
         System.out.println(response.readEntity(String.class));
 
         // Méthode GET avec un paramètre : on rajoute notre paramètre dans l'url
         WebTarget parametre = webTarget.path("/3");
-        Invocation.Builder requeteParam
-                = parametre.request(MediaType.TEXT_PLAIN_TYPE);
+        Invocation.Builder requeteParam = parametre.request(MediaType.TEXT_PLAIN_TYPE);
         invocationBuilder.header("some-header", "true");
         Response reponse2 = requeteParam.get();
         System.out.println(reponse2.readEntity(String.class));
 
         // Méthode DELETE Pareil qu'avant mais on met .delete() a la place de .get()
         WebTarget parametreDel = webTarget.path("/5");
-        Invocation.Builder delete
-                = parametreDel.request(MediaType.TEXT_PLAIN_TYPE);
+        Invocation.Builder delete = parametreDel.request(MediaType.TEXT_PLAIN_TYPE);
         invocationBuilder.header("some-header", "true");
         Response deletePost = delete.delete();
         System.out.println(deletePost.readEntity(String.class));
