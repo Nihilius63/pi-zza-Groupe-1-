@@ -21,12 +21,36 @@ function ajouterEvent() {
             modif.previousElementSibling.remove();
             let input=document.createElement("input");
             input.setAttribute("type","text")
-            input.setAttribute("class","inputFondBlanc")
+            input.setAttribute("id","inputFondBlanc")
             modif.parentNode.append(input);
             modif.setAttribute("value","Valider")
         }
         else {
+            changeNbPlaces()
+            addCommand()
+            let elementParent=modif.parentNode
             modif.setAttribute("value","Modifier")
+            let input=document.createElement("input");
+            let inputhidden1=document.createElement("input")
+            let inputhidden2=document.createElement("input")
+            let p = document.createElement("p")
+            p.innerHTML=document.getElementById("inputFondBlanc").value
+            elementParent.append(p)
+            input.setAttribute("id","modifNbPersonne")
+            input.setAttribute("type","button")
+            input.setAttribute("value","Modifier")
+            inputhidden2.setAttribute("id","idTable")
+            inputhidden2.setAttribute("value",document.getElementById("idTable").value)
+            inputhidden2.setAttribute("type","hidden")
+            inputhidden1.setAttribute("id","nbPlaces")
+            inputhidden1.setAttribute("value",document.getElementById("inputFondBlanc").value)
+            inputhidden1.setAttribute("type","hidden")
+            elementParent.innerHTML="";
+            elementParent.append(p)
+            elementParent.append(input)
+            elementParent.append(inputhidden2)
+            elementParent.append(inputhidden1)
+            ajouterEvent()
         }
     })
 }
@@ -37,7 +61,7 @@ function addProduit(event){
 
     let object= new Object();
     object.idCommande=1;
-    object.idProduit=event.alt;
+    object.idProduit=1;
     object.quantite=1;
     let jsonencode=JSON.stringify(object);
 
@@ -147,5 +171,51 @@ function getProduit(id){
     requestPost.open("GET","http://localhost/pi-zza-Groupe-1-/server/produit/"+id);
     requestPost.send();
 }
+function changeNbPlaces() {
+
+    let object= new Object();
+    object.idTables=document.getElementById("idTable").value;
+    object.nbPlaces=document.getElementById("nbPlaces").value;
+    object.nbPersonne=document.getElementById("inputFondBlanc").value;
+
+    let jsonencode=JSON.stringify(object);
+    console.log(jsonencode)
+    let requestPost=new XMLHttpRequest();
+    requestPost.addEventListener("readystatechange",function(){
+        if (requestPost.readyState== 4) {
+            if (requestPost.status == 200) {
+            }
+            else {
+                console.log(requestPost.status);
+            }
+        }
+    });
+
+    requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/tables");
+    requestPost.send(jsonencode);
+}
+
+function addCommand() {
+    let object= new Object();
+    object.idTables=document.getElementById("idTable").value;
+    let jsonencode=JSON.stringify(object);
+    console.log(jsonencode)
+    let requestPost=new XMLHttpRequest();
+    requestPost.addEventListener("readystatechange",function(){
+        if (requestPost.readyState== 4) {
+            if (requestPost.status == 200) {
+
+            }
+            else {
+                console.log(requestPost.status);
+            }
+        }
+    });
+
+    requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/commande");
+    requestPost.send(jsonencode);
+
+}
+
 
 ajouterEvent();

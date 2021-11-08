@@ -21,7 +21,7 @@ body .content .droite .affichageTable .carte img { height: 80%; width: 80%; }
 body .droitetable { background-color: #202332; width: 30%; height: 10000px; color: white; text-align: center; }
 body .droitetable .nbPersonne { justify-content: center; align-items: center; display: flex; }
 body .droitetable .nbPersonne p { margin-right: 10px; }
-body .droitetable .nbPersonne .inputFondBlanc { background: white; }
+body .droitetable .nbPersonne #inputFondBlanc { background: white; color: black; }
 body .droitetable .nbPersonne input { background: #00A2D3; border: none; color: white; }
 body .droitetable .ligne { display: flex; margin: 10px 0px 10px 15px; align-items: center; }
 body .droitetable .ligne .ajouterProduit { width: 30px; height: 30px; align-self: center; cursor: pointer; }

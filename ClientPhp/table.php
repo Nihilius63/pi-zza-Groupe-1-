@@ -6,7 +6,7 @@ include_once ("php/DAOProduit.php");
 include_once ("php/DAOTables.php")
 
 ?>
-<div class="content">
+<div class="content" >
     <div id="gauche">
         <h1> Commande </h1>
 
@@ -47,7 +47,8 @@ foreach ($commandes as $commande) {
         $table=DAOTables::getTableById($_GET['idTable']);
         echo '<p>'.$table->nbPersonne.'</p>';
         ?>
-        <input id="modifNbPersonne" type="button" value="Modifier"></div>
+
+        <input id="modifNbPersonne" type="button" value="Modifier"><input type="hidden" id="idTable" value="<?php echo $table->idTables;?>"><input type="hidden" id="nbPlaces" value="<?php echo $table->nbPlaces;?>"></div>
 
 
         <H1> Ajouter produit</H1>
@@ -57,7 +58,7 @@ foreach ($commandes as $commande) {
         foreach ($produit as $prod) {
             if ($prod->idCategorie==1) {
                 echo '<div class="ligne">
-                    <img class="imgProduit" src="'.$prod->imageProduit.'" alt="">
+                    <img class="imgProduit" src="'.$prod->imageProduit.'">
                     <div class="colonne">
                         <p>'.$prod->nomProduit.'</p>
                         <p>'.$prod->prixProduit.'€</p>
