@@ -1,11 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.1.0
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1
--- Généré le : lun. 08 nov. 2021 à 09:47
--- Version du serveur :  10.4.18-MariaDB
--- Version de PHP : 8.0.3
+SET NAMES utf8mb4;
+DROP DATABASE IF EXISTS pi_zza;
+CREATE DATABASE pi_zza;
+USE pi_zza;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,31 +113,31 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `prixProduit`, `imageProduit`, `idCategorie`) VALUES
-(1, 'Orientale', 12.5, '../pi-zza-Groupe-1-/img/Orientale.webp', 1),
-(2, 'Savoyarde', 12.5, '../pi-zza-Groupe-1-/img/Savoyarde.webp', 1),
-(3, 'Deliziosa', 12.5, '../pi-zza-Groupe-1-/img/Deliziosa.webp', 1),
-(4, 'Vegan Peppina', 12.5, '../pi-zza-Groupe-1-/img/Vegan Peppina.webp', 1),
-(5, 'Chèvre Miel', 10.5, '../pi-zza-Groupe-1-/img/chevre miel.webp', 1),
-(6, '4 fromages', 10.5, '../pi-zza-Groupe-1-/img/4fromages.webp', 1),
-(7, 'Hawaienne Jambon', 8.5, '../pi-zza-Groupe-1-/img/Hawaienne.webp', 1),
-(8, 'Saumoneta', 10.5, '../pi-zza-Groupe-1-/img/Saumoneta.webp', 1),
-(9, 'Margherita', 8.5, '../pi-zza-Groupe-1-/img/Margherita.webp', 1),
-(10, 'Original Pepperonni', 8.5, '../pi-zza-Groupe-1-/img/pepperonni.webp', 1),
-(13, 'Reine', 8.5, '../pi-zza-Groupe-1-/img/Reine.webp', 1),
-(14, 'Steak & Cheese', 11, '../pi-zza-Groupe-1-/img/Steak.webp', 1),
-(15, 'Peppina', 11, '../pi-zza-Groupe-1-/img/Peppina.webp', 1),
-(16, 'Deluxe', 11, '../pi-zza-Groupe-1-/img/Deluxe.webp', 1),
-(17, 'Samourai', 11.99, '../pi-zza-Groupe-1-/img/Samouraic.webp', 2),
-(18, 'Chèvre Miel', 11.99, '../pi-zza-Groupe-1-/img/chevre mielc.webp', 2),
-(19, 'Kebab', 11.99, '../pi-zza-Groupe-1-/img/Kebabc.webp', 2),
-(20, 'Poulet-Curry', 11.99, '../pi-zza-Groupe-1-/img/poulet-curryc.webp', 2),
-(22, 'Coca-Cola', 2.5, '../pi-zza-Groupe-1-/img/coca.webp', 3),
-(23, 'Oasis', 2.5, '../pi-zza-Groupe-1-/img/Oasis.webp', 3),
-(24, 'Evian', 2.5, '../pi-zza-Groupe-1-/img/evian.webp', 3),
-(25, 'Badoit', 2.5, '../pi-zza-Groupe-1-/img/badoit.webp', 3),
-(26, 'Sprite', 2.5, '../pi-zza-Groupe-1-/img/Sprite.webp', 3),
-(27, 'Mini beignets choco-noisette ', 3, '../pi-zza-Groupe-1-/img/beignets.webp', 4),
-(28, 'Moelleux au Chocolat', 4.99, '../pi-zza-Groupe-1-/img/moelleux.webp', 4);
+(1, 'Orientale', 12.5, '../img/Orientale.webp', 1),
+(2, 'Savoyarde', 12.5, '../img/Savoyarde.webp', 1),
+(3, 'Deliziosa', 12.5, '../img/Deliziosa.webp', 1),
+(4, 'Vegan Peppina', 12.5, '../img/Vegan Peppina.webp', 1),
+(5, 'Chèvre Miel', 10.5, '../img/chevre miel.webp', 1),
+(6, '4 fromages', 10.5, '../img/4fromages.webp', 1),
+(7, 'Hawaienne Jambon', 8.5, '../img/Hawaienne.webp', 1),
+(8, 'Saumoneta', 10.5, '../img/Saumoneta.webp', 1),
+(9, 'Margherita', 8.5, '../img/Margherita.webp', 1),
+(10, 'Original Pepperonni', 8.5, '../img/pepperonni.webp', 1),
+(13, 'Reine', 8.5, '../img/Reine.webp', 1),
+(14, 'Steak & Cheese', 11, '../img/Steak.webp', 1),
+(15, 'Peppina', 11, '../img/Peppina.webp', 1),
+(16, 'Deluxe', 11, '../img/Deluxe.webp', 1),
+(17, 'Samourai', 11.99, '../img/Samouraic.webp', 2),
+(18, 'Chèvre Miel', 11.99, '../img/chevre mielc.webp', 2),
+(19, 'Kebab', 11.99, '../img/Kebabc.webp', 2),
+(20, 'Poulet-Curry', 11.99, '../img/poulet-curryc.webp', 2),
+(22, 'Coca-Cola', 2.5, '../img/coca.webp', 3),
+(23, 'Oasis', 2.5, '../img/Oasis.webp', 3),
+(24, 'Evian', 2.5, '../img/evian.webp', 3),
+(25, 'Badoit', 2.5, '../img/badoit.webp', 3),
+(26, 'Sprite', 2.5, '../img/Sprite.webp', 3),
+(27, 'Mini beignets choco-noisette ', 3, '../img/beignets.webp', 4),
+(28, 'Moelleux au Chocolat', 4.99, '../img/moelleux.webp', 4);
 
 -- --------------------------------------------------------
 
