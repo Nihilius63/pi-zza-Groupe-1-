@@ -135,7 +135,7 @@ public class ProduitsController extends HistoriquesController {
 
     }
 
-    public void modifProduit(MouseEvent event, String idProduit, String nomProduit, int prixProduit, String imageProduit, int categorieProduit) {
+    public void modifProduit(MouseEvent event, String idProduit, String nomProduit, float prixProduit, String imageProduit, int categorieProduit) {
 
         img3 = imageProduit;
         img2 = imageProduit;
@@ -446,7 +446,7 @@ public class ProduitsController extends HistoriquesController {
             JSONObject json = new JSONObject(jsonArray2.get(i).toString());
             String idProduit = (String) json.get("idProduit");
             String nomProduit = (String) json.get("nomProduit");
-            int prixProduit = Integer.parseInt((String) json.get("prixProduit"));
+            float prixProduit = Float.parseFloat((String) json.get("prixProduit"));
             String img = (String) json.get("imageProduit");
             int idCategorie = Integer.parseInt((String) json.get("idCategorie"));
             Label nameProduits = new Label(nomProduit);
