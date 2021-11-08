@@ -59,7 +59,7 @@
                 $controller = new commandeControllers($requestMethod, $commandeId,$idTables);
                 $controller->processRequest();
                 break;
-            case "contient" : 
+            case "contient" :
                 $contientId = null;
                 if (isset($urlParts[2]))
                 {
@@ -82,7 +82,7 @@
                         $controller = new contientControllers();
                         $controller->setRequestMethod($requestMethod);
                         $controller->setCommandeId((int) $urlParts[2]);
-                        $controller->setCommandeId((int) $urlParts[3]);
+                        $controller->setProduitId((int) $urlParts[3]);
                         $controller->processRequest();
                     }
                 }

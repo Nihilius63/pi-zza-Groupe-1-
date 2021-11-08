@@ -8,7 +8,7 @@ class contientDAO
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM contient WHERE idCommande = :idCommande AND idProduit=:idProduit');
         $state->bindValue(":idCommande", $id1);
-        $state->bindValue(":idCommande", $id2);
+        $state->bindValue(":idProduit", $id2);
         $state->execute();
         $resultats = $state->fetchAll();
 

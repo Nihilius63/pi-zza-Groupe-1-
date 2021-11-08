@@ -129,8 +129,8 @@ class contientControllers
             }
             return $response;
         }
-        private function getContient($id) {	
-            $result = contientDAO::get($id);
+        private function getContient($id1,$id2) {	
+            $result = contientDAO::get($id1,$id2);
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
             if ($result == null) 
@@ -171,7 +171,7 @@ class contientControllers
         }
         private function deleteContient($id1,$id2) 
         {
-            contientDAO::delete($id);	
+            contientDAO::delete($id1,$id2);	
             $response['status_code_header'] = 'HTTP/1.1 200 Successfull deletion';
             $response['body'] = null;
             return $response;
