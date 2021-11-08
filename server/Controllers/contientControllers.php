@@ -143,10 +143,12 @@ class contientControllers
         private function createContient()
         {
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-            if (isset($input["idCommande"],$input["idProduit"],$input["quantite"])) 
+            if (isset($input["idProduit"],$input["quantite"])) 
             {
                 $contient=new contientDTO($input["idProduit"],$input["quantite"]);
                 $contient->setIdCommande($input["idCommande"]);
+                $contient->setIdProduit($input["idProduit"]);
+                $contient->setQuantite($input["quantite"]);
                 contientDAO::insert($contient);
                 $response['body'] = json_encode($contient);
                 $response['status_code_header'] = 'HTTP/1.1 200 Successfull';
