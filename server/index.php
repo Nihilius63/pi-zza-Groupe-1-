@@ -44,11 +44,19 @@
                 break;
             case "commande" : 
                 $commandeId = null;
+                $idTables=null;
                 if (isset($urlParts[2])) 
                 {
-                    $commandeId = (int) $urlParts[2];
+                    if($urlParts[2]=="Tables")
+                    {
+                        $idTables= (int) $urlParts[3];
+                    }
+                    else
+                    {
+                        $commandeId = (int) $urlParts[2];
+                    }
                 }
-                $controller = new commandeControllers($requestMethod, $commandeId);
+                $controller = new commandeControllers($requestMethod, $commandeId,$idTables);
                 $controller->processRequest();
                 break;
             case "contient" : 

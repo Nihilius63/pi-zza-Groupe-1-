@@ -2,7 +2,7 @@
 include_once('DTO/commandeDTO.php');
 class commandeDAO 
 {
-        public static function get($id)
+    public static function get($id)
     {
         $Commande = null;
         $connex = DatabaseLinker::getConnexion();
@@ -18,6 +18,23 @@ class commandeDAO
             $Commande->setIdCommande($result["idCommande"]);
         }
         return $Commande;
+    }
+    public static function getbyTables($id)
+    {
+        $Commandes = array();
+        $connex = DatabaseLinker::getConnexion();
+        $state = $connex->prepare('SELECT * FROM commande WHERE idTables = :idTables');
+        $state->bindValue(":idTables", $id);
+        $state->execute();
+        $resultats = $state->fetchAll();
+
+        foreach ($resultats as $result)
+        {
+                $Commande = new commandeDTO($result["idTables"]);
+                $Commande->setIdCommande($result["idCommande"]);
+                $Commandes[] = $Commande;
+        }
+        return $Commandes;
     }
 
     public static function getList()

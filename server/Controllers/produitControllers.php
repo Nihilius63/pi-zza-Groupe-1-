@@ -106,7 +106,6 @@ public function processRequest()
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (isset($input["nomProduit"],$input["prixProduit"],$input["idProduit"],$input['imageProduit'],$input['idCategorie']))
         {
-            echo "test";
             $produit=new produitDTO($input["nomProduit"],$input["imageProduit"],$input["prixProduit"],$input['idCategorie']);
             $produit->setIdProduit($input["idProduit"]);
             produitDAO::update($produit);
