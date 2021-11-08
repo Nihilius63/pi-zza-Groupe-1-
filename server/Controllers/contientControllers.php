@@ -145,7 +145,7 @@ class contientControllers
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
             if (isset($input["idProduit"],$input["quantite"],$input["idCommande"])) 
             {
-                $contient=new contientDTO($input["idProduit"],$input["quantite"]);
+                $contient=new contientDTO();
                 $contient->setIdCommande($input["idCommande"]);
                 $contient->setIdProduit($input["idProduit"]);
                 $contient->setQuantite($input["quantite"]);

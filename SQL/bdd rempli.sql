@@ -14,9 +14,9 @@ CREATE TABLE `categorie` (
 
 
 INSERT INTO `categorie` (`idCategorie`, `nomCategorie`) VALUES
-(1, 'Pizza'),
-(2, 'Calzone'),
-(3, 'Boisson'),
+(1, 'Pizzas'),
+(2, 'Calzones'),
+(3, 'Boissons'),
 (4, 'Desserts');
 
 CREATE TABLE `commande` (
@@ -130,13 +130,6 @@ ALTER TABLE `produit`
 ALTER TABLE `tables`
   ADD PRIMARY KEY (`idTables`);
 
-ALTER TABLE `taille`
-  ADD PRIMARY KEY (`idTaille`);
-
-ALTER TABLE `taille_produit`
-  ADD PRIMARY KEY (`idTaille`,`idProduit`),
-  ADD KEY `Avoir_produit0_FK` (`idProduit`);
-
 ALTER TABLE `categorie`
   MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
@@ -152,9 +145,6 @@ ALTER TABLE `produit`
 ALTER TABLE `tables`
   MODIFY `idTables` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
-ALTER TABLE `taille`
-  MODIFY `idTaille` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 ALTER TABLE `commande`
   ADD CONSTRAINT `commande_tables_FK` FOREIGN KEY (`idTables`) REFERENCES `tables` (`idTables`);
 
@@ -165,7 +155,4 @@ ALTER TABLE `contient`
 ALTER TABLE `produit`
   ADD CONSTRAINT `produit_Categorie_FK` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`);
 
-ALTER TABLE `taille_produit`
-  ADD CONSTRAINT `Avoir_Taille_FK` FOREIGN KEY (`idTaille`) REFERENCES `taille` (`idTaille`),
-  ADD CONSTRAINT `Avoir_produit0_FK` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`idProduit`);
 COMMIT;
