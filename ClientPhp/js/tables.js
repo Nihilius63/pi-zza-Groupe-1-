@@ -1,4 +1,12 @@
 
+function addsupprevent(){
+    let supprimer=document.querySelectorAll(".imgdelete");
+    supprimer.forEach((el)=> {
+        el.addEventListener("click", function() {
+            supprimerProduit(el);
+        });
+    });
+};
 function ajouterEvent() {
     let add=document.querySelectorAll(".ajouterProduit");
     let gauche=document.getElementById("gauche");
@@ -57,11 +65,11 @@ function ajouterEvent() {
 
 
 function addProduit(event){
+    let idCommande=document.getElementById("idCommande").value
     let requestPost=new XMLHttpRequest();
-
     let object= new Object();
-    object.idCommande=1;
-    object.idProduit=1;
+    object.idCommande=idCommande;
+    object.idProduit=event.alt;
     object.quantite=1;
     let jsonencode=JSON.stringify(object);
 
@@ -80,6 +88,7 @@ function addProduit(event){
     requestPost.send(jsonencode);}
 
 function supprimerProduit(event){
+    let idCommande=document.getElementById("idCommande").value
     let requestPost=new XMLHttpRequest();
     let idProduit=event.alt;
     requestPost.addEventListener("readystatechange",function(){
@@ -95,81 +104,88 @@ function supprimerProduit(event){
         }
     });
 
-    requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+idProduit);
+    requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+idCommande+"/"+idProduit);
     requestPost.send();}
 
 
 function getProduit(id){
-    let requestPost=new XMLHttpRequest();
-    requestPost.addEventListener("readystatechange",function(){
-        if (requestPost.readyState== 4) {
-            if (requestPost.status == 200) {
-                var jsonobj=requestPost.responseText;
-                var obj=JSON.parse(jsonobj);
-                let divproduit=document.createElement("div");
-                divproduit.setAttribute("class","produit");
+    if (document.getElementById("idProduit"+id)) {
+        updateQuantite(id)
+    }
+    else {
+        let requestPost=new XMLHttpRequest();
+        requestPost.addEventListener("readystatechange",function(){
+            if (requestPost.readyState== 4) {
+                if (requestPost.status == 200) {
+                    var jsonobj=requestPost.responseText;
+                    var obj=JSON.parse(jsonobj);
+                    let divproduit=document.createElement("div");
+                    divproduit.setAttribute("class","produit");
+                    divproduit.setAttribute("id","idProduit"+id)
                     let divligne=document.createElement("div");
                     divligne.setAttribute("class","ligne");
                     divproduit.appendChild(divligne)
 
-                        let img=document.createElement("img");
-                        img.setAttribute("src",obj.imageProduit);
-                        divligne.appendChild(img)
+                    let img=document.createElement("img");
+                    img.setAttribute("src",obj.imageProduit);
+                    divligne.appendChild(img)
 
-                        let colonne1=document.createElement("div");
-                            colonne1.setAttribute("class","colonne");
-                            let nom=document.createElement("p");
-                            nom.innerText="Nom";
-                            let nomProduit=document.createElement("p");
-                            nomProduit.innerHTML=obj.nomProduit
-                            colonne1.appendChild(nom);
-                            colonne1.appendChild(nomProduit)
-                            divligne.appendChild(colonne1)
+                    let colonne1=document.createElement("div");
+                    colonne1.setAttribute("class","colonne");
+                    let nom=document.createElement("p");
+                    nom.innerText="Nom";
+                    let nomProduit=document.createElement("p");
+                    nomProduit.innerHTML=obj.nomProduit
+                    colonne1.appendChild(nom);
+                    colonne1.appendChild(nomProduit)
+                    divligne.appendChild(colonne1)
 
 
-                        let colonne2=document.createElement("div");
-                            colonne2.setAttribute("class","colonne");
-                            let prix=document.createElement("p");
-                            prix.innerHTML="Prix";
-                            let prixProduit=document.createElement("p");
-                            prixProduit.innerHTML=obj.prixProduit
-                            colonne2.appendChild(prix)
-                            colonne2.appendChild(prixProduit)
-                            divligne.appendChild(colonne2)
+                    let colonne2=document.createElement("div");
+                    colonne2.setAttribute("class","colonne");
+                    let prix=document.createElement("p");
+                    prix.innerHTML="Prix";
+                    let prixProduit=document.createElement("p");
+                    prixProduit.innerHTML=obj.prixProduit+"€"
+                    colonne2.appendChild(prix)
+                    colonne2.appendChild(prixProduit)
+                    divligne.appendChild(colonne2)
 
-                        let colonne3=document.createElement("div");
-                            colonne3.setAttribute("class","colonne");
-                            let quantite=document.createElement("p");
-                            quantite.innerHTML="Quantite";
-                            let quantiteProduit=document.createElement("p");
-                            quantiteProduit.innerHTML="1";
-                            colonne3.appendChild(quantite)
-                            colonne3.appendChild(quantiteProduit)
-                            divligne.appendChild(colonne3)
+                    let colonne3=document.createElement("div");
+                    colonne3.setAttribute("class","colonne");
+                    let quantite=document.createElement("p");
+                    quantite.innerHTML="Quantite";
+                    let quantiteProduit=document.createElement("p");
+                    quantiteProduit.setAttribute("id","quantiteProduit"+id)
+                    quantiteProduit.innerHTML="1";
+                    colonne3.appendChild(quantite)
+                    colonne3.appendChild(quantiteProduit)
+                    divligne.appendChild(colonne3)
 
-                        let divdelete = document.createElement("div");
-                            divdelete.setAttribute("class","delete");
-                            let imgDelete=document.createElement("img")
-                            imgDelete.setAttribute("class","imgdelete");
-                            imgDelete.setAttribute("src","img/delete.png");
-                            imgDelete.setAttribute("alt",obj.idProduit)
-                            divdelete.appendChild(imgDelete)
-                            divligne.appendChild(divdelete)
-                            divdelete.addEventListener("click", function() {
-                                supprimerProduit(divdelete)
-                            });
+                    let divdelete = document.createElement("div");
+                    divdelete.setAttribute("class","delete");
+                    let imgDelete=document.createElement("img")
+                    imgDelete.setAttribute("class","imgdelete");
+                    imgDelete.setAttribute("src","img/delete.png");
+                    imgDelete.setAttribute("alt",obj.idProduit)
+                    divdelete.appendChild(imgDelete)
+                    divligne.appendChild(divdelete)
+                    divdelete.addEventListener("click", function() {
+                        supprimerProduit(divdelete)
+                    });
 
-                gauche.appendChild(divproduit)
-                ajouterEvent()
+                    gauche.appendChild(divproduit)
+                }
+                else {
+                    console.log(requestPost.status);
+                }
             }
-            else {
-                console.log(requestPost.status);
-            }
-        }
-    });
+            addsupprevent()
+        });
 
-    requestPost.open("GET","http://localhost/pi-zza-Groupe-1-/server/produit/"+id);
-    requestPost.send();
+        requestPost.open("GET","http://localhost/pi-zza-Groupe-1-/server/produit/"+id);
+        requestPost.send();
+    }
 }
 function changeNbPlaces() {
 
@@ -212,10 +228,33 @@ function addCommand() {
         }
     });
 
-    requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/commande");
+    requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/commande");
     requestPost.send(jsonencode);
 
 }
+function updateQuantite(idProduit) {
+    let qteProduit=document.getElementById("quantiteProduit"+idProduit).innerHTML
+    let produit=document.getElementById("quantiteProduit"+idProduit)
+    let object= new Object();
+    object.idCommande=1;
+    object.idProduit=idProduit;
+    object.quantite=parseInt(qteProduit)+1;
+    let jsonencode=JSON.stringify(object);
+    console.log(jsonencode)
+    let requestPost=new XMLHttpRequest();
+    requestPost.addEventListener("readystatechange",function(){
+        if (requestPost.readyState== 4) {
+            if (requestPost.status == 200) {
+                produit.innerHTML=object.quantite
+            }
+            else {
+                console.log(requestPost.status);
+            }
+        }
+    });
 
+    requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/contient");
+    requestPost.send(jsonencode);
+}
 
 ajouterEvent();

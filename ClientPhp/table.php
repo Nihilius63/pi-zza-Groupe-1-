@@ -14,9 +14,12 @@ include_once ("php/DAOTables.php")
 $commandes=DAOCommande::getCommandeByIdTable($_GET["idTable"]);
 foreach ($commandes as $commande) {
     $contients=DAOContenir::getContenirByIdCommande($commande->idCommande);
+    ?>
+    <input type="hidden" id="idCommande" value="<?php echo $commande->idCommande;?>">
+    <?php
     foreach ($contients as $contient) {
         $produit=DAOProduit::getProduitByIdProduit($contient->idProduit);
-        echo '<div class="produit">
+        echo '<div class="produit" id="idProduit'.$produit->idProduit.'">
                 <div class="ligne">
                     <img src="'.$produit->imageProduit.'" alt="">
                     <div class="colonne">
@@ -29,7 +32,7 @@ foreach ($commandes as $commande) {
                     </div>
                     <div class="colonne">
                         <p>Quantité</p>
-                        <p>'.$contient->quantite.'</p>
+                        <p id="quantiteProduit'.$produit->idProduit.'">'.$contient->quantite.'</p>
                     </div>
                     <div class="delete">
                         <img class="imgdelete" src="img/delete.png" alt="'.$produit->idProduit.'">
