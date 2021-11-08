@@ -165,8 +165,10 @@ class contientControllers
             $input = (array) json_decode(file_get_contents('php://input'), TRUE);
             if (isset($input["idCommande"],$input["idProduit"],$input["quantite"]))
             {
-                $contient=new contientDTO($input["idProduit"],$input["quantite"]);
+                $contient=new contientDTO();
                 $contient->setIdCommande($input["idCommande"]);
+                $contient->setQuantite($input["quantite"]);
+                $contient->setIdProduit($input["idProduit"]);
                 contientDAO::update($contient);
             }
             return null;
