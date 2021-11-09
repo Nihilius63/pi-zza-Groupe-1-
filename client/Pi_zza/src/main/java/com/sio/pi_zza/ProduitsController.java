@@ -6,19 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.sio.pi_zza.DAO.produitDAO;
+import com.sio.pi_zza.DAO.categorieDAO;
 import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -31,9 +29,6 @@ import javafx.stage.Window;
 import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 public class ProduitsController extends HistoriquesController {
@@ -106,18 +101,9 @@ public class ProduitsController extends HistoriquesController {
                     categorieProduits = "3";
                 }
 
-                Client client = ClientBuilder.newClient();
-                WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
-
                 String image = "file:images/" + nomProduits.replace(" ", "_") + ".png";
 
-                JSONObject jo = new JSONObject();
-                jo.put("nomProduit", nomProduits);
-                jo.put("prixProduit", prixProduits);
-                jo.put("imageProduit", image);
-                jo.put("idCategorie", categorieProduits);
-                Response larep = webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(jo.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
-                System.out.println("Form response " + larep.getStatus());
+                produitDAO.createProduit(nomProduits, Float.parseFloat(prixProduits), image, Integer.parseInt(categorieProduits));
 
                 Path copied = Paths.get("images/"+nomProduits.replace(" ", "_")+".png");
                 Path originalPath = Paths.get(img2.replace("file:/", ""));
@@ -221,21 +207,15 @@ public class ProduitsController extends HistoriquesController {
     }
 
     public void clickModif(MouseEvent event, Stage newStage, String namePr, String nomProduit, String prixProduit, String imageProduit, String categorieProduit, String idProduit) {
-
-        Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
-
-        String categorieId = "";
+        int categorieId = 0;
 
         if(categorieProduit == "Pizza") {
-            categorieId = "1";
+            categorieId = 1;
         } else if(categorieProduit == "Boissons") {
-            categorieId = "2";
+            categorieId = 2;
         } else {
-            categorieId = "3";
+            categorieId = 3;
         }
-
-        System.out.println("Id Produit : "+idProduit+"\nNom Produit : "+nomProduit+"\nPrix Produit : "+prixProduit+"\nImage Produit : "+imageProduit+"\nCategorie Produit : "+categorieId);
 
         String image = "file:images/" + nomProduit.replace(" ", "_") + ".png";
 
@@ -246,8 +226,7 @@ public class ProduitsController extends HistoriquesController {
         update.put("imageProduit",image);
         update.put("idCategorie",categorieId);
 
-        Response larep=webTarget.request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(update.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
-        System.out.println("Form response " + larep.getStatus());
+        produitDAO.updateProduitById(Integer.parseInt(idProduit), nomProduit, Float.parseFloat(prixProduit), image, categorieId);
 
         System.out.println("Modification réussi!");
 
@@ -300,33 +279,6 @@ public class ProduitsController extends HistoriquesController {
 
     }
 
-    public void clickDelete(MouseEvent event, Stage newStage, String idProduit, String nomProduit) {
-        try {
-            Path pathDelete = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
-            Files.delete(pathDelete);
-
-            Client client = ClientBuilder.newClient();
-            WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
-
-            Invocation.Builder invocationBuilder
-                    = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
-            invocationBuilder.header("some-header", "true");
-            Response response = invocationBuilder.get();
-
-            WebTarget parametreDel = webTarget.path("/"+idProduit);
-            Invocation.Builder delete
-                    = parametreDel.request(MediaType.TEXT_PLAIN_TYPE);
-            invocationBuilder.header("some-header", "true");
-            Response deletePost = delete.delete();
-
-            newStage.hide();
-            App.setRoot("primary");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void suprProduit(MouseEvent event, String idProduit, String nomProduit) {
 
         Stage newStage = new Stage();
@@ -366,6 +318,20 @@ public class ProduitsController extends HistoriquesController {
 
     }
 
+    public void clickDelete(MouseEvent event, Stage newStage, String idProduit, String nomProduit) {
+        try {
+            Path pathDelete = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
+            Files.delete(pathDelete);
+
+            produitDAO.deleteProduitById(Integer.parseInt(idProduit));
+
+            newStage.hide();
+            App.setRoot("primary");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void produits(Client client) {
 
@@ -396,13 +362,8 @@ public class ProduitsController extends HistoriquesController {
         String nomCategorie2="";
         String nomCategorie3="";
 
-        WebTarget webTarget = client.target("http://localhost/pi-zza-Groupe-1-/server/categorie");
-
-        Invocation.Builder invocationBuilder = webTarget.request(MediaType.TEXT_PLAIN_TYPE);
-        invocationBuilder.header("some-header", "true");
-        Response response = invocationBuilder.get();
-
-        JSONArray jsonArray = new JSONArray(response.readEntity(String.class));
+        JSONArray jsonArray = new JSONArray();
+        jsonArray = categorieDAO.getCategorie();
 
         for (int i = 0; i < jsonArray.length(); i++) {
 

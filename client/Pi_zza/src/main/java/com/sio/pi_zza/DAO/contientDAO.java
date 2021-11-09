@@ -6,11 +6,12 @@ import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class contientDAO {
 
-    public static JSONObject getContientByIdCommande(int idCommande) {
+    public static JSONArray getContientByIdCommande(int idCommande) {
         Client client = ClientBuilder.newClient();
         WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient/commande/");
 
@@ -22,7 +23,7 @@ public class contientDAO {
         invocationContient.header("some-header", "true");
         Response response = requeteParamProduit.get();
 
-        JSONObject jsonContient = new JSONObject(response.readEntity(String.class));
+        JSONArray jsonContient = new JSONArray(response.readEntity(String.class));
         return jsonContient;
     }
 

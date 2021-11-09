@@ -1,5 +1,8 @@
 package com.sio.pi_zza;
 
+import com.sio.pi_zza.DAO.commandeDAO;
+import com.sio.pi_zza.DAO.contientDAO;
+import com.sio.pi_zza.DAO.produitDAO;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
@@ -75,106 +78,82 @@ public class DashboardController {
         int sommeCommande = 0;
         int totalCommande = 0;
 
-        WebTarget webTargetCommande = client.target("http://localhost/pi-zza-Groupe-1-/server/commande/Tables");
-
-        Invocation.Builder invocationCommandeTables = webTargetCommande.request(MediaType.TEXT_PLAIN_TYPE);
-        invocationCommandeTables.header("some-header", "true");
-
-        WebTarget parametreIdTable = webTargetCommande.path("/"+idTables);
-        Invocation.Builder requeteParamCommande = parametreIdTable.request(MediaType.TEXT_PLAIN_TYPE);
-        invocationCommandeTables.header("some-header", "true");
-        Response response1 = requeteParamCommande.get();
-
-        JSONArray jsonCommande = new JSONArray(response1.readEntity(String.class));
+        JSONArray jsonCommande = new JSONArray();
+        jsonCommande = commandeDAO.getCommandeByIdTables(idTables);
 
         totalCommande = jsonCommande.length();
 
-        for (int i = 0; i < jsonCommande.length(); i++) {
-            JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
-            int idCommande = Integer.parseInt((String) json1.get("idCommande"));
-            int idTable = Integer.parseInt((String) json1.get("idTables"));
+        if(totalCommande == 0) {
+        Label label = new Label("Aucune information n'est disponible pour la table numéro "+idTables);
+        Box.getChildren().add(label);
+        } else {
+            for (int i = 0; i < jsonCommande.length(); i++) {
+                JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
+                int idCommande = Integer.parseInt((String) json1.get("idCommande"));
+                int idTable = Integer.parseInt((String) json1.get("idTables"));
 
-            Label numeroCommande = new Label("Numéro de la commande: " + idTables);
-            Box.getChildren().add(numeroCommande);
+                Label numeroCommande = new Label("Numéro de la commande: " + idTables);
+                Box.getChildren().add(numeroCommande);
 
-            Button suprCommande = new Button("Supprimer la commande");
-            Box.getChildren().add(suprCommande);
+                Button suprCommande = new Button("Supprimer la commande");
+                Box.getChildren().add(suprCommande);
 
-            WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient/commande");
+                JSONArray jsonContient = new JSONArray();
+                jsonContient = contientDAO.getContientByIdCommande(idCommande);
 
-            Invocation.Builder invocationContientCommande = webTargetContient.request(MediaType.TEXT_PLAIN_TYPE);
-            invocationContientCommande.header("some-header", "true");
+                for (int j = 0; j < jsonContient.length(); j++) {
+                    JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
+                    int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
+                    int idProduit = Integer.parseInt((String) json2.get("idProduit"));
+                    int quantite = Integer.parseInt((String) json2.get("quantite"));
 
-            WebTarget parametreIdCommande = webTargetContient.path("/"+idCommande);
-            Invocation.Builder requeteParamContient = parametreIdCommande.request(MediaType.TEXT_PLAIN_TYPE);
-            invocationContientCommande.header("some-header", "true");
-            Response response2 = requeteParamContient.get();
+                    Label value = new Label(j + " commandes: " + idCommande2);
 
-            JSONArray jsonContient = new JSONArray(response2.readEntity(String.class));
+                    Hubox.getChildren().add(value);
 
-            for (int j = 0; j < jsonContient.length(); j++) {
-                JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
-                int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
-                int idProduit = Integer.parseInt((String) json2.get("idProduit"));
-                int quantite = Integer.parseInt((String) json2.get("quantite"));
+                    JSONObject jsonProduit = new JSONObject();
+                    jsonProduit = produitDAO.getProduitById(idProduit);
 
-                Label value = new Label(j + " commandes: " + idCommande2);
-
-                Hubox.getChildren().add(value);
-
-                WebTarget webTargetProduit = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
-
-                Invocation.Builder invocationBuilderProduit = webTargetProduit.request(MediaType.TEXT_PLAIN_TYPE);
-                invocationBuilderProduit.header("some-header", "true");
-
-                Response response3 = invocationBuilderProduit.get();
-
-                JSONArray jsonProduit = new JSONArray(response3.readEntity(String.class));
-
-                for (int k = 0; k < jsonProduit.length(); k++) {
-                    JSONObject json3 = new JSONObject(jsonProduit.get(k).toString());
-                    int produitId = Integer.parseInt((String) json3.get("idProduit"));
-                    String nomProduit = (String) json3.get("nomProduit");
-                    float prixProduit = Float.parseFloat((String) json3.get("prixProduit"));
-                    String imageProduit = (String) json3.get("imageProduit");
-                    int idCategorie = Integer.parseInt((String) json3.get("idCategorie"));
+                    int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
+                    String nomProduit = (String) jsonProduit.get("nomProduit");
+                    float prixProduit = Float.parseFloat((String) jsonProduit.get("prixProduit"));
+                    String imageProduit = (String) jsonProduit.get("imageProduit");
+                    int idCategorie = Integer.parseInt((String) jsonProduit.get("idCategorie"));
 
                     /*
                     Button suprProduitCommande = new Button("Supprimer un produit");
                     Box.getChildren().add(suprProduitCommande);
-                     */
+                    */
 
                     sommeCommande += prixProduit * quantite;
+
                 }
+
+                Label numeroTable = new Label("Numéro de la table: " + idTables);
+                Box.getChildren().add(numeroTable);
+
+                Label nombrePerso = new Label("Numéro de la table: " + nbPersonne);
+                Box.getChildren().add(nombrePerso);
+
+                Label nombreCommande = new Label("Nombre de commande: " + totalCommande);
+                Box.getChildren().add(nombreCommande);
+
+                Label somCommande = new Label("Sommes des commandes: " + sommeCommande);
+                Box.getChildren().add(somCommande);
+
+                Button tableInoccupe = new Button("Mettre la table en innocupée");
+                Box.getChildren().add(tableInoccupe);
+
+                EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent e) {
+                        clickInnocupe(e, idTables);
+                    }
+                };
+
+                tableInoccupe.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
             }
-
-            Label numeroTable = new Label("Numéro de la table: " + idTables);
-            Box.getChildren().add(numeroTable);
-
-            Label nombrePerso = new Label("Numéro de la table: " + nbPersonne);
-            Box.getChildren().add(nombrePerso);
-
-            Label nombreCommande = new Label("Nombre de commande: " + totalCommande);
-            Box.getChildren().add(nombreCommande);
-
-            Label somCommande = new Label("Sommes des commandes: " + sommeCommande);
-            Box.getChildren().add(somCommande);
-
-            Button tableInoccupe = new Button("Mettre la table en innocupée");
-            Box.getChildren().add(tableInoccupe);
-
-            EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
-            {
-                @Override
-                public void handle(MouseEvent e)
-                {
-                    clickInnocupe(e, idTables);
-                }
-            };
-
-            tableInoccupe.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
-
         }
 
         Scene stageScene = new Scene(Box, 500, 200);

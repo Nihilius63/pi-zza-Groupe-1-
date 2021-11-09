@@ -73,6 +73,7 @@ public class produitDAO {
         WebTarget webTargetProduit = client.target("http://localhost/pi-zza-Groupe-1-/server/produit");
 
         JSONObject create = new JSONObject();
+        create.put("idProduit", 1);
         create.put("nomProduit", nomProduit);
         create.put("prixProduit", prixProduit);
         create.put("imageProduit", image);
