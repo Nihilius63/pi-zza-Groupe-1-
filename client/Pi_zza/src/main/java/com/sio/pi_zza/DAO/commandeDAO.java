@@ -13,7 +13,7 @@ public class commandeDAO {
 
     public static JSONArray getCommandeByIdTables(int idTables) {
         Client client = ClientBuilder.newClient();
-        WebTarget webTargetCommande = client.target("http://localhost/pi-zza-Groupe-1-/server/commande/tables");
+        WebTarget webTargetCommande = client.target("http://localhost/pi-zza-Groupe-1-/server/commande/Tables");
 
         Invocation.Builder invocationCommande = webTargetCommande.request(MediaType.TEXT_PLAIN_TYPE);
         invocationCommande.header("some-header", "true");

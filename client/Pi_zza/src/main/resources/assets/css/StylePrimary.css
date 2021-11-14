@@ -2,34 +2,28 @@
     -fx-background-color: #fff;
 }
 
-.sidebar{
-    -fx-background-color: #333645;
+.slideBar {
+    -fx-background-color: #00a2d3;
 }
 
 .btns {
     -fx-background-color: transparent;
 }
 
+.btnsSelect {
+    -fx-background-color: #394581;
+}
+
+/*
 .btns:hover {
     -fx-background-color: #202332;
 }
+*/
 
 .box {
-    -fx-border-color: #7C8184;
-    -fx-border-width: 1px 0px 0px 0px;
+    -fx-background-color: #202332;
 }
 
-.boxAll {
-}
-
-.boxDashboard {
-    -fx-background-color: transparent;
-}
-
-.boxProduits {
-    -fx-background-color: transparent;
-}
-
-.boxHistorique {
-    -fx-background-color: transparent;
+.textSlideBar {
+    -fx-text-fill: white;
 }

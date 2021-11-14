@@ -71,4 +71,19 @@ public class contientDAO {
         invocationProduit.header("some-header", "true");
         delete.delete();
     }
+
+    public static void deleteContientByIdCommandeProduit(int idCommande, int idProduit) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient/");
+
+        Invocation.Builder invocationContient = webTargetContient.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationContient.header("some-header", "true");
+
+        WebTarget parametreContient = webTargetContient.path("/"+idCommande+"/"+idProduit);
+        Invocation.Builder requeteParamProduit = parametreContient.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationContient.header("some-header", "true");
+
+        requeteParamProduit.delete();
+
+    }
 }
