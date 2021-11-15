@@ -38,5 +38,4 @@ public class categorieDAO {
         JSONObject jsonCategorie = new JSONObject(response.readEntity(String.class));
         return jsonCategorie;
     }
-
 }
