@@ -59,6 +59,7 @@ foreach ($commandes as $commande) {
         <form method="post" action="traitement.php">
             <p>
                 <select name="categorie" id="categorie">
+                    <option value="null">Choissisez une categorie</option>
                     <?php
                     $categorie=DAOCategorie::getCategorie();
                     foreach ($categorie as $value) {

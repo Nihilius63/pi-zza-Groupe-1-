@@ -147,7 +147,7 @@ window.onload=function()
                         let prix=document.createElement("p");
                         prix.innerHTML="Prix";
                         let prixProduit=document.createElement("p");
-                        prixProduit.innerHTML=obj.prixProduit+"â‚¬"
+                        prixProduit.innerHTML=obj.prixProduit+"€"
                         colonne2.appendChild(prix)
                         colonne2.appendChild(prixProduit)
                         divligne.appendChild(colonne2)
@@ -263,43 +263,51 @@ window.onload=function()
         produit.forEach((el)=>{
             conteneur.removeChild(el);
         });
+        if(id==null)
+        {
+            let img=document.createElement("img");
+            img.setAttribute("src","img/logo.png");
+            conteneur.appendChild(img)
+        }
         let request = new XMLHttpRequest();
             request.addEventListener("readystatechange", function () {
                 if (this.readyState == 4 && this.status == 200) {
                     var jsonobj=request.responseText;
-                    var obj=JSON.parse(jsonobj);
-                    console.log(obj);
-                    let divligne=document.createElement("div");
-                    divligne.setAttribute("class","ligne");
-                    conteneur.appendChild(divligne)
+                    var objet=JSON.parse(jsonobj);
+                    objet.forEach((obj)=>
+                    {
+                        let divligne=document.createElement("div");
+                        divligne.setAttribute("class","ligne");
+                        conteneur.appendChild(divligne)
 
-                    let img=document.createElement("img");
-                    img.setAttribute("src",obj.imageProduit);
-                    divligne.appendChild(img)
+                        let img=document.createElement("img");
+                        img.setAttribute("src",obj.imageProduit);
+                        divligne.appendChild(img)
 
-                    let colonne=document.createElement("div");
-                    colonne.setAttribute("class","colonne");
-                    let nomProduit=document.createElement("p");
-                    nomProduit.innerHTML=obj.nomProduit
-                    let prix=document.createElement("p");
-                    prix.innerHTML=obj.prix;
-                    colonne.appendChild(nomProduit);
-                    colonne.appendChild(prix);
-                    divligne.appendChild(colonne);
-
+                        let colonne=document.createElement("div");
+                        colonne.setAttribute("class","colonne");
+                        let nomProduit=document.createElement("p");
+                        nomProduit.innerHTML=obj.nomProduit
+                        let prix=document.createElement("p");
+                        prix.innerHTML=obj.prixProduit+"€";
+                        colonne.appendChild(nomProduit);
+                        colonne.appendChild(prix);
+                        divligne.appendChild(colonne);
+                        let img2=document.createElement("img");
+                        img2.setAttribute("class","ajouterProduit");
+                        img2.setAttribute("src","img/add.png");
+                        img2.setAttribute("alt",obj.idProduit);
+                        divligne.appendChild(img2)
+                    });
+                    ajouterEvent();
             }
 
                 else {
-                    conteneur.innerText = "Error 404 NotFound";
-                    var jsonobj=request.responseText;
-                    var obj=JSON.parse(jsonobj);
-                    console.log(obj);
                 }
             });
                 request.open("GET","http://localhost/pi-zza-Groupe-1-/server/produit/categorie/"+id);
                 request.send();
     }
-    ajouterEvent();
     let form = document.querySelector("select#categorie");
     let id=null;
     form.addEventListener("focusout",function(){
@@ -312,4 +320,6 @@ window.onload=function()
         });
             update(id);
     });
+    ajouterEvent();
+    update(id);
 }
