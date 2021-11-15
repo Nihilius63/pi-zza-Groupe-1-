@@ -1,0 +1,29 @@
+.parent {
+    -fx-background-color: #fff;
+}
+
+.slideBar {
+    -fx-background-color: #00a2d3;
+}
+
+.btns {
+    -fx-background-color: transparent;
+}
+
+.btnsSelect {
+    -fx-background-color: #394581;
+}
+
+/*
+.btns:hover {
+    -fx-background-color: #202332;
+}
+*/
+
+.box {
+    -fx-background-color: #202332;
+}
+
+.textSlideBar {
+    -fx-text-fill: white;
+}
