@@ -135,7 +135,7 @@ public class AddProduitsController extends LaunchController implements Initializ
                     categorieProduits = "3";
                 }
 
-                String image = "file:images/" + nomProduits.replace(" ", "_") + ".png";
+                String image = "images/" + nomProduits.replace(" ", "_") + ".png";
 
                 produitDAO.createProduit(nomProduits, Float.parseFloat(prixProduits), image, Integer.parseInt(categorieProduits));
 

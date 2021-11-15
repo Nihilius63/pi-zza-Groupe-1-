@@ -10,6 +10,7 @@ import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -102,26 +104,30 @@ public class DashboardController extends LaunchController implements Initializab
 
     public void clickInfosSupl(MouseEvent e, int idTables, int nbPersonne, int nbPlaces){
         try {
-            // BUG LIE AU WEBSERVICE QUAND IL N'Y A PAS DE COMMANDE POUR LA TABLE
-            tableInfoDTO tableInfo = new tableInfoDTO(idTables, nbPersonne, nbPlaces);
-            App.setRoot("infoCommande");
+            JSONArray verifTable = commandeDAO.getCommandeByIdTables(idTables);
+            System.out.println(verifTable);
+            if(verifTable.isNull(0)) {
+                Stage errorTable = new Stage();
+                VBox box = new VBox();
+                Label msgView = new Label("Votre table est vide!");
+                box.getChildren().add(msgView);
+                Scene suprCommandeScene = new Scene(box, 200, 250);
+                errorTable.setScene(suprCommandeScene);
+                errorTable.show();
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                pause.setOnFinished(time -> {
+                    errorTable.hide();
+                    }
+                );
+                pause.play();
+            } else {
+                tableInfoDTO tableInfo = new tableInfoDTO(idTables, nbPersonne, nbPlaces);
+                App.setRoot("infoCommande");
+            }
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-
-    }
-
-    public void clickInnocupe(MouseEvent event, int idTables) {
-
-        Stage newStage = new Stage();
-        VBox Box = new VBox();
-        HBox HuBox = new HBox();
-
-        Box.getChildren().add(HuBox);
-
-        Scene stageScene = new Scene(Box, 500, 200);
-        newStage.setScene(stageScene);
-        newStage.show();
 
     }
 

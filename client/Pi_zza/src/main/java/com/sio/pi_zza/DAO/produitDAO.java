@@ -38,6 +38,23 @@ public class produitDAO {
         return jsonProduit;
     }
 
+    public static JSONArray getProduitByIdCategorie(int idCategorie) {
+
+        Client client = ClientBuilder.newClient();
+        WebTarget webTargetProduit = client.target("http://localhost/pi-zza-Groupe-1-/server/produit/categorie");
+
+        Invocation.Builder invocationProduitByIdCategorie = webTargetProduit.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationProduitByIdCategorie.header("some-header", "true");
+
+        WebTarget parametreIdCategorie = webTargetProduit.path("/"+idCategorie);
+        Invocation.Builder requeteParamProduit = parametreIdCategorie.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationProduitByIdCategorie.header("some-header", "true");
+        Response response = requeteParamProduit.get();
+
+        JSONArray jsonProduitByCategorie = new JSONArray(response.readEntity(String.class));
+        return jsonProduitByCategorie;
+    }
+
     public static void deleteProduitById(int idProduit) {
 
         Client client = ClientBuilder.newClient();

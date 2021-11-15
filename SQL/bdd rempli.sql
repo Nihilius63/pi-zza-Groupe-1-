@@ -15,9 +15,8 @@ CREATE TABLE `categorie` (
 
 INSERT INTO `categorie` (`idCategorie`, `nomCategorie`) VALUES
 (1, 'Pizzas'),
-(2, 'Calzones'),
-(3, 'Boissons'),
-(4, 'Desserts');
+(2, 'Boissons'),
+(3, 'Desserts');
 
 CREATE TABLE `commande` (
   `idCommande` int(11) NOT NULL,
@@ -60,31 +59,27 @@ CREATE TABLE `produit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `prixProduit`, `imageProduit`, `idCategorie`) VALUES
-(1, 'Orientale', 12.5, '../img/Orientale.webp', 1),
-(2, 'Savoyarde', 12.5, '../img/Savoyarde.webp', 1),
-(3, 'Deliziosa', 12.5, '../img/Deliziosa.webp', 1),
-(4, 'Vegan Peppina', 12.5, '../img/Vegan Peppina.webp', 1),
-(5, 'Chèvre Miel', 10.5, '../img/chevre miel.webp', 1),
-(6, '4 fromages', 10.5, '../img/4fromages.webp', 1),
-(7, 'Hawaienne Jambon', 8.5, '../img/Hawaienne.webp', 1),
-(8, 'Saumoneta', 10.5, '../img/Saumoneta.webp', 1),
-(9, 'Margherita', 8.5, '../img/Margherita.webp', 1),
-(10, 'Original Pepperonni', 8.5, '../img/pepperonni.webp', 1),
-(13, 'Reine', 8.5, '../img/Reine.webp', 1),
-(14, 'Steak & Cheese', 11, '../img/Steak.webp', 1),
-(15, 'Peppina', 11, '../img/Peppina.webp', 1),
-(16, 'Deluxe', 11, '../img/Deluxe.webp', 1),
-(17, 'Samourai', 11.99, '../img/Samouraic.webp', 2),
-(18, 'Chèvre Miel', 11.99, '../img/chevre mielc.webp', 2),
-(19, 'Kebab', 11.99, '../img/Kebabc.webp', 2),
-(20, 'Poulet-Curry', 11.99, '../img/poulet-curryc.webp', 2),
-(22, 'Coca-Cola', 2.5, '../img/coca.webp', 3),
-(23, 'Oasis', 2.5, '../img/Oasis.webp', 3),
-(24, 'Evian', 2.5, '../img/evian.webp', 3),
-(25, 'Badoit', 2.5, '../img/badoit.webp', 3),
-(26, 'Sprite', 2.5, '../img/Sprite.webp', 3),
-(27, 'Mini beignets choco-noisette ', 3, '../img/beignets.webp', 4),
-(28, 'Moelleux au Chocolat', 4.99, '../img/moelleux.webp', 4);
+(1, 'Orientale', 12.5, 'images/Orientale.png', 1),
+(2, 'Savoyarde', 12.5, 'images/Savoyarde.png', 1),
+(3, 'Deliziosa', 12.5, 'images/Deliziosa.png', 1),
+(4, 'Vegan Peppina', 12.5, 'images/Vegan_Peppina.png', 1),
+(5, 'Chèvre Miel', 10.5, 'images/Chèvre_Miel.png', 1),
+(6, '4 fromages', 10.5, 'images/4_fromages.png', 1),
+(7, 'Hawaienne Jambon', 8.5, 'images/Hawaienne_Jambon.png', 1),
+(8, 'Saumoneta', 10.5, 'images/Saumoneta.png', 1),
+(9, 'Margherita', 8.5, 'images/Margherita.png', 1),
+(10, 'Original Pepperonni', 8.5, 'images/Original_Pepperonni.png', 1),
+(13, 'Reine', 8.5, 'images/Reine.png', 1),
+(14, 'Steak & Cheese', 11, 'images/Steak_&_Cheese.png', 1),
+(15, 'Peppina', 11, 'images/Peppina.png', 1),
+(16, 'Deluxe', 11, 'images/Deluxe.png', 1),
+(17, 'Coca-Cola', 2.5, 'images/Coca-Cola.png', 2),
+(18, 'Oasis', 2.5, 'images/Oasis.png', 2),
+(19, 'Evian', 2.5, 'images/Evian.png', 2),
+(20, 'Badoit', 2.5, 'images/Badoit.png', 2),
+(21, 'Sprite', 2.5, 'images/Sprite.png', 2),
+(22, 'Mini beignets choco-noisette', 3, 'images/Mini_beignets_choco-noisette.png', 3),
+(23, 'Moelleux au Chocolat', 4.99, 'images/Moelleux_au_Chocolat.png', 3);
 
 CREATE TABLE `tables` (
   `idTables` int(11) NOT NULL,
