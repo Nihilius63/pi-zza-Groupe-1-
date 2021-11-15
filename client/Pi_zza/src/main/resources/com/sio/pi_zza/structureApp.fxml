@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" prefHeight="652.0" prefWidth="997.0" stylesheets="@../../../assets/css/StylePrimary.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sio.pi_zza.LaunchController">
+<AnchorPane prefHeight="652.0" prefWidth="997.0" stylesheets="@../../../assets/css/StylePrimary.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sio.pi_zza.LaunchController">
    <children>
       <HBox prefHeight="116.0" prefWidth="1006.0" styleClass="slideBar">
          <children>
