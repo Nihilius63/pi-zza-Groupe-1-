@@ -71,7 +71,7 @@ class commandeControllers
         }
     }
 
-        public function getAllCommandes() {		
+        private function getAllCommandes() {		
             $result = commandeDAO::getList();
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';

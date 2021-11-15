@@ -35,11 +35,17 @@
 		
             case "produit" :
                 $produitId = null;
-                if (isset($urlParts[2])) 
+                $request=null;
+                if (isset($urlParts[3])) 
+                {
+                        $request = $urlParts[2];
+                        $produitId=$urlParts[3];
+                }
+                else if (isset($urlParts[2])) 
                 {
                         $produitId = (int) $urlParts[2];
                 }
-                $controller = new produitControllers($requestMethod, $produitId);
+                $controller = new produitControllers($requestMethod, $produitId,$request);
                 $controller->processRequest();
                 break;
             case "commande" : 

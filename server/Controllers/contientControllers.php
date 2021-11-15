@@ -102,7 +102,7 @@ class contientControllers
         }
     }
 
-        public function getAllContient() {		
+        private function getAllContient() {		
             $result = contientDAO::getList();
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';

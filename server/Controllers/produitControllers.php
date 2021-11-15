@@ -7,10 +7,12 @@ class produitControllers
 {
     private $requestMethod;
     private $produitId = null;
-    public function __construct($requestMethod, $id) 
+    private $request=null;
+    public function __construct($requestMethod, $id,$request) 
     {
         $this->requestMethod = $requestMethod;
-		$this->produitId = $id;
+	$this->produitId = $id;
+        $this->request=$request;
     }
 
 public function processRequest() 
@@ -18,7 +20,11 @@ public function processRequest()
     $response=$this->notFoundResponse();
     switch ($this->requestMethod) {
         case 'GET':
-            if ($this->produitId) {
+            if($this->request=="categorie")
+            {
+                $response= $this->getproduitbycate($this->produitId);
+            }
+            else if ($this->produitId) {
                 $response = $this->getproduit($this->produitId);
             } else 
             {
@@ -66,8 +72,14 @@ public function processRequest()
             echo $response['status_code_header'];
         }
     }
-    public function getAllproduit() {		
+    private function getAllproduit() {		
         $result = produitDAO::getList();
+        $response['body'] = json_encode($result);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        return $response;
+    }
+    private function getproduitbycate($id) {		
+        $result = produitDAO::getproduitbycate($id);
         $response['body'] = json_encode($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         return $response;

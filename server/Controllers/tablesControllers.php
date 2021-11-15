@@ -64,7 +64,7 @@ class tablesControllers
             echo $response['status_code_header'];
         }
     }
-        public function getAllTables() {		
+        private function getAllTables() {		
             $result = tablesDAO::getList();
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';

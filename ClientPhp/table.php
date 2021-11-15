@@ -58,11 +58,11 @@ foreach ($commandes as $commande) {
         <H1> Ajouter produit</H1>
         <form method="post" action="traitement.php">
             <p>
-                <select name="pays" id="pays">
+                <select name="categorie" id="categorie">
                     <?php
                     $categorie=DAOCategorie::getCategorie();
                     foreach ($categorie as $value) {
-                        echo "<option value='".$value->nomCategorie."'>".$value->nomCategorie."</option>";
+                        echo "<option id='".$value->idCategorie."' value='".$value->nomCategorie."'>".$value->nomCategorie."</option>";
                     }
                     ?>
                 </select>
@@ -71,14 +71,12 @@ foreach ($commandes as $commande) {
         <?php
         $produit=DAOProduit::getProduits();
         foreach ($produit as $prod) {
-            if ($prod->idCategorie==1) {
                 echo '<div class="ligne">
                     <img class="imgProduit" src="'.$prod->imageProduit.'">
                     <div class="colonne">
                         <p>'.$prod->nomProduit.'</p>
                         <p>'.$prod->prixProduit.'€</p>
                     </div><img class="ajouterProduit" src="img/add.png" alt="'.$prod->idProduit.'"></div>';
-            }
         }?>
     </div>
     <script src="js/tables.js"></script>

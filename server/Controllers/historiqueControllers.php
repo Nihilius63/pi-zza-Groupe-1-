@@ -63,7 +63,7 @@ public function processRequest()
             echo $response['status_code_header'];
         }
 }
-    public function getAllhistorique() {		
+    private function getAllhistorique() {		
         $result = historiqueDAO::getList();
         $response['body'] = json_encode($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';

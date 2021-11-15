@@ -64,7 +64,7 @@ class categorieControllers
             echo $response['status_code_header'];
         }
     }
-        public function getAllCategorie() {		
+        private function getAllCategorie() {		
             $result = categorieDAO::getList();
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';

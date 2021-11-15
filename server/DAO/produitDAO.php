@@ -39,6 +39,26 @@ class produitDAO
         }
         return $Produits;
     }
+    public static function getproduitbycate($id)
+    {
+        $Produits = array();
+
+        $connex = DatabaseLinker::getConnexion();
+
+        $state = $connex->prepare('SELECT * FROM produit WHERE idCategorie=:idCategorie');
+        $state->bindValue(":idCategorie", $id);
+        $state->execute();
+        $resultats = $state->fetchAll();
+
+        foreach ($resultats as $result)
+        {
+                $Produit = new produitDTO($result["nomProduit"],$result["imageProduit"],$result["prixProduit"],$result["idCategorie"]);
+                $Produit->setIdProduit($result["idProduit"]);
+
+                $Produits[] = $Produit;
+        }
+        return $Produits;
+    }
 
     public static function delete($id)
     {
