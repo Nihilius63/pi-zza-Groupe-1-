@@ -74,12 +74,10 @@ public class InfoSuplTableController extends LaunchController implements Initial
         int nbPersonne = tableInfoDTO.nbPersonne;
         int nbPlaces = tableInfoDTO.nbPlace;
 
-
         int sommeCommande = 0;
         int totalCommande = 0;
 
-        JSONArray jsonCommande = new JSONArray();
-        jsonCommande = commandeDAO.getCommandeByIdTables(idTables);
+        JSONArray jsonCommande = commandeDAO.getCommandeByIdTables(idTables);
 
         totalCommande = jsonCommande.length();
 
@@ -89,8 +87,7 @@ public class InfoSuplTableController extends LaunchController implements Initial
             int idCommande = Integer.parseInt((String) json1.get("idCommande"));
             int idTable = Integer.parseInt((String) json1.get("idTables"));
 
-            JSONArray jsonContient = new JSONArray();
-            jsonContient = contientDAO.getContientByIdCommande(idCommande);
+            JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
 
             for (int j = 0; j < jsonContient.length(); j++) {
                 JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
@@ -98,8 +95,7 @@ public class InfoSuplTableController extends LaunchController implements Initial
                 int idProduit = Integer.parseInt((String) json2.get("idProduit"));
                 int quantite = Integer.parseInt((String) json2.get("quantite"));
 
-                JSONObject jsonProduit = new JSONObject();
-                jsonProduit = produitDAO.getProduitById(idProduit);
+                JSONObject jsonProduit = produitDAO.getProduitById(idProduit);
 
                 int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
                 String nomProduit = (String) jsonProduit.get("nomProduit");
@@ -124,7 +120,6 @@ public class InfoSuplTableController extends LaunchController implements Initial
                     }
                 };
                 suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
-
 
                 HBox productLigne = new HBox();
                 Label scrolTextProduit = new Label("Produit dans la commande: " + nomProduit);

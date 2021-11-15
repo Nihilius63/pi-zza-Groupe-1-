@@ -13,7 +13,7 @@ public class contientDAO {
 
     public static JSONArray getContientByIdCommande(int idCommande) {
         Client client = ClientBuilder.newClient();
-        WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient/commande/");
+        WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient/commande");
 
         Invocation.Builder invocationContient = webTargetContient.request(MediaType.TEXT_PLAIN_TYPE);
         invocationContient.header("some-header", "true");

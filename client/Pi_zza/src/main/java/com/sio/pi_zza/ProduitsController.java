@@ -36,9 +36,11 @@ public class ProduitsController extends LaunchController implements Initializabl
     @FXML private Button addProducts;
     @FXML private ImageView closeImg;
 
-    @FXML private HBox produitsHBoxGrid;
+    @FXML private HBox produitsHBox;
     @FXML private GridPane categorieGrid;
 
+    private ScrollPane scrollProduit;
+    private GridPane gridProduit;
     private String img2 = "";
     private String img3 = "";
 
@@ -57,6 +59,7 @@ public class ProduitsController extends LaunchController implements Initializabl
         JSONArray jsonCategorie = categorieDAO.getCategorie();
 
         for (int i = 0; i < jsonCategorie.length(); i++) {
+            int compteur = 0;
 
             JSONObject jsonObjectCommande = new JSONObject(jsonCategorie.get(i).toString());
             int idCategorie = Integer.parseInt((String) jsonObjectCommande.get("idCategorie"));
@@ -64,18 +67,20 @@ public class ProduitsController extends LaunchController implements Initializabl
 
             Label CategorieName = new Label(nomCategorie);
             categorieGrid.add(CategorieName, i, 1);
-            /*
 
             JSONArray jsonProduit = produitDAO.getProduitByIdCategorie(idCategorie);
 
+            scrollProduit = new ScrollPane();
+            scrollProduit.setPrefSize(1000,1000);
+            gridProduit = new GridPane();
+
             for (int j = 0; j < jsonProduit.length(); j++) {
-                JSONObject jsonObjectProduit = new JSONObject(jsonProduit.get(i).toString());
+
+                JSONObject jsonObjectProduit = new JSONObject(jsonProduit.get(j).toString());
                 int idProduit = Integer.parseInt((String) jsonObjectProduit.get("idProduit"));
                 String nomProduit = (String) jsonObjectProduit.get("nomProduit");
                 float prixProduit = Float.parseFloat((String) jsonObjectProduit.get("prixProduit"));
                 String img = (String) jsonObjectProduit.get("imageProduit");
-
-                GridPane gridPaneProduit = new GridPane();
 
                 VBox vboxProduit = new VBox();
                 Label nameProduits = new Label(nomProduit);
@@ -97,9 +102,7 @@ public class ProduitsController extends LaunchController implements Initializabl
                 hbox.getChildren().add(buttonSupr);
                 vboxProduit.getChildren().add(hbox);
 
-                gridPaneProduit.add(vboxProduit, 0, i);
-
-                produitsHBoxGrid.getChildren().add(gridPaneProduit);
+                gridProduit.add(vboxProduit, 0, compteur);
 
                 EventHandler<MouseEvent> eventModif = new EventHandler<MouseEvent>()
                 {
@@ -121,7 +124,11 @@ public class ProduitsController extends LaunchController implements Initializabl
                 };
                 buttonSupr.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSupr);
 
-            }*/
+                compteur++;
+            }
+
+            scrollProduit.setContent(gridProduit);
+            produitsHBox.getChildren().add(scrollProduit);
         }
     }
 
@@ -174,7 +181,7 @@ public class ProduitsController extends LaunchController implements Initializabl
         box.getChildren().add(prixProduitText);
 
         Label imageSerieT = new Label("Image du produit:");
-        ImageView imageSerie = new ImageView(""+imageProduit);
+        ImageView imageSerie = new ImageView("file:"+imageProduit);
         imageSerie.setFitHeight(100);
         imageSerie.setFitWidth(100);
         box.getChildren().add(imageSerieT);
@@ -344,7 +351,7 @@ public class ProduitsController extends LaunchController implements Initializabl
             produitDAO.deleteProduitById(idProduit);
 
             newStage.hide();
-            App.setRoot("primary");
+            App.setRoot("produit");
 
         } catch (IOException e) {
             e.printStackTrace();
