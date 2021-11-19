@@ -27,7 +27,7 @@ class commandeDAO
         $state->bindValue(":idTables", $id);
         $state->execute();
         $resultats = $state->fetchAll();
-
+        
         foreach ($resultats as $result)
         {
                 $Commande = new commandeDTO($result["idTables"]);

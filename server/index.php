@@ -53,7 +53,7 @@
                 $idTables=null;
                 if (isset($urlParts[2])) 
                 {
-                    if($urlParts[2]=="Tables")
+                    if($urlParts[2]=="tables")
                     {
                         $idTables= (int) $urlParts[3];
                     }
