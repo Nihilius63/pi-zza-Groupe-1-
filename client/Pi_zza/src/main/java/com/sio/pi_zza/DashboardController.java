@@ -105,7 +105,6 @@ public class DashboardController extends LaunchController implements Initializab
     public void clickInfosSupl(MouseEvent e, int idTables, int nbPersonne, int nbPlaces){
         try {
             JSONArray verifTable = commandeDAO.getCommandeByIdTables(idTables);
-            System.out.println("ID: "+idTables+" ====> "+verifTable);
             if(verifTable.isNull(0)) {
                 Stage errorTable = new Stage();
                 VBox box = new VBox();

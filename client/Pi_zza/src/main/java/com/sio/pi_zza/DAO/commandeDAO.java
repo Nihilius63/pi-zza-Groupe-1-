@@ -11,6 +11,18 @@ import org.json.JSONObject;
 
 public class commandeDAO {
 
+    public static JSONArray getCommand() {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTargetCommande = client.target("http://localhost/pi-zza-Groupe-1-/server/commande");
+
+        Invocation.Builder invocationCommande = webTargetCommande.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationCommande.header("some-header", "true");
+        Response response = invocationCommande.get();
+
+        JSONArray jsonCommande = new JSONArray(response.readEntity(String.class));
+        return jsonCommande;
+    }
+
     public static JSONArray getCommandeByIdTables(int idTables) {
         Client client = ClientBuilder.newClient();
         WebTarget webTargetCommande = client.target("http://localhost/pi-zza-Groupe-1-/server/commande/tables");

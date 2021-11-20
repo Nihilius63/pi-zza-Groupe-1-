@@ -11,6 +11,18 @@ import org.json.JSONObject;
 
 public class contientDAO {
 
+    public static JSONArray getContient() {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient");
+
+        Invocation.Builder invocationContient = webTargetContient.request(MediaType.TEXT_PLAIN_TYPE);
+        invocationContient.header("some-header", "true");
+        Response response = invocationContient.get();
+
+        JSONArray jsonContient = new JSONArray(response.readEntity(String.class));
+        return jsonContient;
+    }
+
     public static JSONArray getContientByIdCommande(int idCommande) {
         Client client = ClientBuilder.newClient();
         WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient/commande");

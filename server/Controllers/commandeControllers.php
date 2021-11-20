@@ -82,20 +82,12 @@ class commandeControllers
             $result = commandeDAO::getbytables($id);
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
-            if ($result == null) 
-            {
-                return null;
-            }
             return $response;
         }
         private function getCommandes($id) {	
             $result = commandeDAO::get($id);
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
-            if ($result == null) 
-            {
-                return null;
-            }
             return $response;
         }
 
