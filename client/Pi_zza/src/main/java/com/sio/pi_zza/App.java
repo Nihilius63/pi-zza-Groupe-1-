@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 public class App extends Application {
 
     private static Scene scene;
+    private double x, y;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -22,7 +23,17 @@ public class App extends Application {
         scene.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("πzza");
+        //stage.setTitle("πzza");
+
+        scene.setOnMousePressed(event -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+        scene.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX()-x);
+            stage.setY(event.getScreenY()-y);
+        });
+
         stage.show();
     }
 

@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="c242255a-46d9-4123-909b-a0a4cb4793c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DAO/commandeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DAO/commandeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DAO/contientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DAO/contientDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgTools/add-file.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgTools/box.png" beforeDir="false" afterPath="$PROJECT_DIR$/imgTools/box.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgTools/deux-bases-de-donnees.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgTools/to-do-list.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/css/StylePrimary.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/css/StylePrimary.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/addProduit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/addProduit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/structureApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/structureApp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +108,9 @@
       <workItem from="1636959887333" duration="294000" />
       <workItem from="1636965619764" duration="18212000" />
       <workItem from="1637353588087" duration="6723000" />
+      <workItem from="1637430087365" duration="1010000" />
+      <workItem from="1637452445357" duration="332000" />
+      <workItem from="1637452841504" duration="6109000" />
     </task>
     <servers />
   </component>

@@ -3,27 +3,33 @@
 }
 
 .slideBar {
-    -fx-background-color: #00a2d3;
+    -fx-background-color: #00369B;
+    -fx-font-family: "Arial Rounded MT Bold";
 }
 
 .btns {
     -fx-background-color: transparent;
+    -fx-font-family: Bahnschrift;
 }
 
 .btnsSelect {
     -fx-background-color: #394581;
 }
 
-/*
-.btns:hover {
-    -fx-background-color: #202332;
-}
-*/
-
 .box {
-    -fx-background-color: #202332;
+    -fx-background-color: #04081F;
 }
 
 .textSlideBar {
     -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+}
+
+.hoverHSlide:hover {
+    -fx-background-color: #0C185F;
+}
+
+.infoBox {
+    -fx-background-color: #010208;
 }
