@@ -193,14 +193,21 @@
                               </Label>
                               <TextField fx:id="nomProduits" prefHeight="40.0" prefWidth="770.0">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets right="25.0" />
                                  </VBox.margin>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="ButtonHover" />
+                                 </styleClass>
                               </TextField>
                            </children>
+                           <VBox.margin>
+                              <Insets left="15.0" top="25.0" />
+                           </VBox.margin>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label prefHeight="32.0" prefWidth="770.0" text="Prix du produit" textFill="WHITE">
+                              <Label prefHeight="32.0" prefWidth="770.0" text="Prix du produit :" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
@@ -210,14 +217,21 @@
                               </Label>
                               <TextField fx:id="prixProduits" prefHeight="40.0" prefWidth="770.0">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets right="25.0" />
                                  </VBox.margin>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="ButtonHover" />
+                                 </styleClass>
                               </TextField>
                            </children>
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label alignment="BOTTOM_LEFT" prefHeight="1.0" prefWidth="336.0" text="Image du produit" textFill="WHITE">
+                              <Label alignment="BOTTOM_LEFT" prefHeight="1.0" prefWidth="336.0" text="Image du produit :" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="23.0" />
                                  </font>
@@ -227,17 +241,24 @@
                               </Label>
                               <Button fx:id="importImage" mnemonicParsing="false" prefHeight="41.0" prefWidth="770.0" text="Importer une image">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets right="25.0" />
                                  </VBox.margin>
                                  <font>
                                     <Font name="Book Antiqua" size="15.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="ButtonHover" />
+                                 </styleClass>
                               </Button>
                            </children>
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="352.0" text="Catégorie du produit" textFill="WHITE">
+                              <Label alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="352.0" text="Catégorie du produit :" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="23.0" />
                                  </font>
@@ -247,17 +268,27 @@
                               </Label>
                               <ComboBox fx:id="importCategorie" prefHeight="38.0" prefWidth="795.0">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets right="25.0" />
                                  </VBox.margin>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="categorieHover" />
+                                 </styleClass>
                               </ComboBox>
                            </children>
+                           <VBox.margin>
+                              <Insets left="15.0" top="15.0" />
+                           </VBox.margin>
                         </VBox>
                      </children>
                   </VBox>
                   <ImageView fx:id="imageViewImport" fitHeight="322.0" fitWidth="401.0" pickOnBounds="true" preserveRatio="true" styleClass="imgBox">
                      <HBox.margin>
-                        <Insets top="25.0" />
+                        <Insets left="25.0" top="25.0" />
                      </HBox.margin>
+                     <image>
+                        <Image url="@../../../../../../imgTools/interoImgAdd.png" />
+                     </image>
                   </ImageView>
                </children>
             </HBox>
@@ -280,6 +311,10 @@
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="buttonAdd" />
+                  <String fx:value="buttonAddHover" />
+               </styleClass>
             </Button>
          </children>
       </VBox>
