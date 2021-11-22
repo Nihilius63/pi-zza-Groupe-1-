@@ -3,8 +3,15 @@ body {
   padding: 0;
   font-family: "Roboto Light" ;
   header {
-    height: 75px;
+    @media (min-width: 500px) {
+      height: 75px;
+      justify-content: normal;
+    }
+    height: 100px;
     background-color: #00A2D3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     a {
       text-decoration: none;
       .header {
@@ -13,8 +20,10 @@ body {
         font-size: 60px;
 
         img {
+          @media (min-width: 500px) {
+            margin-left: 30px;
+          }
           max-height: 75px;
-          margin-left: 30px;
         }
 
         p {
@@ -31,6 +40,7 @@ body {
       width: 70%;
       flex-direction: column;
       text-align: center;
+      align-items: center;
       .produit {
         display: flex;
         flex-direction: column;
@@ -80,11 +90,15 @@ body {
         flex-wrap: wrap;
         margin-bottom: 30px;
         .carte {
+          @media (min-width: 500px) {
+            height: 150px;
+            width: 200px;
+          }
           margin-top: 20px;
-          height: 150px;
-          width: 200px;
           cursor: pointer;
           margin-bottom: 20px;
+          height: 100px;
+          width: 125px;
           .red {
             color: #d51919;
           }
@@ -154,3 +168,8 @@ body {
   }
 }
 
+.valider {
+  background-color: greenyellow;
+  height: 50px;
+  width: 200px;
+}

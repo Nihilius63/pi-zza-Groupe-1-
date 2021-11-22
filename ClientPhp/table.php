@@ -43,6 +43,9 @@ foreach ($commandes as $commande) {
 }
 
 ?>
+        <div class="valider">
+            <p>Valider</p>
+        </div>
     </div>
     <div class="droitetable">
         <h1>Nombre de personnes</h1>
@@ -73,7 +76,7 @@ foreach ($commandes as $commande) {
         $produit=DAOProduit::getProduits();
         foreach ($produit as $prod) {
                 echo '<div class="ligne">
-                    <img class="imgProduit" src="'.$prod->imageProduit.'">
+                    <img class="imgProduit" src="../client/Pi_zza/'.$prod->imageProduit.'">
                     <div class="colonne">
                         <p>'.$prod->nomProduit.'</p>
                         <p>'.$prod->prixProduit.'€</p>
