@@ -27,6 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -124,10 +125,15 @@ public class DashboardController extends LaunchController implements Initializab
             JSONArray verifTable = commandeDAO.getCommandeByIdTables(idTables);
             if(verifTable.isNull(0)) {
                 Stage errorTable = new Stage();
+                errorTable.initStyle(StageStyle.UNDECORATED);
                 VBox box = new VBox();
+                box.setAlignment(Pos.CENTER);
+                box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
+                box.getStyleClass().add("boxNo");
                 Label msgView = new Label("Votre table est vide!");
+                msgView.getStyleClass().add("titleBar");
                 box.getChildren().add(msgView);
-                Scene suprCommandeScene = new Scene(box, 200, 250);
+                Scene suprCommandeScene = new Scene(box, 320, 110);
                 errorTable.setScene(suprCommandeScene);
                 errorTable.show();
 

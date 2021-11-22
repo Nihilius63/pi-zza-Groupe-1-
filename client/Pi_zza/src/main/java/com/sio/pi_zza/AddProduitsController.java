@@ -15,10 +15,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -68,8 +70,8 @@ public class AddProduitsController extends LaunchController implements Initializ
             JSONObject jsonList = new JSONObject(categorieJsonList.get(i).toString());
             String nomCategorie = (String) jsonList.get("nomCategorie");
             listNameCategorie.add(nomCategorie);
-        }
 
+        }
 
         importCategorie.setItems(listNameCategorie);
         importCategorie.getSelectionModel().selectFirst();

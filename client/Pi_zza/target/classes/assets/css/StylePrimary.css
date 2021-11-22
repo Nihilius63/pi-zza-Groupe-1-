@@ -20,6 +20,13 @@
     -fx-background-color: #04081F;
 }
 
+.boxNo {
+    -fx-background-color: #0b1558;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+}
+
 .textSlideBar {
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
@@ -30,6 +37,12 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 30px;
+}
+
+.titleBarProduitSupr {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
 }
 
 .hoverHSlide:hover {
@@ -108,7 +121,7 @@
     -fx-font-size: 15px;
 }
 
-.categorieHover:selected:focused, .categorieHover:filled:selected, .categorieHover:odd, .categorieHover:even, .categorieHover:filled:hover {
+.combo-box > .list-cell {
     -fx-text-fill: white;
 }
 
@@ -171,10 +184,17 @@
     -fx-background-radius: 15px;
 }
 
+.boxProduitSupr {
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-background-radius: 15px;
+}
+
 .textProduitLittle {
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-font-size: 12px;
+    -fx-font-size: 11px;
     -fx-padding: 5px;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
@@ -186,6 +206,17 @@
     -fx-background-color: #04081F;
 }
 
-.buttonProduit:hover {
+.buttonProduitSupr {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-background-color: #04081F;
+    -fx-font-size: 20px;
+}
+
+.buttonProduit:hover, .buttonProduitSupr:hover {
     -fx-background-color: #181f56;
+}
+
+.combo-box-base {
+    -fx-text-fill: red;
 }

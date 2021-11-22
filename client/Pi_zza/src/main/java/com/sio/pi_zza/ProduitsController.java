@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -92,7 +93,7 @@ public class ProduitsController extends LaunchController implements Initializabl
                 vboxProduit.setPrefWidth(236);
                 vboxProduit.setAlignment(Pos.CENTER);
                 vboxProduit.getStyleClass().add("boxProduit");
-                Label Produits = new Label(nomProduit + "      " + prixProduit + "€");
+                Label Produits = new Label(nomProduit + "    " + prixProduit + "€");
                 ImageView image = new ImageView("file:"+img);
                 image.setFitHeight(80);
                 image.setFitWidth(100);
@@ -324,19 +325,26 @@ public class ProduitsController extends LaunchController implements Initializabl
     }
 
     public void suprProduit(int idProduit, String nomProduit) {
-
         Stage newStage = new Stage();
+        newStage.initStyle(StageStyle.UNDECORATED);
+
         VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
+
         HBox bo = new HBox();
         Label title = new Label("Vous êtes sur de vouloir suprimmé ?");
         Button yes = new Button("Oui");
         Button no = new Button("Non");
 
-        title.getStyleClass().add("suprLabel");
-        yes.getStyleClass().add("but");
-        no.getStyleClass().add("but");
-        bo.getStyleClass().add("boBOX");
-        box.getStyleClass().add("boxSupr");
+        box.getStyleClass().add("boxNo");
+        title.getStyleClass().add("titleBarProduitSupr");
+        yes.getStyleClass().add("buttonProduitSupr");
+        no.getStyleClass().add("buttonProduitSupr");
+
+        bo.setSpacing(5);
+        bo.getStyleClass().add("boxProduitSupr");
+        bo.setAlignment(Pos.CENTER);
 
         box.getChildren().add(title);
         box.getChildren().add(bo);
