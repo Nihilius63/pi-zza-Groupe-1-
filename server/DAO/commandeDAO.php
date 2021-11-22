@@ -34,6 +34,23 @@ class commandeDAO
         }
         return $Commande;
     }
+    public static function getbyTables($id)
+    {
+        $Commandes = array();
+        $connex = DatabaseLinker::getConnexion();
+        $state = $connex->prepare('SELECT * FROM commande WHERE idTables = :idTables');
+        $state->bindValue(":idTables", $id);
+        $state->execute();
+        $resultats = $state->fetchAll();
+
+        foreach ($resultats as $result)
+        {
+                $Commande = new commandeDTO($result["idTables"]);
+                $Commande->setIdCommande($result["idCommande"]);
+                $Commandes[] = $Commande;
+        }
+        return $Commandes;
+    }
 
     public static function getList()
     {

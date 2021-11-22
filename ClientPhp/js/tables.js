@@ -354,6 +354,8 @@ window.onload=function()
     }
     function valide()
     {
+        addCommand();
+        getlastid();
         addContient();
     }
     let form = document.querySelector("select#categorie");
@@ -374,6 +376,4 @@ window.onload=function()
     });
     ajouterEvent();
     update(id);
-    addCommand();
-    getlastid();
 }
