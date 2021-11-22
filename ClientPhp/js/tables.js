@@ -73,7 +73,6 @@ window.onload=function()
         object.idProduit=event.alt;
         object.quantite=1;
         let jsonencode=JSON.stringify(object);
-
         requestPost.addEventListener("readystatechange",function(){
             if (requestPost.readyState== 4) {
                 if (requestPost.status == 200) {
@@ -124,7 +123,7 @@ window.onload=function()
                         divproduit.setAttribute("class","produit");
                         divproduit.setAttribute("id","idProduit"+id)
                         let divligne=document.createElement("div");
-                        divligne.setAttribute("class","ligne");
+                        divligne.setAttribute("class","ligne2");
                         divproduit.appendChild(divligne)
 
                         let img=document.createElement("img");
@@ -310,7 +309,7 @@ window.onload=function()
     }
     let form = document.querySelector("select#categorie");
     let id=null;
-    form.addEventListener("focusout",function(){
+    form.addEventListener("click",function(){
         let option = document.querySelectorAll("option");
         option.forEach((op)=>{
            if (op.value==form.value)

@@ -21,7 +21,7 @@ foreach ($commandes as $commande) {
     foreach ($contients as $contient) {
         $produit=DAOProduit::getProduitByIdProduit($contient->idProduit);
         echo '<div class="produit" id="idProduit'.$produit->idProduit.'">
-                <div class="ligne">
+                <div class="ligne2">
                     <img src="'.$produit->imageProduit.'" alt="">
                     <div class="colonne">
                         <p>Nom</p>
