@@ -76,16 +76,18 @@ public class DashboardController extends LaunchController implements Initializab
             int nbPlaces = Integer.parseInt((String) json.get("nbPlaces"));
             int nbPersonne = Integer.parseInt((String) json.get("nbPersonne"));
 
-            Pane boxHistorique = new Pane();
-            boxHistorique.getStyleClass().add("boxTable");
             VBox vbo = new VBox();
-
             vbo.setAlignment(Pos.CENTER);
+            vbo.getStyleClass().add("boxTable");
 
             Label numTable = new Label("Numéro de la table: " + idTables);
             Label nbrPlace = new Label("Nombre de places: " + nbPlaces);
             Label nbrPersonne = new Label("Nombre de personne: " + nbPersonne);
+
+            HBox hub = new HBox();
+            hub.setAlignment(Pos.CENTER);
             Button infoSupl = new Button("Informations");
+            hub.getChildren().add(infoSupl);
 
             numTable.getStyleClass().add("textTable");
             nbrPlace.getStyleClass().add("textTable");
@@ -95,9 +97,7 @@ public class DashboardController extends LaunchController implements Initializab
             vbo.getChildren().add(numTable);
             vbo.getChildren().add(nbrPlace);
             vbo.getChildren().add(nbrPersonne);
-            vbo.getChildren().add(infoSupl);
-
-            boxHistorique.getChildren().add(vbo);
+            vbo.getChildren().add(hub);
 
             EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
             {
@@ -110,7 +110,7 @@ public class DashboardController extends LaunchController implements Initializab
 
             infoSupl.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-            tables.add(boxHistorique, cpt % 3, cpt / 3);
+            tables.add(vbo, cpt % 3, cpt / 3);
 
             if (cpt < jsonArray.length() ) {
                 cpt++;

@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -65,13 +66,17 @@ public class ProduitsController extends LaunchController implements Initializabl
             int idCategorie = Integer.parseInt((String) jsonObjectCommande.get("idCategorie"));
             String nomCategorie = (String) jsonObjectCommande.get("nomCategorie");
 
+            HBox hbCate = new HBox();
             Label CategorieName = new Label(nomCategorie);
+            hbCate.getChildren().add(CategorieName);
+            hbCate.setAlignment(Pos.CENTER);
             CategorieName.getStyleClass().add("titleBar");
-            categorieGrid.add(CategorieName, i, 1);
+            categorieGrid.add(hbCate, i, 1);
 
             JSONArray jsonProduit = produitDAO.getProduitByIdCategorie(idCategorie);
 
             scrollProduit = new ScrollPane();
+            scrollProduit.getStyleClass().add("scrollPane");
             scrollProduit.setPrefSize(1000,1000);
             gridProduit = new GridPane();
 
@@ -84,21 +89,34 @@ public class ProduitsController extends LaunchController implements Initializabl
                 String img = (String) jsonObjectProduit.get("imageProduit");
 
                 VBox vboxProduit = new VBox();
-                Label nameProduits = new Label(nomProduit);
-                Label prixProduits = new Label(""+prixProduit);
-                ImageView image = new ImageView("file:/"+img);
+                vboxProduit.setPrefWidth(236);
+                vboxProduit.setAlignment(Pos.CENTER);
+                vboxProduit.getStyleClass().add("boxProduit");
+                Label Produits = new Label(nomProduit + "      " + prixProduit + "€");
+                ImageView image = new ImageView("file:"+img);
                 image.setFitHeight(80);
-                image.setFitWidth(80);
+                image.setFitWidth(100);
+                image.getStyleClass().add("imgForm");
+
+                if(nomProduit.length() <= 15) {
+                    Produits.getStyleClass().add("textSlideBar");
+                } else {
+                    Produits.getStyleClass().add("textProduitLittle");
+                }
 
                 Button buttonModif = new Button("Modifier");
                 Button buttonSupr = new Button("Supprimer");
 
+                buttonModif.getStyleClass().add("buttonProduit");
+                buttonSupr.getStyleClass().add("buttonProduit");
 
-                vboxProduit.getChildren().add(nameProduits);
-                vboxProduit.getChildren().add(prixProduits);
+                vboxProduit.getChildren().add(Produits);
                 vboxProduit.getChildren().add(image);
 
                 HBox hbox = new HBox();
+                hbox.setSpacing(5);
+                hbox.getStyleClass().add("boxProduit");
+                hbox.setAlignment(Pos.CENTER);
                 hbox.getChildren().add(buttonModif);
                 hbox.getChildren().add(buttonSupr);
                 vboxProduit.getChildren().add(hbox);

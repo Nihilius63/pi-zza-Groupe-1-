@@ -47,6 +47,11 @@ public class InfoSuplTableController extends LaunchController implements Initial
     @FXML private Button tableInnocupe;
     @FXML private Button retour;
 
+    private int idCommandeInfo;
+    private VBox commandProduct;
+    private Label scrolTextCommande;
+    private HBox productLigne;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -81,15 +86,22 @@ public class InfoSuplTableController extends LaunchController implements Initial
 
         totalCommande = jsonCommande.length();
 
+        productLigne = new HBox();
+        scrolTextCommande = new Label();
+
         for (int i = 0; i < jsonCommande.length(); i++) {
 
             JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
             int idCommande = Integer.parseInt((String) json1.get("idCommande"));
             int idTable = Integer.parseInt((String) json1.get("idTables"));
 
+            idCommandeInfo = idCommande;
+            scrolTextCommande.setText("Commande numéro: " + idCommandeInfo);
+
             JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
 
             for (int j = 0; j < jsonContient.length(); j++) {
+                commandProduct = new VBox();
                 JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
                 int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
                 int idProduit = Integer.parseInt((String) json2.get("idProduit"));
@@ -105,23 +117,7 @@ public class InfoSuplTableController extends LaunchController implements Initial
 
                 sommeCommande += prixProduit * quantite;
 
-                VBox commandProduct = new VBox();
 
-                HBox commandeLigne = new HBox();
-                Label scrolTextCommande = new Label("Commande numéro : " + idCommande2);
-                Button suprCommande = new Button("Supprimer");
-                commandeLigne.getChildren().add(scrolTextCommande);
-                commandeLigne.getChildren().add(suprCommande);
-
-                EventHandler<MouseEvent> eventSuprCommande = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent e) {
-                        suprCommande(idCommande);
-                    }
-                };
-                suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
-
-                HBox productLigne = new HBox();
                 Label scrolTextProduit = new Label("Produit dans la commande: " + nomProduit);
                 Button suprProduct = new Button("Supprimer");
                 productLigne.getChildren().add(scrolTextProduit);
@@ -134,13 +130,6 @@ public class InfoSuplTableController extends LaunchController implements Initial
                     }
                 };
                 suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
-
-                commandProduct.getChildren().add(commandeLigne);
-                commandProduct.getChildren().add(productLigne);
-
-                TitledPane infoCommande = new TitledPane("Commande numéro " + idCommande2 + " /-/ Information sur la commande /-/", commandProduct);
-                accordionCommande.getPanes().addAll(infoCommande);
-
             }
 
 
@@ -149,6 +138,24 @@ public class InfoSuplTableController extends LaunchController implements Initial
             nombreCommandeEff.setText("Nombre de commande effectué: " + totalCommande);
             sommeCommandes.setText("Somme des commandes: " + sommeCommande);
         }
+
+        HBox commandeLigne = new HBox();
+        Button suprCommande = new Button("Supprimer");
+        commandProduct.getChildren().add(scrolTextCommande);
+        commandeLigne.getChildren().add(suprCommande);
+        commandProduct.getChildren().add(commandeLigne);
+        commandProduct.getChildren().add(productLigne);
+
+        EventHandler<MouseEvent> eventSuprCommande = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                suprCommande(idCommandeInfo);
+            }
+        };
+        suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
+
+        TitledPane infoCommande = new TitledPane("Commande numéro " + idCommandeInfo + " /-/ Information sur la commande /-/", commandProduct);
+        accordionCommande.getPanes().addAll(infoCommande);
 
         EventHandler<MouseEvent> eventClickInnocupe = new EventHandler<MouseEvent>() {
             @Override

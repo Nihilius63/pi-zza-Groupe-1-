@@ -50,9 +50,10 @@
 
 .textTable {
     -fx-text-fill: white;
-    -fx-padding: 20px 0px 0px 60px;
-    -fx-border-insets: 20px 0px 0px 60px;
-    -fx-background-insets: 20px 0px 0px 60px;
+    -fx-font-size: 15px;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }
 
 /*
@@ -60,7 +61,7 @@
     -fx-background-color: #0744d7;
 }*/
 
-.scroll-pane .viewport {    -fx-background-color: #010208;}
+.scrollPane .viewport {    -fx-background-color: #010208;}
 
 .scrollPane {
     -fx-background-color: #010208;
@@ -130,13 +131,14 @@
 }
 
 .infoButton {
-    -fx-background-color: #577abf;
+    -fx-font-size: 15px;
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-padding: 20px 0px 0px 60px;
-    -fx-border-insets: 20px 0px 0px 60px;
-    -fx-background-insets: 20px 0px 0px 60px;
-    -fx-font-size: 15px;
+    -fx-background-color: #04081F;
+}
+
+.infoButton:hover {
+    -fx-background-color: #182254;
 }
 
 .buttonAdd {
@@ -149,12 +151,41 @@
 .boxHistoryInfo {
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-font-size: 15px;
-    -fx-padding: 0px 0px 0px 10px;
+    -fx-font-size: 14px;
+    -fx-padding: 9px 0px 0px 65px;
+    -fx-border-insets: 9px 0px 0px 65px;
+    -fx-background-insets: 9px 0px 0px 65px;
 }
 
 .boxHistoryInfoLittle {
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 10px;
+}
+
+.boxProduit {
+    -fx-background-color: #00369B;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-background-radius: 15px;
+}
+
+.textProduitLittle {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 12px;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.buttonProduit {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-background-color: #04081F;
+}
+
+.buttonProduit:hover {
+    -fx-background-color: #181f56;
 }
