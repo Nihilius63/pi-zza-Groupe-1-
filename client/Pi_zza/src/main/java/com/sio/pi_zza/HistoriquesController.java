@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -78,22 +79,13 @@ public class HistoriquesController extends LaunchController implements Initializ
             String date = (String) json.get("dateCommande");
             int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
 
-            //Produit: plMoelleuxauxgrgrgg => 15nbr sinon plus petit
-
             Pane boxHistorique = new Pane();
-            VBox.setMargin(boxHistorique, new Insets(10,10,10,10)); //Test Margin
             VBox vb = new VBox();
             Label Produit = new Label("Produit: " + nomProduit);
             Label Prix = new Label("Prix: " + prixProduit + "€");
             Label DateHistory = new Label("Date: " + date);
             Label Quantite = new Label("Quantite: " + quantite);
             Label Table = new Label("Table numéro: " + numeroTable);
-
-            Produit.setPadding(new Insets(10, 0, 0, 0));
-            Prix.setPadding(new Insets(10, 0, 0, 0));
-            DateHistory.setPadding(new Insets(10, 0, 0, 0));
-            Quantite.setPadding(new Insets(10, 0, 0, 0));
-            Table.setPadding(new Insets(10, 0, 0, 0));
 
             boxHistorique.getStyleClass().add("boxHistory");
 
@@ -107,6 +99,8 @@ public class HistoriquesController extends LaunchController implements Initializ
             DateHistory.getStyleClass().add("boxHistoryInfo");
             Quantite.getStyleClass().add("boxHistoryInfo");
             Table.getStyleClass().add("boxHistoryInfo");
+
+            vb.setAlignment(Pos.CENTER);
 
             vb.getChildren().add(Produit);
             vb.getChildren().add(Prix);

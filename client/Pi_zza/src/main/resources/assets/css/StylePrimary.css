@@ -40,9 +40,19 @@
     -fx-background-color: #010208;
 }
 
-.boxHistory {
+.boxHistory, .boxTable {
     -fx-background-color: #2969c0;
     -fx-background-radius: 50px;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+}
+
+.textTable {
+    -fx-text-fill: white;
+    -fx-padding: 20px 0px 0px 60px;
+    -fx-border-insets: 20px 0px 0px 60px;
+    -fx-background-insets: 20px 0px 0px 60px;
 }
 
 /*
@@ -50,8 +60,43 @@
     -fx-background-color: #0744d7;
 }*/
 
+.scroll-pane .viewport {    -fx-background-color: #010208;}
+
+.scrollPane {
+    -fx-background-color: #010208;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scrollPane:focused {
+    -fx-background-color: #010208;
+    -fx-background-insets: 0;
+}
+
+.scrollPane .corner {
+    -fx-background-color: #010208;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar:vertical .track {
+    -fx-border-color:transparent transparent transparent #1D1D1D;
+    -fx-background-color: linear-gradient(from 100% 0% to 0% 0%, #323232 0%, #212121 100%);
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #0744d7;
+    -fx-effect: dropshadow(one-pass-box,#000000,2.0,0.7,0.0,0.0);
+    -fx-background-insets: 3 3 3 3;
+    -fx-background-radius: 2em;
+}
+
+.increment-button, .decrement-button{
+    -fx-background-color: linear-gradient(from 100% 0% to 0% 0%, #323232 0%, #212121 100%);
+    -fx-background-insets: 0px;
+}
+
 .imgBox {
-    -fx-border-color: red;
+    -fx-border-color: #010208;
     -fx-border-width: 5px;
 }
 
@@ -60,6 +105,10 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 15px;
+}
+
+.categorieHover:selected:focused, .categorieHover:filled:selected, .categorieHover:odd, .categorieHover:even, .categorieHover:filled:hover {
+    -fx-text-fill: white;
 }
 
 .categorieHover:hover {
@@ -80,6 +129,16 @@
     -fx-font-size: 15px;
 }
 
+.infoButton {
+    -fx-background-color: #577abf;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-padding: 20px 0px 0px 60px;
+    -fx-border-insets: 20px 0px 0px 60px;
+    -fx-background-insets: 20px 0px 0px 60px;
+    -fx-font-size: 15px;
+}
+
 .buttonAdd {
     -fx-background-color: #00369B;
     -fx-text-fill: white;
@@ -91,6 +150,7 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 15px;
+    -fx-padding: 0px 0px 0px 10px;
 }
 
 .boxHistoryInfoLittle {

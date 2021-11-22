@@ -15,19 +15,19 @@
 
 <AnchorPane prefHeight="652.0" prefWidth="997.0" stylesheets="@../../../assets/css/StylePrimary.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sio.pi_zza.AddProduitsController">
    <children>
-      <HBox prefHeight="116.0" prefWidth="1006.0" styleClass="slideBar">
+      <HBox prefHeight="116.0" prefWidth="1007.0" styleClass="slideBar">
          <children>
             <ImageView fx:id="logoImg" fitHeight="88.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:imgTools/pizza_logo.png" />
-               </image>
                <HBox.margin>
                   <Insets left="8.0" top="15.0" />
                </HBox.margin>
+               <image>
+                  <Image url="file:imgTools/pizza_logo.png" />
+               </image>
             </ImageView>
             <Label prefHeight="116.0" prefWidth="805.0" text="πzza" textFill="WHITE">
                <font>
-                  <Font name="Candara" size="48.0" />
+                  <Font name="Century Schoolbook" size="54.0" />
                </font>
                <HBox.margin>
                   <Insets />
@@ -36,148 +36,259 @@
                   <Insets left="15.0" />
                </padding>
             </Label>
-            <ImageView fx:id="closeImg" fitHeight="74.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:imgTools/close.png" />
-               </image>
+            <ImageView fx:id="closeImg" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="25.0" top="25.0" />
                </HBox.margin>
+               <image>
+                  <Image url="file:imgTools/close.png" />
+               </image>
             </ImageView>
          </children>
       </HBox>
       <VBox layoutY="116.0" prefHeight="541.0" prefWidth="237.0" styleClass="box">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="261.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconDashboard" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconDashboard" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:imgTools/box.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="dashboardButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleClicks" prefHeight="80.0" prefWidth="216.0" text="Dashboard">
+                  <Button fx:id="dashboardButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="94.0" text="Dashboard">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconProduit" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconProduit" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:imgTools/to-do-list.png" />
+                        <Image url="file:imgTools/document-signed.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="produitsButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="105.0" prefWidth="231.0" text="Produits">
+                  <Button fx:id="produitsButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="75.0" text="Produits">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconHistorique" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconAddProduit" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:imgTools/deux-bases-de-donnees.png" />
+                        <Image url="file:imgTools/file-add.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="historiqueButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="125.0" prefWidth="326.0" text="Historique">
+                  <Button fx:id="addProducts" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="143.0" text="Ajouter un produit">
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="btnsSelect">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconAddProduit" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconHistorique" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:imgTools/add-file.png" />
+                        <Image url="file:imgTools/browser.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="addProducts" mnemonicParsing="false" onAction="#handleClicks" prefHeight="127.0" prefWidth="260.0" text="Ajouter un produit">
+                  <Button fx:id="historiqueButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="92.0" text="Historique">
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="boxAll" layoutX="236.0" layoutY="116.0" prefHeight="541.0" prefWidth="770.0">
+      <VBox fx:id="boxAll" layoutX="237.0" layoutY="116.0" prefHeight="541.0" prefWidth="770.0" styleClass="infoBox">
          <children>
-            <Label alignment="CENTER" prefHeight="56.0" prefWidth="814.0" text="Ajouter un produit" underline="true">
+            <Label alignment="CENTER" prefHeight="56.0" prefWidth="814.0" text="Ajouter un produit" textFill="WHITE">
                <font>
-                  <Font name="Bodoni MT" size="46.0" />
+                  <Font name="Bookman Old Style" size="46.0" />
                </font>
             </Label>
             <HBox prefHeight="387.0" prefWidth="770.0">
                <children>
                   <VBox prefHeight="369.0" prefWidth="352.0">
                      <children>
-                        <Label alignment="BOTTOM_LEFT" prefHeight="67.0" prefWidth="755.0" text="Nom du produit :">
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label alignment="BOTTOM_LEFT" prefHeight="12.0" prefWidth="352.0" text="Nom du produit :" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="23.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nomProduits" prefHeight="40.0" prefWidth="770.0">
+                                 <VBox.margin>
+                                    <Insets right="25.0" />
+                                 </VBox.margin>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="ButtonHover" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="15.0" top="25.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="770.0" text="Prix du produit :" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="23.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="prixProduits" prefHeight="40.0" prefWidth="770.0">
+                                 <VBox.margin>
+                                    <Insets right="25.0" />
+                                 </VBox.margin>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="ButtonHover" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
                            <VBox.margin>
                               <Insets left="15.0" />
                            </VBox.margin>
-                           <font>
-                              <Font name="Bodoni MT" size="23.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="nomProduits" prefHeight="40.0" prefWidth="770.0">
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label alignment="BOTTOM_LEFT" prefHeight="1.0" prefWidth="336.0" text="Image du produit :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="23.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <Button fx:id="importImage" mnemonicParsing="false" prefHeight="41.0" prefWidth="770.0" text="Importer une image">
+                                 <VBox.margin>
+                                    <Insets right="25.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Book Antiqua" size="15.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="ButtonHover" />
+                                 </styleClass>
+                              </Button>
+                           </children>
                            <VBox.margin>
-                              <Insets left="15.0" right="50.0" />
+                              <Insets left="15.0" top="10.0" />
                            </VBox.margin>
-                        </TextField>
-                        <Label prefHeight="32.0" prefWidth="770.0" text="Prix du produit">
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="352.0" text="Catégorie du produit :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="23.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <ComboBox fx:id="importCategorie" prefHeight="38.0" prefWidth="795.0">
+                                 <VBox.margin>
+                                    <Insets right="25.0" />
+                                 </VBox.margin>
+                                 <styleClass>
+                                    <String fx:value="buttonBox" />
+                                    <String fx:value="categorieHover" />
+                                 </styleClass>
+                              </ComboBox>
+                           </children>
                            <VBox.margin>
-                              <Insets left="15.0" />
+                              <Insets left="15.0" top="15.0" />
                            </VBox.margin>
-                           <font>
-                              <Font name="Bodoni MT" size="23.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="prixProduits" prefHeight="40.0" prefWidth="770.0">
-                           <VBox.margin>
-                              <Insets left="15.0" right="50.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Label alignment="BOTTOM_LEFT" prefHeight="44.0" prefWidth="336.0" text="Image du produit">
-                           <font>
-                              <Font name="Bodoni MT" size="23.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="15.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Button fx:id="importImage" mnemonicParsing="false" prefHeight="41.0" prefWidth="770.0" text="Importer une image">
-                           <VBox.margin>
-                              <Insets left="15.0" right="50.0" top="8.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Book Antiqua" size="15.0" />
-                           </font>
-                        </Button>
-                        <Label alignment="BOTTOM_LEFT" prefHeight="49.0" prefWidth="755.0" text="Catégorie du produit">
-                           <VBox.margin>
-                              <Insets left="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Bodoni MT" size="23.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="importCategorie" prefHeight="38.0" prefWidth="795.0">
-                           <VBox.margin>
-                              <Insets left="15.0" right="50.0" />
-                           </VBox.margin>
-                        </ComboBox>
+                        </VBox>
                      </children>
                   </VBox>
-                  <ImageView fx:id="imageViewImport" fitHeight="322.0" fitWidth="395.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageViewImport" fitHeight="322.0" fitWidth="401.0" pickOnBounds="true" preserveRatio="true" styleClass="imgBox">
                      <HBox.margin>
-                        <Insets top="25.0" />
+                        <Insets left="25.0" top="25.0" />
                      </HBox.margin>
+                     <image>
+                        <Image url="file:imgTools/interoImgAdd.png" />
+                     </image>
                   </ImageView>
                </children>
             </HBox>
@@ -200,7 +311,12 @@
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="buttonAdd" />
+                  <String fx:value="buttonAddHover" />
+               </styleClass>
             </Button>
-         </children></VBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

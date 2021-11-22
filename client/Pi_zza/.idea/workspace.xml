@@ -6,10 +6,31 @@
   <component name="ChangeListManager">
     <list default="true" id="c242255a-46d9-4123-909b-a0a4cb4793c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/AddProduitsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/AddProduitsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/DashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/HistoriquesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/HistoriquesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/ProduitsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/ProduitsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/css/StylePrimary.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/css/StylePrimary.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/addProduit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/addProduit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/historique.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/historique.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/infoCommande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/infoCommande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/produit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/produit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/structureApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/sio/pi_zza/structureApp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/assets/css/StylePrimary.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/assets/css/StylePrimary.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/addProduit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/addProduit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/historique.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/historique.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/infoCommande.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/infoCommande.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/produit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/produit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/structureApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/structureApp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +95,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="c242255a-46d9-4123-909b-a0a4cb4793c4" name="Changes" comment="" />
       <created>1633339813277</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -97,6 +119,7 @@
       <workItem from="1637452445357" duration="332000" />
       <workItem from="1637452841504" duration="6109000" />
       <workItem from="1637522200235" duration="4803000" />
+      <workItem from="1637564639455" duration="12821000" />
     </task>
     <servers />
   </component>

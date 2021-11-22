@@ -16,12 +16,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -74,13 +76,28 @@ public class DashboardController extends LaunchController implements Initializab
             int nbPlaces = Integer.parseInt((String) json.get("nbPlaces"));
             int nbPersonne = Integer.parseInt((String) json.get("nbPersonne"));
 
+            Pane boxHistorique = new Pane();
+            boxHistorique.getStyleClass().add("boxTable");
             VBox vbo = new VBox();
 
-            Label lab = new Label("Numéro de la table: "+idTables+"\nNombre de places: "+nbPlaces+"\nNombre de personne: "+nbPersonne);
+            vbo.setAlignment(Pos.CENTER);
+
+            Label numTable = new Label("Numéro de la table: " + idTables);
+            Label nbrPlace = new Label("Nombre de places: " + nbPlaces);
+            Label nbrPersonne = new Label("Nombre de personne: " + nbPersonne);
             Button infoSupl = new Button("Informations");
 
-            vbo.getChildren().add(lab);
+            numTable.getStyleClass().add("textTable");
+            nbrPlace.getStyleClass().add("textTable");
+            nbrPersonne.getStyleClass().add("textTable");
+            infoSupl.getStyleClass().add("infoButton");
+
+            vbo.getChildren().add(numTable);
+            vbo.getChildren().add(nbrPlace);
+            vbo.getChildren().add(nbrPersonne);
             vbo.getChildren().add(infoSupl);
+
+            boxHistorique.getChildren().add(vbo);
 
             EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>()
             {
@@ -93,7 +110,7 @@ public class DashboardController extends LaunchController implements Initializab
 
             infoSupl.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-            tables.add(vbo, cpt % 3, cpt / 3);
+            tables.add(boxHistorique, cpt % 3, cpt / 3);
 
             if (cpt < jsonArray.length() ) {
                 cpt++;

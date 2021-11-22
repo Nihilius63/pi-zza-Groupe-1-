@@ -17,16 +17,16 @@
       <HBox prefHeight="116.0" prefWidth="1006.0" styleClass="slideBar">
          <children>
             <ImageView fx:id="logoImg" fitHeight="88.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:imgTools/pizza_logo.png" />
-               </image>
                <HBox.margin>
                   <Insets left="8.0" top="15.0" />
                </HBox.margin>
+               <image>
+                  <Image url="file:imgTools/pizza_logo.png" />
+               </image>
             </ImageView>
             <Label prefHeight="116.0" prefWidth="805.0" text="πzza" textFill="WHITE">
                <font>
-                  <Font name="Candara" size="48.0" />
+                  <Font name="Century Schoolbook" size="54.0" />
                </font>
                <HBox.margin>
                   <Insets />
@@ -35,87 +35,150 @@
                   <Insets left="15.0" />
                </padding>
             </Label>
-            <ImageView fx:id="closeImg" fitHeight="74.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:imgTools/close.png" />
-               </image>
+            <ImageView fx:id="closeImg" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="25.0" top="25.0" />
                </HBox.margin>
+               <image>
+                  <Image url="file:imgTools/close.png" />
+               </image>
             </ImageView>
          </children>
       </HBox>
       <VBox layoutY="116.0" prefHeight="541.0" prefWidth="237.0" styleClass="box">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="261.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconDashboard" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconDashboard" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:imgTools/box.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="dashboardButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleClicks" prefHeight="80.0" prefWidth="216.0" text="Dashboard">
+                  <Button fx:id="dashboardButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="94.0" text="Dashboard">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconProduit" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconProduit" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:imgTools/to-do-list.png" />
+                        <Image url="file:imgTools/document-signed.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="produitsButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="105.0" prefWidth="231.0" text="Produits">
+                  <Button fx:id="produitsButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="75.0" text="Produits">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconHistorique" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconAddProduit" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:imgTools/deux-bases-donnees.png" />
+                        <Image url="file:imgTools/file-add.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="historiqueButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="125.0" prefWidth="326.0" text="Historique">
+                  <Button fx:id="addProducts" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="143.0" text="Ajouter un produit">
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
-                  <ImageView fx:id="iconAddProduit" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconHistorique" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:imgTools/add-file.png" />
+                        <Image url="file:imgTools/browser.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="addProducts" mnemonicParsing="false" onAction="#handleClicks" prefHeight="127.0" prefWidth="260.0" text="Ajouter un produit">
+                  <Button fx:id="historiqueButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="92.0" text="Historique">
                      <styleClass>
                         <String fx:value="btns" />
                         <String fx:value="textSlideBar" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
+                  </Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="20.0" top="15.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="boxAll" alignment="CENTER" layoutX="237.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="769.0">
+      <VBox fx:id="boxAll" alignment="CENTER" layoutX="237.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="769.0" styleClass="infoBox">
          <children>
-            <Label fx:id="numeroTable" alignment="CENTER" prefHeight="38.0" prefWidth="673.0" text="Numéro de la table : ^^">
+            <Label fx:id="numeroTable" alignment="CENTER" prefHeight="16.0" prefWidth="769.0" styleClass="textSlideBar" text="Numéro de la table : 1">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <HBox prefHeight="38.0" prefWidth="600.0" />
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="nombrePlaceOcu" alignment="CENTER" prefHeight="112.0" prefWidth="600.0" text="Nombre de place occupé : ^^ / ^^">
+                  <Label fx:id="nombrePlaceOcu" alignment="CENTER" prefHeight="9.0" prefWidth="769.0" styleClass="textSlideBar" text="Nombre de place occupé : 2 / 3">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -124,7 +187,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="nombreCommandeEff" alignment="CENTER" prefHeight="94.0" prefWidth="600.0" text="Nombre de commande effectué : ^^">
+                  <Label fx:id="nombreCommandeEff" alignment="CENTER" prefHeight="31.0" prefWidth="832.0" styleClass="textSlideBar" text="Nombre de commande effectué : 1">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -133,7 +196,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="sommeCommandes" alignment="CENTER" prefHeight="47.0" prefWidth="600.0" text="Somme des commandes : ^^">
+                  <Label fx:id="sommeCommandes" alignment="CENTER" prefHeight="31.0" prefWidth="840.0" styleClass="textSlideBar" text="Somme des commandes : 24€">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -142,25 +205,33 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="363.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="104.0" prefWidth="600.0" text="--- Liste des commandes ---">
+                  <Label alignment="CENTER" prefHeight="0.0" prefWidth="769.0" styleClass="textSlideBar" text="--- Liste des commandes ---">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Accordion fx:id="accordionCommande" prefHeight="256.0" prefWidth="598.0" />
+                  <Accordion fx:id="accordionCommande" prefHeight="341.0" prefWidth="769.0" />
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="tableInnocupe" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" text="Table innocupée">
+                  <Button fx:id="tableInnocupe" mnemonicParsing="false" prefHeight="38.0" prefWidth="130.0" text="Table innocupée">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="buttonBox" />
+                        <String fx:value="ButtonHover" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="retour" mnemonicParsing="false" prefHeight="38.0" prefWidth="77.0" text="Retour">
+                  <Button fx:id="retour" mnemonicParsing="false" prefHeight="38.0" prefWidth="69.0" text="Retour">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="buttonBox" />
+                        <String fx:value="ButtonHover" />
+                     </styleClass>
                   </Button>
                </children>
             </HBox>

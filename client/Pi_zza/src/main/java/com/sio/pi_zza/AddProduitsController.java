@@ -10,10 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -73,14 +70,13 @@ public class AddProduitsController extends LaunchController implements Initializ
             listNameCategorie.add(nomCategorie);
         }
 
+
         importCategorie.setItems(listNameCategorie);
         importCategorie.getSelectionModel().selectFirst();
 
         if (imageSave == "") {
             Image img = new Image("file:imgTools/interoImgAdd.png");
             imageViewImport.setImage(img);
-            imageViewImport.setFitHeight(100);
-            imageViewImport.setFitWidth(100);
         }
 
         EventHandler<MouseEvent> closeButtonEvent = new EventHandler<MouseEvent>() {

@@ -47,14 +47,14 @@ public class ProduitsController extends LaunchController implements Initializabl
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        EventHandler<MouseEvent> closeButtonEvent = new EventHandler<MouseEvent>() {
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
                 closeButton();
             }
         };
 
-        closeImg.addEventHandler(MouseEvent.MOUSE_CLICKED, closeButtonEvent);
+        closeImg.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
         JSONArray jsonCategorie = categorieDAO.getCategorie();
 
@@ -66,6 +66,7 @@ public class ProduitsController extends LaunchController implements Initializabl
             String nomCategorie = (String) jsonObjectCommande.get("nomCategorie");
 
             Label CategorieName = new Label(nomCategorie);
+            CategorieName.getStyleClass().add("titleBar");
             categorieGrid.add(CategorieName, i, 1);
 
             JSONArray jsonProduit = produitDAO.getProduitByIdCategorie(idCategorie);
@@ -376,5 +377,6 @@ public class ProduitsController extends LaunchController implements Initializabl
             addProductsWindow();
         }
     }
+
 
 }
