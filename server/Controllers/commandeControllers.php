@@ -6,22 +6,27 @@ class commandeControllers
     private $requestMethod;
     private $commandeId = null;
     private $tablesId = null;
-    public function __construct($requestMethod,$id1,$id2) 
+    private $last =null;
+    public function __construct($requestMethod,$id1,$id2,$last) 
     {
         $this->requestMethod = $requestMethod;
         $this->commandeId = $id1;
         $this->tablesId = $id2;
+        $this->last=$last ;
     }
 
     public function processRequest() 
     {
         $response = $this->notFoundResponse();	
         switch ($this->requestMethod) {
-            case 'GET':
+            case 'GET': 
                 if ($this->tablesId)
                 {
                     $response = $this->getCommandesbyTables($this->tablesId);
                 }
+                else if ($this->last) {
+                    $response = $this->getLast();
+                } 
                 else if ($this->commandeId) {
                     $response = $this->getCommandes($this->commandeId);
                 } 
@@ -77,7 +82,12 @@ class commandeControllers
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
             return $response;
         }
-
+        private function getLast() {	
+            $result = commandeDAO::getLast();
+            $response['body'] = json_encode($result);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            return $response;
+        }
         private function getCommandesbyTables($id) {	
             $result = commandeDAO::getbytables($id);
             $response['body'] = json_encode($result);

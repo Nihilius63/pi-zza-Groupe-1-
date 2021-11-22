@@ -15,9 +15,6 @@ include_once ("php/DAOCategorie.php");
 $commandes=DAOCommande::getCommandeByIdTable($_GET["idTable"]);
 foreach ($commandes as $commande) {
     $contients=DAOContenir::getContenirByIdCommande($commande->idCommande);
-    ?>
-    <input type="hidden" id="idCommande" value="<?php echo $commande->idCommande;?>">
-    <?php
     foreach ($contients as $contient) {
         $produit=DAOProduit::getProduitByIdProduit($contient->idProduit);
         echo '<div class="produit" id="idProduit'.$produit->idProduit.'">

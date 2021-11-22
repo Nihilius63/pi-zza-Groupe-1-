@@ -65,38 +65,25 @@ window.onload=function()
     }
 
 
-    function addProduit(event){
-        let idCommande=document.getElementById("idCommande").value
-        let requestPost=new XMLHttpRequest();
-        let object= new Object();
-        object.idCommande=idCommande;
+    function addProduit(event)
+    {
+        getProduit(event.alt)
+    }
+
+    function supprimerProduit(event)
+    {
+        let parent=event.parentNode
+        parent.parentNode.remove();
+        let idcommand=document.querySelector("div.result");
+        let object=new Object();
+        object.idCommande=idcommand.id;
         object.idProduit=event.alt;
-        object.quantite=1;
         let jsonencode=JSON.stringify(object);
-        requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) {
-                if (requestPost.status == 200) {
-                    getProduit(event.alt)
-                }
-                else {
-                    console.log(requestPost.status);
-                }
-            }
-        });
-
-        requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/contient");
-        requestPost.send(jsonencode);}
-
-    function supprimerProduit(event){
-        let idCommande=document.getElementById("idCommande").value
+        console.log(jsonencode)
         let requestPost=new XMLHttpRequest();
-        let idProduit=event.alt;
         requestPost.addEventListener("readystatechange",function(){
             if (requestPost.readyState== 4) {
                 if (requestPost.status == 200) {
-                    let parent=event.parentNode
-                    console.log(parent.parentNode)
-                    parent.parentNode.remove();
                 }
                 else {
                     console.log(requestPost.status);
@@ -104,8 +91,9 @@ window.onload=function()
             }
         });
 
-        requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+idCommande+"/"+idProduit);
-        requestPost.send();}
+        requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+object.idCommande+"/"+object.idProduit);
+        requestPost.send(jsonencode);
+    }
 
 
     function getProduit(id){
@@ -127,7 +115,7 @@ window.onload=function()
                         divproduit.appendChild(divligne)
 
                         let img=document.createElement("img");
-                        img.setAttribute("src",obj.imageProduit);
+                        img.setAttribute("src","../Client/Pi_zza/"+obj.imageProduit);
                         divligne.appendChild(img)
 
                         let colonne1=document.createElement("div");
@@ -218,11 +206,14 @@ window.onload=function()
         console.log(jsonencode)
         let requestPost=new XMLHttpRequest();
         requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) {
-                if (requestPost.status == 200) {
-
+            if (requestPost.readyState== 4) 
+            {
+                if (requestPost.status == 200) 
+                {
+                    
                 }
-                else {
+                else 
+                {
                     console.log(requestPost.status);
                 }
             }
@@ -240,7 +231,6 @@ window.onload=function()
         object.idProduit=idProduit;
         object.quantite=parseInt(qteProduit)+1;
         let jsonencode=JSON.stringify(object);
-        console.log(jsonencode)
         let requestPost=new XMLHttpRequest();
         requestPost.addEventListener("readystatechange",function(){
             if (requestPost.readyState== 4) {
@@ -279,7 +269,7 @@ window.onload=function()
                         conteneur.appendChild(divligne)
 
                         let img=document.createElement("img");
-                        img.setAttribute("src",obj.imageProduit);
+                        img.setAttribute("src","../Client/Pi_zza/"+obj.imageProduit);
                         divligne.appendChild(img)
 
                         let colonne=document.createElement("div");
@@ -306,8 +296,72 @@ window.onload=function()
                 request.open("GET","http://localhost/pi-zza-Groupe-1-/server/produit/categorie/"+id);
                 request.send();
     }
+    function getlastid()
+    {
+        let requestPost1=new XMLHttpRequest();
+        requestPost1.addEventListener("readystatechange",function(){
+            if (requestPost1.readyState== 4) 
+            {
+                if (requestPost1.status == 200) 
+                {
+                    let jsonobj=requestPost1.responseText;
+                    let objet=JSON.parse(jsonobj);
+                    let divligne=document.createElement("div");
+                    divligne.setAttribute("class","result");
+                    divligne.setAttribute("id",objet.idCommande);
+                    let conteneur=document.querySelector("div#gauche")
+                    conteneur.appendChild(divligne)
+                }
+                else 
+                {
+                    console.log(requestPost1.status);
+                }
+            }
+        });
+        requestPost1.open("GET","http://localhost/pi-zza-Groupe-1-/server/commande/lastid");
+        requestPost1.send();
+    }
+    function addContient()
+    {
+        var idcommande=document.querySelector("div.result");
+        console.log(idcommande);
+        let produitpanier=document.querySelectorAll("div.produit");
+        produitpanier.forEach((el)=>
+        {
+            let object= new Object();
+            console.log(idcommande);
+            object.idCommande=idcommande.id;
+            object.idProduit=el.id.substring(9);
+            object.quantite=document.getElementById("quantiteProduit"+object.idProduit).innerHTML;
+            let jsonencode=JSON.stringify(object);
+            console.log(jsonencode);
+            let requestPost=new XMLHttpRequest();
+            requestPost.addEventListener("readystatechange",function(){
+            if (requestPost.readyState== 4) 
+            {
+                if (requestPost.status == 200) 
+                {
+                    
+                }
+                else {
+                    console.log(requestPost1.status);
+                }
+            }
+        });
+        requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/contient");
+        requestPost.send(jsonencode);
+        });
+    }
+    function valide()
+    {
+        addContient();
+    }
     let form = document.querySelector("select#categorie");
     let id=null;
+    let valid=document.querySelector("div.valider")
+    valid.addEventListener("click",function(){
+        valide();
+    });
     form.addEventListener("click",function(){
         let option = document.querySelectorAll("option");
         option.forEach((op)=>{
@@ -320,4 +374,6 @@ window.onload=function()
     });
     ajouterEvent();
     update(id);
+    addCommand();
+    getlastid();
 }

@@ -19,22 +19,20 @@ class commandeDAO
         }
         return $Commande;
     }
-    public static function getbyTables($id)
+    public static function getlast()
     {
-        $Commandes = array();
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('SELECT * FROM commande WHERE idTables = :idTables');
-        $state->bindValue(":idTables", $id);
+        $state = $connex->prepare('SELECT * FROM commande ORDER BY idCommande DESC LIMIT 0, 1');
         $state->execute();
         $resultats = $state->fetchAll();
         
-        foreach ($resultats as $result)
+        if (sizeof($resultats) > 0)
         {
-                $Commande = new commandeDTO($result["idTables"]);
-                $Commande->setIdCommande($result["idCommande"]);
-                $Commandes[] = $Commande;
+            $result = $resultats[0];
+            $Commande = new commandeDTO($result["idTables"]);
+            $Commande->setIdCommande($result["idCommande"]);
         }
-        return $Commandes;
+        return $Commande;
     }
 
     public static function getList()
