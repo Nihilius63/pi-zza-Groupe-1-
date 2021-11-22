@@ -228,7 +228,7 @@ window.onload=function()
             }
         });
 
-        requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/commande");
+        requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/commande");
         requestPost.send(jsonencode);
 
     }
@@ -252,7 +252,6 @@ window.onload=function()
                 }
             }
         });
-
         requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/contient");
         requestPost.send(jsonencode);
     }
