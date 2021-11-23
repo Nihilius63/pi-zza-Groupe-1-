@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class InfoSuplTableController extends LaunchController implements Initializable {
+public class InfoSuplTableController extends DashboardController implements Initializable {
 
     @FXML private Button dashboardButton;
     @FXML private Button produitsButton;

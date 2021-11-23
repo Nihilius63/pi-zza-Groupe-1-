@@ -36,13 +36,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DashboardController extends LaunchController implements Initializable {
+public class DashboardController implements Initializable {
 
     @FXML private Button dashboardButton;
     @FXML private Button produitsButton;
     @FXML private Button historiqueButton;
     @FXML private Button addProducts;
     @FXML private ImageView closeImg;
+
 
     private int cpt = 0;
 
@@ -55,6 +56,11 @@ public class DashboardController extends LaunchController implements Initializab
     @FXML private Accordion accordionCommande;
     @FXML private Button tableInnocupe;
     @FXML private Button retour;
+
+    @FXML
+    public void closeButton() {
+        App.close();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -170,6 +176,19 @@ public class DashboardController extends LaunchController implements Initializab
         if(event.getSource() == addProducts) {
             addProductsWindow();
         }
+    }
+
+    public void dashboardWindow() throws IOException {
+        App.setRoot("dashboard");
+    }
+    public void produitsWindow() throws IOException {
+        App.setRoot("produit");
+    }
+    public void historiqueWindow() throws IOException {
+        App.setRoot("historique");
+    }
+    public void addProductsWindow() throws IOException {
+        App.setRoot("addProduit");
     }
 }
 

@@ -35,7 +35,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AddProduitsController extends LaunchController implements Initializable {
+public class AddProduitsController extends DashboardController implements Initializable {
 
     @FXML private Button dashboardButton;
     @FXML private Button produitsButton;

@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HistoriquesController extends LaunchController implements Initializable {
+public class HistoriquesController extends DashboardController implements Initializable {
 
     private int cpt = 0;
 

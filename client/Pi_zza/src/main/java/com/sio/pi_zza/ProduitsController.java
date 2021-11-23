@@ -30,7 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ResourceBundle;
 
-public class ProduitsController extends LaunchController implements Initializable {
+public class ProduitsController extends DashboardController implements Initializable {
 
     @FXML private Button dashboardButton;
     @FXML private Button produitsButton;
