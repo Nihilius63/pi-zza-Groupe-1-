@@ -62,8 +62,7 @@ public class AddProduitsController extends DashboardController implements Initia
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        JSONArray categorieJsonList = new JSONArray();
-        categorieJsonList = categorieDAO.getCategorie();
+        JSONArray categorieJsonList = categorieDAO.getCategorie();
         ObservableList<String> listNameCategorie = FXCollections.observableArrayList();
 
         for (int i = 0; i < categorieJsonList.length(); i++) {
@@ -125,9 +124,9 @@ public class AddProduitsController extends DashboardController implements Initia
 
         } else {
             try {
-                if (Objects.equals(categorieProduits, "Pizza")) {
+                if (categorieProduits.equals("Pizzas")) {
                     categorieProduits = "1";
-                } else if (Objects.equals(categorieProduits, "Boissons")) {
+                } else if (categorieProduits.equals("Boissons")) {
                     categorieProduits = "2";
                 } else {
                     categorieProduits = "3";
@@ -166,13 +165,13 @@ public class AddProduitsController extends DashboardController implements Initia
             importImage.setText(imageSave);
             Image img = new Image(imageSave);
             imageViewImport.setImage(img);
-            imageViewImport.setFitHeight(100);
-            imageViewImport.setFitWidth(100);
+            imageViewImport.setFitHeight(374);
+            imageViewImport.setFitWidth(322);
         } else {
             Image img = new Image("file:imgTools/interoImgAdd.png");
             imageViewImport.setImage(img);
-            imageViewImport.setFitHeight(100);
-            imageViewImport.setFitWidth(100);
+            imageViewImport.setFitHeight(374);
+            imageViewImport.setFitWidth(322);
         }
     }
 

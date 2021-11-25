@@ -27,10 +27,31 @@
     -fx-border-width: 2px;
 }
 
+.boxModif {
+    -fx-background-color: #0b1558;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+}
+
 .textSlideBar {
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 15px;
+}
+
+.textInfoSupl {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-padding: 8px;
+}
+
+.textTitleProduit {
+    -fx-text-fill: white;
+    -fx-padding: 15px;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 25px;
 }
 
 .titleBar {
@@ -56,6 +77,16 @@
 .boxHistory, .boxTable {
     -fx-background-color: #2969c0;
     -fx-background-radius: 50px;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+}
+
+.boxInfoTable {
+    -fx-background-color: #0b1558;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
     -fx-padding: 10px;
     -fx-border-insets: 10px;
     -fx-background-insets: 10px;
@@ -217,6 +248,41 @@
     -fx-background-color: #181f56;
 }
 
-.combo-box-base {
-    -fx-text-fill: red;
+.textfieldsModif {
+    -fx-background-color: #0744d7;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+}
+
+.textfieldsModif:hover {
+    -fx-background-color: #255acd;
+}
+
+.importImage {
+    -fx-background-color: #3563d2;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+}
+
+.importImage:hover {
+    -fx-background-color: #184ccb;
+}
+
+.espace {
+    -fx-padding: 15px 0px 0px 0px;
+}
+
+.space {
+    -fx-padding: 30px 0px 0px 0px;
+    -fx-spacing: 15px;
 }
