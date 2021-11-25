@@ -195,6 +195,8 @@ public class ProduitsController extends DashboardController implements Initializ
         categorieProduitText.getSelectionModel().select(categorieProduit-1);
 
         HBox huBox = new HBox();
+        huBox.setAlignment(Pos.CENTER);
+        huBox.getStyleClass().add("boxProduit");
         Label nom = new Label("Nom du produit:");
         box.getChildren().add(nom);
         box.getChildren().add(nomProduitText);
@@ -230,6 +232,14 @@ public class ProduitsController extends DashboardController implements Initializ
 
         Button modif = new Button("Modifier");
         Button retour = new Button("Retour");
+
+        modif.getStyleClass().add("buttonProduit");
+        retour.getStyleClass().add("buttonProduit");
+        nom.getStyleClass().add("textSlideBar");
+        prix.getStyleClass().add("textSlideBar");
+        imageSerieT.getStyleClass().add("textSlideBar");
+        addImage.getStyleClass().add("buttonProduit");
+        categorieT.getStyleClass().add("textSlideBar");
 
         box.getChildren().add(huBox);
 
