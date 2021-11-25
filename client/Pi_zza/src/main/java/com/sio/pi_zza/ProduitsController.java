@@ -182,8 +182,11 @@ public class ProduitsController extends DashboardController implements Initializ
         }
 
         Stage newStage = new Stage();
-
+        newStage.initStyle(StageStyle.UNDECORATED);
         VBox box = new VBox();
+        box.setAlignment(Pos.CENTER);
+        box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
+        box.getStyleClass().add("infoBox");
 
         TextField nomProduitText = new TextField(nomProduit);
         TextField prixProduitText = new TextField(""+prixProduit);
