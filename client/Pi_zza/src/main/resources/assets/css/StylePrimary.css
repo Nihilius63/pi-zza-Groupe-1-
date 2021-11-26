@@ -105,6 +105,12 @@
     -fx-background-color: #0744d7;
 }*/
 
+.scrollInfo {
+    -fx-background-color: #0b1558;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
 .scrollPane .viewport {    -fx-background-color: #010208;}
 
 .scrollPane {

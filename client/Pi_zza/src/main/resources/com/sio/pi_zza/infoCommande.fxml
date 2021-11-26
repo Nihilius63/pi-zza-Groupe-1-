@@ -172,9 +172,9 @@
       <VBox fx:id="boxAll" alignment="TOP_CENTER" layoutX="237.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="769.0" styleClass="infoBox">
          <children>
             <Label alignment="CENTER" prefHeight="36.0" prefWidth="813.0" styleClass="titleBar" text="Information sur la table:  " />
-            <HBox prefHeight="553.0" prefWidth="769.0">
+            <HBox prefHeight="285.0" prefWidth="769.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="486.0" prefWidth="769.0" styleClass="boxInfoTable">
+                  <VBox alignment="TOP_CENTER" prefHeight="486.0" prefWidth="699.0" styleClass="boxInfoTable">
                      <children>
                         <Label fx:id="numeroTable" prefHeight="45.0" prefWidth="905.0" styleClass="textInfoSupl" text="Numéro de la table : 1">
                            <font>
@@ -201,21 +201,21 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="769.0" styleClass="boxInfoTable">
                      <children>
-                        <Label alignment="CENTER" prefHeight="0.0" prefWidth="385.0" styleClass="textInfoSupl" text="--- Liste des commandes ---">
+                        <Label alignment="CENTER" prefHeight="0.0" prefWidth="385.0" styleClass="textInfoSupl" text="Liste des commandes">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
                         <ScrollPane prefHeight="410.0" prefWidth="385.0" styleClass="scrollPane">
                            <content>
-                              <VBox prefHeight="594.0" prefWidth="311.0" />
+                              <VBox fx:id="scrollCommande" prefHeight="594.0" prefWidth="311.0" styleClass="scrollInfo" />
                            </content>
                         </ScrollPane>
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="177.0" prefWidth="769.0">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="769.0">
                <children>
                   <Button fx:id="tableInnocupe" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" text="Table innocupée">
                      <HBox.margin>

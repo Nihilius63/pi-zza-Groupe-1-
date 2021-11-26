@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -43,7 +40,7 @@ public class InfoSuplTableController extends DashboardController implements Init
     @FXML private Label nombrePlaceOcu;
     @FXML private Label nombreCommandeEff;
     @FXML private Label sommeCommandes;
-    @FXML private Accordion accordionCommande;
+    @FXML private ScrollPane scrollCommande;
     @FXML private Button tableInnocupe;
     @FXML private Button retour;
 
@@ -51,6 +48,7 @@ public class InfoSuplTableController extends DashboardController implements Init
     private VBox commandProduct;
     private Label scrolTextCommande;
     private HBox productLigne;
+    private int compteur;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,6 +88,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         scrolTextCommande = new Label();
 
         for (int i = 0; i < jsonCommande.length(); i++) {
+            compteur++;
 
             JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
             int idCommande = Integer.parseInt((String) json1.get("idCommande"));
@@ -101,12 +100,12 @@ public class InfoSuplTableController extends DashboardController implements Init
             JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
 
             for (int j = 0; j < jsonContient.length(); j++) {
-                commandProduct = new VBox();
                 JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
                 int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
                 int idProduit = Integer.parseInt((String) json2.get("idProduit"));
                 int quantite = Integer.parseInt((String) json2.get("quantite"));
 
+                commandProduct = new VBox();
                 JSONObject jsonProduit = produitDAO.getProduitById(idProduit);
 
                 int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
@@ -155,7 +154,6 @@ public class InfoSuplTableController extends DashboardController implements Init
         suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
 
         TitledPane infoCommande = new TitledPane("Commande numéro " + idCommandeInfo + " /-/ Information sur la commande /-/", commandProduct);
-        accordionCommande.getPanes().addAll(infoCommande);
 
         EventHandler<MouseEvent> eventClickInnocupe = new EventHandler<MouseEvent>() {
             @Override
