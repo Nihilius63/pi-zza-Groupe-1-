@@ -40,6 +40,20 @@
     -fx-font-size: 15px;
 }
 
+.textInfoSupl {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-padding: 8px;
+}
+
+.textInfoSuplLittel {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+    -fx-padding: 8px;
+}
+
 .textTitleProduit {
     -fx-text-fill: white;
     -fx-padding: 15px;
@@ -75,6 +89,27 @@
     -fx-background-insets: 10px;
 }
 
+.boxInfoTable {
+    -fx-background-color: #0b1558;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+}
+
+.boxListeCommande {
+    -fx-background-color: #202d96;
+    -fx-background-radius: 10px;
+    -fx-border-color: #bab1b1;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+}
+
 .textTable {
     -fx-text-fill: white;
     -fx-font-size: 15px;
@@ -87,6 +122,12 @@
 .boxHistory:hover {
     -fx-background-color: #0744d7;
 }*/
+
+.scrollInfo {
+    -fx-background-color: #0b1558;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
 
 .scrollPane .viewport {    -fx-background-color: #010208;}
 

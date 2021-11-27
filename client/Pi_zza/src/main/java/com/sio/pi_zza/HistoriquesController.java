@@ -75,7 +75,7 @@ public class HistoriquesController extends DashboardController implements Initia
             JSONObject json = new JSONObject(jsonArray.get(i).toString());
             String nomProduit = (String) json.get("nomProduit");
             int quantite = Integer.parseInt((String) json.get("quantite"));
-            int prixProduit = Integer.parseInt((String) json.get("prixProduit"));
+            float prixProduit = Float.parseFloat((String) json.get("prixProduit"));
             String date = (String) json.get("dateCommande");
             int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
 

@@ -47,6 +47,13 @@
     -fx-padding: 8px;
 }
 
+.textInfoSuplLittel {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+    -fx-padding: 8px;
+}
+
 .textTitleProduit {
     -fx-text-fill: white;
     -fx-padding: 15px;
@@ -85,6 +92,17 @@
 .boxInfoTable {
     -fx-background-color: #0b1558;
     -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+}
+
+.boxListeCommande {
+    -fx-background-color: #202d96;
+    -fx-background-radius: 10px;
+    -fx-border-color: #bab1b1;
     -fx-border-radius: 10px;
     -fx-border-width: 2px;
     -fx-padding: 10px;
