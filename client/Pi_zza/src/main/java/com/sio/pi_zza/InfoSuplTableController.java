@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -77,9 +78,9 @@ public class InfoSuplTableController extends DashboardController implements Init
 
         totalCommande = jsonCommande.length();
 
-        if(nbPersonne <= 2) {
+        if(nbPlaces <= 2) {
             imgTable = new Image("file:imgTools/table1.png");
-        } else if(nbPersonne <=6) {
+        } else if(nbPlaces <=6) {
             imgTable = new Image("file:imgTools/table2.png");
         } else {
             imgTable = new Image("file:imgTools/table3.png");
@@ -145,6 +146,23 @@ public class InfoSuplTableController extends DashboardController implements Init
                     }
                     suprProduct.getStyleClass().add("buttonProduit");
                     bloc.getChildren().add(nomProduiText);
+                    HBox hquantite = new HBox();
+                    hquantite.setAlignment(Pos.CENTER);
+                    Image moins = new Image("file:imgTools/moins.png");
+                    ImageView moinsView = new ImageView(moins);
+                    moinsView.setFitHeight(32);
+                    moinsView.setFitWidth(32);
+                    Image plus = new Image("file:imgTools/plus.png");
+                    Label quantiteText = new Label(""+quantite);
+                    quantiteText.getStyleClass().add("textInfoSupl");
+                    ImageView plusView = new ImageView(plus);
+                    plusView.setFitHeight(32);
+                    plusView.setFitWidth(32);
+                    hquantite.getChildren().add(moinsView);
+                    hquantite.getChildren().add(quantiteText);
+                    hquantite.getChildren().add(plusView);
+
+                    bloc.getChildren().add(hquantite);
                     bloc.getChildren().add(suprProduct);
 
                     EventHandler<MouseEvent> eventSuprProduct = new EventHandler<MouseEvent>() {
@@ -174,7 +192,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         numeroTable.setText("Numéro de la table: " + idTables);
         nombrePlaceOcu.setText("Nombre de place occupé: " + nbPersonne + " / " + nbPlaces);
         nombreCommandeEff.setText("Nombre de commande effectué: " + totalCommande);
-        sommeCommandes.setText("Somme des commandes: " + sommeCommande);
+        sommeCommandes.setText("Somme des commandes: " + sommeCommande + "€");
 
         EventHandler<MouseEvent> eventClickInnocupe = new EventHandler<MouseEvent>() {
             @Override
