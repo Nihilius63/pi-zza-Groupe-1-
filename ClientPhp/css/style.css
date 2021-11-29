@@ -38,3 +38,4 @@ body .droitetable .ligne .ajouterProduit { width: 30px; height: 30px; align-self
 body .droitetable .ligne img { width: 50px; height: 50px; border-radius: 50px; }
 body .droitetable .ligne .colonne { display: flex; margin-left: 10px; margin-right: 10px; width: 70%; }
 body .droitetable .ligne .colonne p { margin-left: 10px; }
+#hidden {visibility: hidden;}

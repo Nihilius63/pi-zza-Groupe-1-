@@ -22,15 +22,15 @@ class commandeDAO
     public static function getlast()
     {
         $connex = DatabaseLinker::getConnexion();
-        $state = $connex->prepare('SELECT * FROM commande ORDER BY idCommande DESC LIMIT 0, 1');
+        $state = $connex->prepare('SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA="pi_zza" AND  TABLE_NAME="commande"');
         $state->execute();
         $resultats = $state->fetchAll();
         
         if (sizeof($resultats) > 0)
         {
             $result = $resultats[0];
-            $Commande = new commandeDTO($result["idTables"]);
-            $Commande->setIdCommande($result["idCommande"]);
+            $Commande = new commandeDTO($result["AUTO_INCREMENT"]);
+            $Commande->setIdCommande($result["AUTO_INCREMENT"]);
         }
         return $Commande;
     }

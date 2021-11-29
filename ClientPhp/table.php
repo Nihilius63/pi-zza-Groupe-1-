@@ -9,38 +9,17 @@ include_once ("php/DAOCategorie.php");
 ?>
 <div class="content" >
     <div id="gauche">
-        <h1> Commande </h1>
+        <h1> Commandes </h1>
 
 <?php
 $commandes=DAOCommande::getCommandeByIdTable($_GET["idTable"]);
-foreach ($commandes as $commande) {
-    $contients=DAOContenir::getContenirByIdCommande($commande->idCommande);
-    foreach ($contients as $contient) {
-        $produit=DAOProduit::getProduitByIdProduit($contient->idProduit);
-        echo '<div class="produit" id="idProduit'.$produit->idProduit.'">
-                <div class="ligne2">
-                    <img src="'.$produit->imageProduit.'" alt="">
-                    <div class="colonne">
-                        <p>Nom</p>
-                        <p>'.$produit->nomProduit.'</p>
-                    </div>
-                    <div class="colonne">
-                        <p>Prix</p>
-                        <p>'.$produit->prixProduit.'€</p>
-                    </div>
-                    <div class="colonne">
-                        <p>Quantité</p>
-                        <p id="quantiteProduit'.$produit->idProduit.'">'.$contient->quantite.'</p>
-                    </div>
-                    <div class="delete">
-                        <img class="imgdelete" src="img/delete.png" alt="'.$produit->idProduit.'">
-                    </div>
-                </div></div>';
-    }
+echo "<div class='lignecommande'><p>Nouvelle Commande</p></div><br>"; 
+foreach ($commandes as $commande) 
+{   
+    echo "<div class='lignecommande' id=".$commande->idCommande."><div id=".$commande->idCommande." class='commande'><p>Commande N°".$commande->idCommande."</p></div><div class='trash'> <i class='fas fa-trash-alt'></i><br></div></div>"; 
 }
-
 ?>
-        <div class="valider">
+        <div class="valider" id="hidden">
             <p>Valider</p>
         </div>
     </div>
@@ -54,21 +33,22 @@ foreach ($commandes as $commande) {
 
         <input id="modifNbPersonne" type="button" value="Modifier"><input type="hidden" id="idTable" value="<?php echo $table->idTables;?>"><input type="hidden" id="nbPlaces" value="<?php echo $table->nbPlaces;?>"></div>
 
-
-        <H1> Ajouter produit</H1>
-        <form method="post" action="traitement.php">
-            <p>
-                <select name="categorie" id="categorie">
-                    <option value="null">Choissisez une categorie</option>
-                    <?php
-                    $categorie=DAOCategorie::getCategorie();
-                    foreach ($categorie as $value) {
-                        echo "<option id='".$value->idCategorie."' value='".$value->nomCategorie."'>".$value->nomCategorie."</option>";
-                    }
-                    ?>
-                </select>
-            </p>
-        </form>
+        <div id="hidden">
+            <h1> Ajouter produit</h1>
+            <form method="post" action="traitement.php">
+                <p>
+                    <select name="categorie" id="categorie">
+                        <option value="null">Choissisez une categorie</option>
+                        <?php
+                        $categorie=DAOCategorie::getCategorie();
+                        foreach ($categorie as $value) {
+                            echo "<option id='".$value->idCategorie."' value='".$value->nomCategorie."'>".$value->nomCategorie."</option>";
+                        }
+                        ?>
+                    </select>
+                </p>
+            </form>
+        </div>
         <?php
         $produit=DAOProduit::getProduits();
         foreach ($produit as $prod) {

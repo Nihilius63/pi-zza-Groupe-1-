@@ -36,7 +36,7 @@ class DAOTables {
             }
             $string=$string.'<p> Table '.$value->idTables.'  </p>';
             if ($value->nbPersonne>0){
-                $string=$string. '<i class="fas fa-exclamation-triangle red"> Occupé</i> </div>';
+                $string=$string. '<i class="fas fa-exclamation-triangle red"> Occupé '.$value->nbPersonne.' Personne</i> </div>';
             }
             else {
                 $string=$string. '</div></a>';

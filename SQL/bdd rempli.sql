@@ -141,13 +141,13 @@ ALTER TABLE `tables`
   MODIFY `idTables` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 ALTER TABLE `commande`
-  ADD CONSTRAINT `commande_tables_FK` FOREIGN KEY (`idTables`) REFERENCES `tables` (`idTables`);
+  ADD CONSTRAINT `commande_tables_FK` FOREIGN KEY (`idTables`) REFERENCES `tables` (`idTables`) ON DELETE CASCADE;
 
 ALTER TABLE `contient`
-  ADD CONSTRAINT `contient_commande_FK` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`idCommande`),
-  ADD CONSTRAINT `contient_produit0_FK` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`idProduit`);
+  ADD CONSTRAINT `contient_commande_FK` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`idCommande`) ON DELETE CASCADE,
+  ADD CONSTRAINT `contient_produit0_FK` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`idProduit`) ON DELETE CASCADE;
 
 ALTER TABLE `produit`
-  ADD CONSTRAINT `produit_Categorie_FK` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`);
+  ADD CONSTRAINT `produit_Categorie_FK` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`) ON DELETE CASCADE;
 
 COMMIT;

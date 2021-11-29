@@ -25,6 +25,7 @@ class contientDAO
 
         public static function getByCommande($id)
     {
+        $contients = array();
         $contient = null;
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM contient WHERE idCommande = :idCommande');
@@ -43,6 +44,7 @@ class contientDAO
     }
         public static function getByProduit($id)
     {
+        $contients = array();
         $contient = null;
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM contient WHERE idProduit = :idProduit');

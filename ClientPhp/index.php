@@ -9,14 +9,14 @@ include_once ('view/header.html');
             <?php
             include_once ("php/DAOTables.php");
             $tab= DAOTables::affichageTable();
-            foreach ($tab as $value) {
+            foreach ($tab as $value) 
+            {
                 echo $value;
             }
             ?>
         </div>
     </div>
 </div>
-
 </body>
 </html>
 
