@@ -4,19 +4,17 @@ import com.sio.pi_zza.DAO.*;
 import com.sio.pi_zza.DTO.tableInfoDTO;
 
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
+import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -32,25 +30,22 @@ import java.util.ResourceBundle;
 
 public class InfoSuplTableController extends DashboardController implements Initializable {
 
-    @FXML private Button dashboardButton;
-    @FXML private Button produitsButton;
-    @FXML private Button historiqueButton;
-    @FXML private Button addProducts;
+    @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
-
     @FXML public Label numeroTable;
     @FXML private Label nombrePlaceOcu;
     @FXML private Label nombreCommandeEff;
     @FXML private Label sommeCommandes;
-    @FXML private VBox vboxCommande;
     @FXML private Button tableInnocupe;
     @FXML private Button retour;
+    @FXML private ScrollPane scrollCommande;
+    @FXML private ImageView imgTables;
 
     private VBox bloc;
+    private Image imgTable;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -82,81 +77,104 @@ public class InfoSuplTableController extends DashboardController implements Init
 
         totalCommande = jsonCommande.length();
 
-        for (int i = 0; i < jsonCommande.length(); i++) {
-            JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
-            int idCommande = Integer.parseInt((String) json1.get("idCommande"));
-            int idTable = Integer.parseInt((String) json1.get("idTables"));
+        if(nbPersonne <= 2) {
+            imgTable = new Image("file:imgTools/table1.png");
+        } else if(nbPersonne <=6) {
+            imgTable = new Image("file:imgTools/table2.png");
+        } else {
+            imgTable = new Image("file:imgTools/table3.png");
+        }
 
+        imgTables.setImage(imgTable);
+
+        if(totalCommande != 0) {
+            for (int i = 0; i < jsonCommande.length(); i++) {
+                JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
+                int idCommande = Integer.parseInt((String) json1.get("idCommande"));
+                int idTable = Integer.parseInt((String) json1.get("idTables"));
+
+                bloc = new VBox();
+                bloc.setPrefWidth(311);
+                bloc.maxWidth(311);
+                bloc.setAlignment(Pos.TOP_CENTER);
+                bloc.getStyleClass().add("boxListeCommande");
+                Label commandeTextId = new Label("Commande numéro: " + idCommande);
+                commandeTextId.setAlignment(Pos.CENTER);
+                commandeTextId.getStyleClass().add("textInfoSupl");
+                Button suprCommande = new Button("Supprimer la commande");
+                suprCommande.getStyleClass().add("buttonProduit");
+                bloc.getChildren().add(commandeTextId);
+                bloc.getChildren().add(suprCommande);
+                Label point = new Label("-----------------------------");
+                point.getStyleClass().add("textInfoSupl");
+                bloc.getChildren().add(point);
+
+                EventHandler<MouseEvent> eventSuprCommande = new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent e) {
+                        suprCommande(idCommande, idTables);
+                    }
+                };
+                suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
+
+                JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
+
+                for (int j = 0; j < jsonContient.length(); j++) {
+                    JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
+                    int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
+                    int idProduit = Integer.parseInt((String) json2.get("idProduit"));
+                    int quantite = Integer.parseInt((String) json2.get("quantite"));
+
+                    JSONObject jsonProduit = produitDAO.getProduitById(idProduit);
+
+                    int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
+                    String nomProduit = (String) jsonProduit.get("nomProduit");
+                    float prixProduit = Float.parseFloat((String) jsonProduit.get("prixProduit"));
+                    String imageProduit = (String) jsonProduit.get("imageProduit");
+                    int idCategorie = Integer.parseInt((String) jsonProduit.get("idCategorie"));
+
+                    sommeCommande += prixProduit * quantite;
+
+                    Label nomProduiText = new Label(nomProduit + " / " + prixProduit + "€");
+                    nomProduiText.setAlignment(Pos.CENTER);
+                    Button suprProduct = new Button("Supprimer le produit");
+                    if (nomProduit.length() <= 15) {
+                        nomProduiText.getStyleClass().add("textInfoSupl");
+                    } else {
+                        nomProduiText.getStyleClass().add("textInfoSuplLittel");
+                    }
+                    suprProduct.getStyleClass().add("buttonProduit");
+                    bloc.getChildren().add(nomProduiText);
+                    bloc.getChildren().add(suprProduct);
+
+                    EventHandler<MouseEvent> eventSuprProduct = new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent e) {
+                            suprProduitCommande(idCommande, produitId, idTables);
+                        }
+                    };
+                    suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
+                }
+            }
+            scrollCommande.setContent(bloc);
+            scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        } else {
             bloc = new VBox();
             bloc.setAlignment(Pos.TOP_CENTER);
             bloc.getStyleClass().add("boxListeCommande");
-            Label commandeTextId = new Label("Commande numéro: " + idCommande);
-            commandeTextId.setAlignment(Pos.CENTER);
-            commandeTextId.getStyleClass().add("textInfoSupl");
-            Button suprCommande = new Button("Supprimer la commande");
-            suprCommande.getStyleClass().add("buttonProduit");
-            bloc.getChildren().add(commandeTextId);
-            bloc.getChildren().add(suprCommande);
-            Label point = new Label("-------------------------------------");
-            point.getStyleClass().add("textInfoSupl");
-            bloc.getChildren().add(point);
-
-            EventHandler<MouseEvent> eventSuprCommande = new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent e) {
-                    suprCommande(idCommande, idTables);
-                }
-            };
-            suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
-
-            JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
-
-            for (int j = 0; j < jsonContient.length(); j++) {
-                JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
-                int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
-                int idProduit = Integer.parseInt((String) json2.get("idProduit"));
-                int quantite = Integer.parseInt((String) json2.get("quantite"));
-
-                JSONObject jsonProduit = produitDAO.getProduitById(idProduit);
-
-                int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
-                String nomProduit = (String) jsonProduit.get("nomProduit");
-                float prixProduit = Float.parseFloat((String) jsonProduit.get("prixProduit"));
-                String imageProduit = (String) jsonProduit.get("imageProduit");
-                int idCategorie = Integer.parseInt((String) jsonProduit.get("idCategorie"));
-
-                sommeCommande += prixProduit * quantite;
-
-                Label nomProduiText = new Label(nomProduit + " / " + prixProduit + "€");
-                nomProduiText.setAlignment(Pos.CENTER);
-                Button suprProduct = new Button("Supprimer le produit");
-                if(nomProduit.length() <= 15) {
-                    nomProduiText.getStyleClass().add("textInfoSupl");
-                } else {
-                    nomProduiText.getStyleClass().add("textInfoSuplLittel");
-                }
-                suprProduct.getStyleClass().add("buttonProduit");
-                bloc.getChildren().add(nomProduiText);
-                bloc.getChildren().add(suprProduct);
-
-                EventHandler<MouseEvent> eventSuprProduct = new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent e) {
-                        suprProduitCommande(idCommande, produitId, idTables);
-                    }
-                };
-                suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
-            }
-
-
-            numeroTable.setText("Numéro de la table: " + idTables);
-            nombrePlaceOcu.setText("Nombre de place occupé: " + nbPersonne + " / " + nbPlaces);
-            nombreCommandeEff.setText("Nombre de commande effectué: " + totalCommande);
-            sommeCommandes.setText("Somme des commandes: " + sommeCommande);
-
-            vboxCommande.getChildren().add(bloc);
-
+            Label ttile = new Label(" Aucune commande n'a été effectué ! ");
+            ttile.setAlignment(Pos.CENTER);
+            ttile.getStyleClass().add("textInfoSuplLittel");
+            bloc.getChildren().add(ttile);
+            scrollCommande.setContent(bloc);
+            scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         }
+
+        numeroTable.setText("Numéro de la table: " + idTables);
+        nombrePlaceOcu.setText("Nombre de place occupé: " + nbPersonne + " / " + nbPlaces);
+        nombreCommandeEff.setText("Nombre de commande effectué: " + totalCommande);
+        sommeCommandes.setText("Somme des commandes: " + sommeCommande);
 
         EventHandler<MouseEvent> eventClickInnocupe = new EventHandler<MouseEvent>() {
             @Override
@@ -171,7 +189,6 @@ public class InfoSuplTableController extends DashboardController implements Init
     public void suprCommande(int idCommande, int idTables) {
         contientDAO.deleteContientByIdCommande(idCommande);
         commandeDAO.deleteByIdCommande(idCommande);
-        tablesDAO.inoccupeTable(idTables);
 
         Stage suprCommandeStage = new Stage();
         suprCommandeStage.initStyle(StageStyle.UNDECORATED);
@@ -203,7 +220,6 @@ public class InfoSuplTableController extends DashboardController implements Init
         if(contientDAO.getContientByIdCommande(idCommande).length() == 1) {
             contientDAO.deleteContientByIdCommande(idCommande);
             commandeDAO.deleteByIdCommande(idCommande);
-            tablesDAO.inoccupeTable(idTables);
         } else {
             contientDAO.deleteContientByIdCommandeProduit(idCommande, idProduit);
         }
@@ -263,45 +279,55 @@ public class InfoSuplTableController extends DashboardController implements Init
             }
         }
 
-        Stage innocuppeTable = new Stage();
+        Stage innocupeTable = new Stage();
+        innocupeTable.initStyle(StageStyle.UNDECORATED);
         VBox box = new VBox();
-        Label msgView = new Label("Votre table est désormais innocupée!");
-        box.getChildren().add(msgView);
-        Scene innocuppeTableScene = new Scene(box, 200, 250);
-        innocuppeTable.setScene(innocuppeTableScene);
-        innocuppeTable.show();
+        box.setAlignment(Pos.CENTER);
+        box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
+        box.getStyleClass().add("boxNo");
+        Label msgViews = new Label("Votre table est désormais innocupée!");
+        msgViews.getStyleClass().add("titleBar");
+        box.getChildren().add(msgViews);
+        Scene suprCommandeScene = new Scene(box, 690, 110);
+        innocupeTable.setScene(suprCommandeScene);
+        innocupeTable.show();
 
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(time -> {
-            try {
-                innocuppeTable.hide();
-                App.setRoot("dashboard");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+                    try {
+                        innocupeTable.hide();
+                        App.setRoot("dashboard");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
         );
         pause.play();
 
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) throws IOException {
-        if (event.getSource() == dashboardButton) {
-            dashboardWindow();
-        }
-
-        if (event.getSource() == produitsButton) {
-            produitsWindow();
-        }
-
-        if (event.getSource() == historiqueButton) {
-            historiqueWindow();
-        }
-
-        if (event.getSource() == addProducts) {
-            addProductsWindow();
-        }
+    @FXML public void dashboardWindow() throws IOException {
+        App.setRoot("dashboard");
     }
-
+    @FXML public void produitsWindow() throws IOException {
+        App.setRoot("produit");
+    }
+    @FXML public void historiqueWindow() throws IOException {
+        App.setRoot("historique");
+    }
+    @FXML public void addProductsWindow() throws IOException {
+        App.setRoot("addProduit");
+    }
+    @FXML private void imgReloadButton() throws  IOException {
+        App.setRoot("infoCommande");
+    }
+    @FXML private void moovRotate() {
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.seconds(2));
+        rotateTransition.setNode(imgReloadSync);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setAutoReverse(false);
+        rotateTransition.play();
+    }
 }

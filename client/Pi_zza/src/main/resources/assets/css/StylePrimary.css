@@ -77,6 +77,10 @@
     -fx-background-color: #0C185F;
 }
 
+.hoverHSlideSelect {
+    -fx-background-color: #1b2e91;
+}
+
 .infoBox {
     -fx-background-color: #010208;
 }
@@ -87,6 +91,9 @@
     -fx-padding: 10px;
     -fx-border-insets: 10px;
     -fx-background-insets: 10px;
+    -fx-border-color: white;
+    -fx-border-radius: 50px;
+    -fx-border-width: 1px;
 }
 
 .boxInfoTable {
@@ -130,19 +137,20 @@
 }
 
 .scrollPane .viewport {    -fx-background-color: #010208;}
+.scrollPaneInfo .viewport {    -fx-background-color: #0b1558;}
 
-.scrollPane {
+.scrollPane, .scrollPaneInfo {
     -fx-background-color: #010208;
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
 
-.scrollPane:focused {
+.scrollPane:focused, .scrollPaneInfo:focused {
     -fx-background-color: #010208;
     -fx-background-insets: 0;
 }
 
-.scrollPane .corner {
+.scrollPane .corner, .scrollPaneInfo.corner {
     -fx-background-color: #010208;
     -fx-background-insets: 0;
 }
@@ -233,6 +241,16 @@
 
 .boxProduit {
     -fx-background-color: #00369B;
+    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-background-radius: 15px;
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
+    -fx-border-width: 1px;
+}
+
+.boxProduitButton {
     -fx-padding: 10px;
     -fx-border-insets: 10px;
     -fx-background-insets: 10px;

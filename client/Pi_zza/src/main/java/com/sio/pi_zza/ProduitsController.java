@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import com.sio.pi_zza.DAO.produitDAO;
 import com.sio.pi_zza.DAO.categorieDAO;
+import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,22 +24,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
+import javafx.stage.*;
+import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ResourceBundle;
 
 public class ProduitsController extends DashboardController implements Initializable {
 
-    @FXML private Button dashboardButton;
-    @FXML private Button produitsButton;
-    @FXML private Button historiqueButton;
-    @FXML private Button addProducts;
+    @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
-
     @FXML private HBox produitsHBox;
     @FXML private GridPane categorieGrid;
 
@@ -82,6 +76,7 @@ public class ProduitsController extends DashboardController implements Initializ
             scrollProduit = new ScrollPane();
             scrollProduit.getStyleClass().add("scrollPane");
             scrollProduit.setPrefSize(1000,1000);
+            scrollProduit.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
             gridProduit = new GridPane();
 
             for (int j = 0; j < jsonProduit.length(); j++) {
@@ -119,7 +114,7 @@ public class ProduitsController extends DashboardController implements Initializ
 
                 HBox hbox = new HBox();
                 hbox.setSpacing(5);
-                hbox.getStyleClass().add("boxProduit");
+                hbox.getStyleClass().add("boxProduitButton");
                 hbox.setAlignment(Pos.CENTER);
                 hbox.getChildren().add(buttonModif);
                 hbox.getChildren().add(buttonSupr);
@@ -185,6 +180,7 @@ public class ProduitsController extends DashboardController implements Initializ
 
         Stage newStage = new Stage();
         newStage.initStyle(StageStyle.UNDECORATED);
+        newStage.initModality(Modality.APPLICATION_MODAL);
         //newStage.setAlwaysOnTop(true); Permet a la fenêtre d'être tjrs devant tout
         VBox box = new VBox();
         box.setAlignment(Pos.TOP_CENTER);
@@ -439,23 +435,29 @@ public class ProduitsController extends DashboardController implements Initializ
         }
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) throws IOException {
-        if(event.getSource() == dashboardButton) {
-            dashboardWindow();
-        }
-
-        if(event.getSource() == produitsButton) {
-            produitsWindow();
-        }
-
-        if(event.getSource() == historiqueButton) {
-            historiqueWindow();
-        }
-
-        if(event.getSource() == addProducts) {
-            addProductsWindow();
-        }
+    @FXML public void dashboardWindow() throws IOException {
+        App.setRoot("dashboard");
+    }
+    @FXML public void produitsWindow() throws IOException {
+        App.setRoot("produit");
+    }
+    @FXML public void historiqueWindow() throws IOException {
+        App.setRoot("historique");
+    }
+    @FXML public void addProductsWindow() throws IOException {
+        App.setRoot("addProduit");
+    }
+    @FXML private void imgReloadButton() throws  IOException {
+        App.setRoot("produit");
+    }
+    @FXML private void moovRotate() {
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.seconds(2));
+        rotateTransition.setNode(imgReloadSync);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setAutoReverse(false);
+        rotateTransition.play();
     }
 
 

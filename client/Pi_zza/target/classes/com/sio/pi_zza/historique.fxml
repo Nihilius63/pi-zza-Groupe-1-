@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,28 +48,18 @@
       </HBox>
       <VBox layoutY="116.0" prefHeight="541.0" prefWidth="237.0" styleClass="box">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="261.0" styleClass="hoverHSlide">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#dashboardWindow" prefHeight="44.0" prefWidth="261.0" styleClass="hoverHSlide">
                <children>
                   <ImageView fx:id="iconDashboard" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:imgTools/box.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="dashboardButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="94.0" text="Dashboard">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <Label styleClass="textSlideBar" text="Dashboard">
                      <padding>
                         <Insets left="8.0" />
                      </padding>
-                     <styleClass>
-                        <String fx:value="btns" />
-                        <String fx:value="textSlideBar" />
-                     </styleClass>
-                  </Button>
+                  </Label>
                </children>
                <VBox.margin>
                   <Insets />
@@ -79,28 +68,18 @@
                   <Insets bottom="15.0" left="20.0" top="15.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#produitsWindow" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
                   <ImageView fx:id="iconProduit" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:imgTools/document-signed.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="produitsButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="75.0" text="Produits">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <Label styleClass="textSlideBar" text="Produits">
                      <padding>
                         <Insets left="8.0" />
                      </padding>
-                     <styleClass>
-                        <String fx:value="btns" />
-                        <String fx:value="textSlideBar" />
-                     </styleClass>
-                  </Button>
+                  </Label>
                </children>
                <VBox.margin>
                   <Insets />
@@ -109,28 +88,18 @@
                   <Insets bottom="15.0" left="20.0" top="15.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#addProductsWindow" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
                <children>
                   <ImageView fx:id="iconAddProduit" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:imgTools/file-add.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="addProducts" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="143.0" text="Ajouter un produit">
-                     <styleClass>
-                        <String fx:value="btns" />
-                        <String fx:value="textSlideBar" />
-                     </styleClass>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <Label styleClass="textSlideBar" text="Ajouter un produit">
                      <padding>
                         <Insets left="8.0" />
                      </padding>
-                  </Button>
+                  </Label>
                </children>
                <VBox.margin>
                   <Insets />
@@ -139,28 +108,18 @@
                   <Insets bottom="15.0" left="20.0" top="15.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlide">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#historiqueWindow" prefHeight="44.0" prefWidth="237.0" styleClass="hoverHSlideSelect">
                <children>
                   <ImageView fx:id="iconHistorique" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="file:imgTools/browser.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="historiqueButton" mnemonicParsing="false" onAction="#handleClicks" prefHeight="44.0" prefWidth="92.0" text="Historique">
-                     <styleClass>
-                        <String fx:value="btns" />
-                        <String fx:value="textSlideBar" />
-                     </styleClass>
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <Label styleClass="textSlideBar" text="Historique">
                      <padding>
                         <Insets left="8.0" />
                      </padding>
-                  </Button>
+                  </Label>
                </children>
                <VBox.margin>
                   <Insets />
@@ -169,11 +128,20 @@
                   <Insets bottom="15.0" left="20.0" top="15.0" />
                </padding>
             </HBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="302.0" prefWidth="237.0">
+               <children>
+                  <ImageView fx:id="imgReloadSync" fitHeight="75.0" fitWidth="75.0" onMouseClicked="#imgReloadButton" onMouseEntered="#moovRotate" pickOnBounds="true" preserveRatio="true" styleClass="imgReloadSync">
+                     <image>
+                        <Image url="file:imgTools/sync.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
          </children>
       </VBox>
       <VBox fx:id="boxAll" layoutX="236.0" layoutY="116.0" prefHeight="541.0" prefWidth="770.0" styleClass="infoBox">
          <children>
-            <GridPane fx:id="boxHistorique" prefHeight="541.0" prefWidth="760.0" styleClass="boxHistorique">
+            <GridPane fx:id="boxHistorique" alignment="CENTER" prefHeight="541.0" prefWidth="760.0" styleClass="boxHistorique">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.0" minWidth="10.0" prefWidth="654.0" />
                </columnConstraints>
@@ -193,18 +161,17 @@
                         <Insets top="10.0" />
                      </padding>
                   </Label>
-                  <GridPane fx:id="historiques" prefHeight="495.0" prefWidth="407.0" GridPane.rowIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
+                  <ScrollPane prefHeight="486.0" prefWidth="780.0" styleClass="scrollPane" GridPane.rowIndex="1">
+                     <content>
+                        <GridPane fx:id="historiques" prefHeight="0.0" prefWidth="739.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
             </GridPane>
          </children>

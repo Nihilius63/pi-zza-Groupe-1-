@@ -3,28 +3,21 @@ package com.sio.pi_zza;
 import com.sio.pi_zza.DAO.categorieDAO;
 import com.sio.pi_zza.DAO.produitDAO;
 import javafx.animation.PauseTransition;
+import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import javafx.util.Callback;
 import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,36 +25,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddProduitsController extends DashboardController implements Initializable {
 
-    @FXML private Button dashboardButton;
-    @FXML private Button produitsButton;
-    @FXML private Button historiqueButton;
-    @FXML private Button addProducts;
+    @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
     @FXML private Label errorMsg;
-
     @FXML private Button importImage;
     @FXML private ComboBox importCategorie;
     @FXML private Button addProduit;
     @FXML private TextField nomProduits;
     @FXML private TextField prixProduits;
     @FXML private ImageView imageViewImport;
-
-    @FXML private ImageView logoImg;
-    @FXML private ImageView iconDashboard;
-    @FXML private ImageView iconProduit;
-    @FXML private ImageView iconHistorique;
-    @FXML private ImageView iconAddProduit;
-
     private String imageSave = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         JSONArray categorieJsonList = categorieDAO.getCategorie();
         ObservableList<String> listNameCategorie = FXCollections.observableArrayList();
 
@@ -69,7 +49,6 @@ public class AddProduitsController extends DashboardController implements Initia
             JSONObject jsonList = new JSONObject(categorieJsonList.get(i).toString());
             String nomCategorie = (String) jsonList.get("nomCategorie");
             listNameCategorie.add(nomCategorie);
-
         }
 
         importCategorie.setItems(listNameCategorie);
@@ -79,7 +58,6 @@ public class AddProduitsController extends DashboardController implements Initia
             Image img = new Image("file:imgTools/interoImgAdd.png");
             imageViewImport.setImage(img);
         }
-
         EventHandler<MouseEvent> closeButtonEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -175,22 +153,28 @@ public class AddProduitsController extends DashboardController implements Initia
         }
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) throws IOException {
-        if (event.getSource() == dashboardButton) {
-            dashboardWindow();
-        }
-
-        if (event.getSource() == produitsButton) {
-            produitsWindow();
-        }
-
-        if (event.getSource() == historiqueButton) {
-            historiqueWindow();
-        }
-
-        if (event.getSource() == addProducts) {
-            addProductsWindow();
-        }
+    @FXML public void dashboardWindow() throws IOException {
+        App.setRoot("dashboard");
+    }
+    @FXML public void produitsWindow() throws IOException {
+        App.setRoot("produit");
+    }
+    @FXML public void historiqueWindow() throws IOException {
+        App.setRoot("historique");
+    }
+    @FXML public void addProductsWindow() throws IOException {
+        App.setRoot("addProduit");
+    }
+    @FXML private void imgReloadButton() throws  IOException {
+        App.setRoot("addProduit");
+    }
+    @FXML private void moovRotate() {
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.seconds(2));
+        rotateTransition.setNode(imgReloadSync);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setAutoReverse(false);
+        rotateTransition.play();
     }
 }

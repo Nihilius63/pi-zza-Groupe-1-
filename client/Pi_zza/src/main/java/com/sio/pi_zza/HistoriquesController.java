@@ -1,23 +1,18 @@
 package com.sio.pi_zza;
 
 import com.sio.pi_zza.DAO.historiqueDAO;
-import javafx.event.ActionEvent;
+import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,33 +23,9 @@ import java.util.ResourceBundle;
 public class HistoriquesController extends DashboardController implements Initializable {
 
     private int cpt = 0;
-
+    @FXML private ImageView imgReloadSync;
     @FXML private GridPane historiques;
-
-    @FXML private Button dashboardButton;
-    @FXML private Button produitsButton;
-    @FXML private Button historiqueButton;
-    @FXML private Button addProducts;
     @FXML private ImageView closeImg;
-
-    @FXML
-    private void handleClicks(ActionEvent event) throws IOException {
-        if(event.getSource() == dashboardButton) {
-            dashboardWindow();
-        }
-
-        if(event.getSource() == produitsButton) {
-            produitsWindow();
-        }
-
-        if(event.getSource() == historiqueButton) {
-            historiqueWindow();
-        }
-
-        if(event.getSource() == addProducts) {
-            addProductsWindow();
-        }
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,6 +41,7 @@ public class HistoriquesController extends DashboardController implements Initia
 
         JSONArray jsonArray = new JSONArray();
         jsonArray = historiqueDAO.getHistorique();
+        float taille = (jsonArray.length()/3) * 172;
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject json = new JSONObject(jsonArray.get(i).toString());
@@ -109,14 +81,37 @@ public class HistoriquesController extends DashboardController implements Initia
             vb.getChildren().add(Table);
 
             boxHistorique.getChildren().add(vb);
+            historiques.setPrefHeight(taille);
             historiques.add(boxHistorique, cpt % 3, cpt / 3);
 
             if (cpt < jsonArray.length() ) {
                 cpt++;
             }
-
         }
-
     }
 
+    @FXML public void dashboardWindow() throws IOException {
+        App.setRoot("dashboard");
+    }
+    @FXML public void produitsWindow() throws IOException {
+        App.setRoot("produit");
+    }
+    @FXML public void historiqueWindow() throws IOException {
+        App.setRoot("historique");
+    }
+    @FXML public void addProductsWindow() throws IOException {
+        App.setRoot("addProduit");
+    }
+    @FXML private void imgReloadButton() throws  IOException {
+        App.setRoot("historique");
+    }
+    @FXML private void moovRotate() {
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.seconds(2));
+        rotateTransition.setNode(imgReloadSync);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setAutoReverse(false);
+        rotateTransition.play();
+    }
 }

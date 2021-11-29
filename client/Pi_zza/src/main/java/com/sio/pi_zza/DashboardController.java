@@ -1,20 +1,11 @@
 package com.sio.pi_zza;
 
-import com.sio.pi_zza.DAO.commandeDAO;
-import com.sio.pi_zza.DAO.contientDAO;
-import com.sio.pi_zza.DAO.produitDAO;
 import com.sio.pi_zza.DTO.tableInfoDTO;
 import com.sio.pi_zza.DAO.tablesDAO;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
+import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,9 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -38,24 +27,10 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
-    @FXML private Button dashboardButton;
-    @FXML private Button produitsButton;
-    @FXML private Button historiqueButton;
-    @FXML private Button addProducts;
+    @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
-
-
     private int cpt = 0;
-
     @FXML private GridPane tables;
-
-    @FXML public Label numeroTable;
-    @FXML private Label nombrePlaceOcu;
-    @FXML private Label nombreCommandeEff;
-    @FXML private Label sommeCommandes;
-    @FXML private Accordion accordionCommande;
-    @FXML private Button tableInnocupe;
-    @FXML private Button retour;
 
     @FXML
     public void closeButton() {
@@ -128,8 +103,7 @@ public class DashboardController implements Initializable {
 
     public void clickInfosSupl(MouseEvent e, int idTables, int nbPersonne, int nbPlaces){
         try {
-            JSONArray verifTable = commandeDAO.getCommandeByIdTables(idTables);
-            if(verifTable.isNull(0)) {
+            if(nbPersonne == 0) {
                 Stage errorTable = new Stage();
                 errorTable.initStyle(StageStyle.UNDECORATED);
                 VBox box = new VBox();
@@ -159,36 +133,29 @@ public class DashboardController implements Initializable {
 
     }
 
-    @FXML
-    private void handleClicks(ActionEvent event) throws IOException {
-        if(event.getSource() == dashboardButton) {
-            dashboardWindow();
-        }
-
-        if(event.getSource() == produitsButton) {
-            produitsWindow();
-        }
-
-        if(event.getSource() == historiqueButton) {
-            historiqueWindow();
-        }
-
-        if(event.getSource() == addProducts) {
-            addProductsWindow();
-        }
-    }
-
-    public void dashboardWindow() throws IOException {
+    @FXML public void dashboardWindow() throws IOException {
         App.setRoot("dashboard");
     }
-    public void produitsWindow() throws IOException {
+    @FXML public void produitsWindow() throws IOException {
         App.setRoot("produit");
     }
-    public void historiqueWindow() throws IOException {
+    @FXML public void historiqueWindow() throws IOException {
         App.setRoot("historique");
     }
-    public void addProductsWindow() throws IOException {
+    @FXML public void addProductsWindow() throws IOException {
         App.setRoot("addProduit");
+    }
+    @FXML private void imgReloadButton() throws  IOException {
+        App.setRoot("dashboard");
+    }
+    @FXML private void moovRotate() {
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.seconds(2));
+        rotateTransition.setNode(imgReloadSync);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setAutoReverse(false);
+        rotateTransition.play();
     }
 }
 
