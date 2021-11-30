@@ -120,58 +120,92 @@ public class InfoSuplTableController extends DashboardController implements Init
 
                 JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
 
-                for (int j = 0; j < jsonContient.length(); j++) {
-                    JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
-                    int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
-                    int idProduit = Integer.parseInt((String) json2.get("idProduit"));
-                    int quantite = Integer.parseInt((String) json2.get("quantite"));
+                if(jsonContient == null) {
+                    System.out.println("test");
+                } else {
+                    System.out.println("OUI");
+                }
 
-                    JSONObject jsonProduit = produitDAO.getProduitById(idProduit);
+                if(jsonContient.length() != 0) {
+                    for (int j = 0; j < jsonContient.length(); j++) {
+                        JSONObject json2 = new JSONObject(jsonContient.get(j).toString());
+                        int idCommande2 = Integer.parseInt((String) json2.get("idCommande"));
+                        int idProduit = Integer.parseInt((String) json2.get("idProduit"));
+                        int quantite = Integer.parseInt((String) json2.get("quantite"));
 
-                    int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
-                    String nomProduit = (String) jsonProduit.get("nomProduit");
-                    float prixProduit = Float.parseFloat((String) jsonProduit.get("prixProduit"));
-                    String imageProduit = (String) jsonProduit.get("imageProduit");
-                    int idCategorie = Integer.parseInt((String) jsonProduit.get("idCategorie"));
+                        JSONObject jsonProduit = produitDAO.getProduitById(idProduit);
 
-                    sommeCommande += prixProduit * quantite;
+                        int produitId = Integer.parseInt((String) jsonProduit.get("idProduit"));
+                        String nomProduit = (String) jsonProduit.get("nomProduit");
+                        float prixProduit = Float.parseFloat((String) jsonProduit.get("prixProduit"));
+                        String imageProduit = (String) jsonProduit.get("imageProduit");
+                        int idCategorie = Integer.parseInt((String) jsonProduit.get("idCategorie"));
 
-                    Label nomProduiText = new Label(nomProduit + " / " + prixProduit + "€");
-                    nomProduiText.setAlignment(Pos.CENTER);
-                    Button suprProduct = new Button("Supprimer le produit");
-                    if (nomProduit.length() <= 15) {
-                        nomProduiText.getStyleClass().add("textInfoSupl");
-                    } else {
-                        nomProduiText.getStyleClass().add("textInfoSuplLittel");
-                    }
-                    suprProduct.getStyleClass().add("buttonProduit");
-                    bloc.getChildren().add(nomProduiText);
-                    HBox hquantite = new HBox();
-                    hquantite.setAlignment(Pos.CENTER);
-                    Image moins = new Image("file:imgTools/moins.png");
-                    ImageView moinsView = new ImageView(moins);
-                    moinsView.setFitHeight(32);
-                    moinsView.setFitWidth(32);
-                    Image plus = new Image("file:imgTools/plus.png");
-                    Label quantiteText = new Label(""+quantite);
-                    quantiteText.getStyleClass().add("textInfoSupl");
-                    ImageView plusView = new ImageView(plus);
-                    plusView.setFitHeight(32);
-                    plusView.setFitWidth(32);
-                    hquantite.getChildren().add(moinsView);
-                    hquantite.getChildren().add(quantiteText);
-                    hquantite.getChildren().add(plusView);
+                        sommeCommande += prixProduit * quantite;
 
-                    bloc.getChildren().add(hquantite);
-                    bloc.getChildren().add(suprProduct);
-
-                    EventHandler<MouseEvent> eventSuprProduct = new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent e) {
-                            suprProduitCommande(idCommande, produitId, idTables);
+                        Label nomProduiText = new Label(nomProduit + " / " + prixProduit + "€");
+                        nomProduiText.setAlignment(Pos.CENTER);
+                        Button suprProduct = new Button("Supprimer le produit");
+                        if (nomProduit.length() <= 15) {
+                            nomProduiText.getStyleClass().add("textInfoSupl");
+                        } else {
+                            nomProduiText.getStyleClass().add("textInfoSuplLittel");
                         }
-                    };
-                    suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
+                        suprProduct.getStyleClass().add("buttonProduit");
+                        bloc.getChildren().add(nomProduiText);
+                        HBox hquantite = new HBox();
+                        hquantite.setAlignment(Pos.CENTER);
+                        Image moins = new Image("file:imgTools/moins.png");
+                        ImageView moinsView = new ImageView(moins);
+                        moinsView.setFitHeight(32);
+                        moinsView.setFitWidth(32);
+                        Image plus = new Image("file:imgTools/plus.png");
+                        Label quantiteText = new Label("" + quantite);
+                        quantiteText.getStyleClass().add("textInfoSupl");
+                        ImageView plusView = new ImageView(plus);
+                        plusView.setFitHeight(32);
+                        plusView.setFitWidth(32);
+                        hquantite.getChildren().add(moinsView);
+                        hquantite.getChildren().add(quantiteText);
+                        hquantite.getChildren().add(plusView);
+
+                        EventHandler<MouseEvent> eventMoinsProduct = new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent e) {
+                                moinsProduct(idCommande, produitId, quantite);
+                            }
+                        };
+                        moinsView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventMoinsProduct);
+
+                        EventHandler<MouseEvent> eventPlusProduct = new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent e) {
+                                plusProduct(idCommande, produitId, quantite);
+                            }
+                        };
+                        plusView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventPlusProduct);
+
+                        bloc.getChildren().add(hquantite);
+                        bloc.getChildren().add(suprProduct);
+
+                        EventHandler<MouseEvent> eventSuprProduct = new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent e) {
+                                suprProduitCommande(idCommande, produitId, idTables);
+                            }
+                        };
+                        suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
+                    }
+                } else {
+                    bloc = new VBox();
+                    bloc.setAlignment(Pos.TOP_CENTER);
+                    bloc.getStyleClass().add("boxListeCommande");
+                    Label ttile = new Label(" Aucun produit n'a encore était ajouté! ");
+                    ttile.setAlignment(Pos.CENTER);
+                    ttile.getStyleClass().add("textInfoSuplLittel");
+                    bloc.getChildren().add(ttile);
+                    scrollCommande.setContent(bloc);
+                    scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
                 }
             }
             scrollCommande.setContent(bloc);
@@ -205,7 +239,6 @@ public class InfoSuplTableController extends DashboardController implements Init
     }
 
     public void suprCommande(int idCommande, int idTables) {
-        contientDAO.deleteContientByIdCommande(idCommande);
         commandeDAO.deleteByIdCommande(idCommande);
 
         Stage suprCommandeStage = new Stage();
@@ -236,7 +269,6 @@ public class InfoSuplTableController extends DashboardController implements Init
 
     public void suprProduitCommande(int idCommande, int idProduit, int idTables) {
         if(contientDAO.getContientByIdCommande(idCommande).length() == 1) {
-            contientDAO.deleteContientByIdCommande(idCommande);
             commandeDAO.deleteByIdCommande(idCommande);
         } else {
             contientDAO.deleteContientByIdCommandeProduit(idCommande, idProduit);
@@ -322,6 +354,31 @@ public class InfoSuplTableController extends DashboardController implements Init
         );
         pause.play();
 
+    }
+
+    public void moinsProduct(int idCommande, int produitId, int quantite) {
+        try {
+            contientDAO.updateContientByIdCommandeAndIdProduit(idCommande, produitId, quantite-1);
+            JSONObject objectProduct = contientDAO.getContientByIdCommandeProduit(idCommande, produitId);
+            int quantity = Integer.parseInt((String) objectProduct.get("quantite"));
+            if(quantity == 0) {
+                contientDAO.deleteContientByIdCommandeProduit(idCommande, produitId);
+                App.setRoot("infoCommande");
+            } else {
+                App.setRoot("infoCommande");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void plusProduct(int idCommande, int produitId, int quantite) {
+        try {
+            contientDAO.updateContientByIdCommandeAndIdProduit(idCommande, produitId, quantite+1);
+            App.setRoot("infoCommande");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML public void dashboardWindow() throws IOException {

@@ -1,9 +1,6 @@
 package com.sio.pi_zza.DAO;
 
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.json.JSONArray;
@@ -21,6 +18,18 @@ public class contientDAO {
 
         JSONArray jsonContient = new JSONArray(response.readEntity(String.class));
         return jsonContient;
+    }
+
+    public static void updateContientByIdCommandeAndIdProduit(int idCommande, int idProduit, int quantite) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTargetContient = client.target("http://localhost/pi-zza-Groupe-1-/server/contient");
+
+        JSONObject update = new JSONObject();
+        update.put("idCommande", idCommande);
+        update.put("idProduit", idProduit);
+        update.put("quantite", quantite);
+
+        webTargetContient.request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(update.toString(),MediaType.APPLICATION_FORM_URLENCODED_TYPE),Response.class);
     }
 
     public static JSONArray getContientByIdCommande(int idCommande) {
