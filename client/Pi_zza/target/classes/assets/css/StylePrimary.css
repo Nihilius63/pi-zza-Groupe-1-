@@ -54,6 +54,13 @@
     -fx-padding: 8px;
 }
 
+.textProduitLitlle {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+    -fx-padding: 8px;
+}
+
 .textTitleProduit {
     -fx-text-fill: white;
     -fx-padding: 15px;

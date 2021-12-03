@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -44,6 +45,8 @@ public class InfoSuplTableController extends DashboardController implements Init
 
     private VBox bloc;
     private Image imgTable;
+    private GridPane gridInfoCommande;
+    private int compteur;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,6 +90,8 @@ public class InfoSuplTableController extends DashboardController implements Init
         }
 
         imgTables.setImage(imgTable);
+        gridInfoCommande = new GridPane();
+        compteur = 0;
 
         if(totalCommande != 0) {
             for (int i = 0; i < jsonCommande.length(); i++) {
@@ -119,12 +124,6 @@ public class InfoSuplTableController extends DashboardController implements Init
                 suprCommande.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprCommande);
 
                 JSONArray jsonContient = contientDAO.getContientByIdCommande(idCommande);
-
-                if(jsonContient == null) {
-                    System.out.println("test");
-                } else {
-                    System.out.println("OUI");
-                }
 
                 if(jsonContient.length() != 0) {
                     for (int j = 0; j < jsonContient.length(); j++) {
@@ -159,12 +158,14 @@ public class InfoSuplTableController extends DashboardController implements Init
                         ImageView moinsView = new ImageView(moins);
                         moinsView.setFitHeight(32);
                         moinsView.setFitWidth(32);
+                        moinsView.getStyleClass().add("moinsImageHover");
                         Image plus = new Image("file:imgTools/plus.png");
                         Label quantiteText = new Label("" + quantite);
                         quantiteText.getStyleClass().add("textInfoSupl");
                         ImageView plusView = new ImageView(plus);
                         plusView.setFitHeight(32);
                         plusView.setFitWidth(32);
+                        plusView.getStyleClass().add("plusImageHover");
                         hquantite.getChildren().add(moinsView);
                         hquantite.getChildren().add(quantiteText);
                         hquantite.getChildren().add(plusView);
@@ -195,20 +196,23 @@ public class InfoSuplTableController extends DashboardController implements Init
                             }
                         };
                         suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
+
+                        gridInfoCommande.add(bloc, 0, compteur);
+                        compteur++;
                     }
                 } else {
-                    bloc = new VBox();
-                    bloc.setAlignment(Pos.TOP_CENTER);
-                    bloc.getStyleClass().add("boxListeCommande");
-                    Label ttile = new Label(" Aucun produit n'a encore était ajouté! ");
+                    VBox blocProduit = new VBox();
+                    blocProduit.setAlignment(Pos.TOP_CENTER);
+                    blocProduit.getStyleClass().add("boxListeCommande");
+                    Label ttile = new Label(" Aucun produit enregistré!");
                     ttile.setAlignment(Pos.CENTER);
-                    ttile.getStyleClass().add("textInfoSuplLittel");
-                    bloc.getChildren().add(ttile);
-                    scrollCommande.setContent(bloc);
-                    scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+                    ttile.getStyleClass().add("textProduitLitlle");
+                    blocProduit.getChildren().add(ttile);
+                    bloc.getChildren().add(blocProduit);
+                    gridInfoCommande.add(bloc, 0, compteur);
+                    compteur++;
                 }
             }
-            scrollCommande.setContent(bloc);
             scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         } else {
@@ -219,14 +223,17 @@ public class InfoSuplTableController extends DashboardController implements Init
             ttile.setAlignment(Pos.CENTER);
             ttile.getStyleClass().add("textInfoSuplLittel");
             bloc.getChildren().add(ttile);
-            scrollCommande.setContent(bloc);
-            scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            gridInfoCommande.add(bloc, 0, compteur);
+            compteur++;
         }
 
         numeroTable.setText("Numéro de la table: " + idTables);
         nombrePlaceOcu.setText("Nombre de place occupé: " + nbPersonne + " / " + nbPlaces);
         nombreCommandeEff.setText("Nombre de commande effectué: " + totalCommande);
         sommeCommandes.setText("Somme des commandes: " + sommeCommande + "€");
+
+        scrollCommande.setContent(gridInfoCommande);
+        scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         EventHandler<MouseEvent> eventClickInnocupe = new EventHandler<MouseEvent>() {
             @Override
