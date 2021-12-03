@@ -81,7 +81,13 @@ window.onload=function()
     }
 
     function getProduit(id,quantites){
-        if (document.getElementById("idProduit"+id)) {
+        let prod=document.getElementById("idProduit"+id)
+        if (prod) 
+        {
+            if (prod.getAttribute("class")=="del")
+            {
+                prod.setAttribute("class","produit");
+            }
             updateQuantite(id)
         }
         else {
@@ -191,7 +197,6 @@ window.onload=function()
             let object=new Object();
             object.idTables=document.getElementById("idTable").value;
             let jsonencode=JSON.stringify(object);
-            console.log(jsonencode)
             let requestPost=new XMLHttpRequest();
             requestPost.addEventListener("readystatechange",function(){
                 if (requestPost.readyState== 4) 
@@ -247,8 +252,13 @@ window.onload=function()
         });
         if(id==null)
         {
+            if(document.querySelector("img#logo"))
+            {
+                conteneur.removeChild(document.querySelector("img#logo"))
+            }
             let img=document.createElement("img");
             img.setAttribute("src","img/logo.png");
+            img.setAttribute("id","logo");
             conteneur.appendChild(img)
         }
         let request = new XMLHttpRequest();
@@ -518,6 +528,7 @@ window.onload=function()
                     addValide();
                     getlastid();
                     trash();
+                    update(null);
                 }
                 else 
                 {
