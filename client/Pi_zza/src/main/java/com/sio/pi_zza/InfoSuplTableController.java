@@ -92,6 +92,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         imgTables.setImage(imgTable);
         gridInfoCommande = new GridPane();
         compteur = 0;
+        bloc = new VBox();
 
         if(totalCommande != 0) {
             for (int i = 0; i < jsonCommande.length(); i++) {
@@ -99,7 +100,6 @@ public class InfoSuplTableController extends DashboardController implements Init
                 int idCommande = Integer.parseInt((String) json1.get("idCommande"));
                 int idTable = Integer.parseInt((String) json1.get("idTables"));
 
-                bloc = new VBox();
                 bloc.setPrefWidth(311);
                 bloc.maxWidth(311);
                 bloc.setAlignment(Pos.TOP_CENTER);
@@ -151,7 +151,6 @@ public class InfoSuplTableController extends DashboardController implements Init
                             nomProduiText.getStyleClass().add("textInfoSuplLittel");
                         }
                         suprProduct.getStyleClass().add("buttonProduit");
-                        bloc.getChildren().add(nomProduiText);
                         HBox hquantite = new HBox();
                         hquantite.setAlignment(Pos.CENTER);
                         Image moins = new Image("file:imgTools/moins.png");
@@ -186,6 +185,7 @@ public class InfoSuplTableController extends DashboardController implements Init
                         };
                         plusView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventPlusProduct);
 
+                        bloc.getChildren().add(nomProduiText);
                         bloc.getChildren().add(hquantite);
                         bloc.getChildren().add(suprProduct);
 
@@ -197,9 +197,9 @@ public class InfoSuplTableController extends DashboardController implements Init
                         };
                         suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
 
-                        gridInfoCommande.add(bloc, 0, compteur);
                         compteur++;
                     }
+                    gridInfoCommande.add(bloc, 0, compteur);
                 } else {
                     VBox blocProduit = new VBox();
                     blocProduit.setAlignment(Pos.TOP_CENTER);
@@ -216,12 +216,11 @@ public class InfoSuplTableController extends DashboardController implements Init
             scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         } else {
-            bloc = new VBox();
             bloc.setAlignment(Pos.TOP_CENTER);
             bloc.getStyleClass().add("boxListeCommande");
-            Label ttile = new Label(" Aucune commande n'a été effectué ! ");
+            Label ttile = new Label("   Aucune commande effectué !   ");
             ttile.setAlignment(Pos.CENTER);
-            ttile.getStyleClass().add("textInfoSuplLittel");
+            ttile.getStyleClass().add("textProduitLitlle");
             bloc.getChildren().add(ttile);
             gridInfoCommande.add(bloc, 0, compteur);
             compteur++;
