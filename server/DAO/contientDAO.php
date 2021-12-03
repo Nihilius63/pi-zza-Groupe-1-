@@ -26,7 +26,6 @@ class contientDAO
         public static function getByCommande($id)
     {
         $contients = array();
-        $contient = null;
         $connex = DatabaseLinker::getConnexion();
         $state = $connex->prepare('SELECT * FROM contient WHERE idCommande = :idCommande');
         $state->bindValue(":idCommande", $id);

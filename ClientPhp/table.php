@@ -13,7 +13,7 @@ include_once ("php/DAOCategorie.php");
 
 <?php
 $commandes=DAOCommande::getCommandeByIdTable($_GET["idTable"]);
-echo "<div class='lignecommande'><p>Nouvelle Commande</p></div><br>"; 
+echo "<div class='commande'><p>Nouvelle Commande</p></div><br>"; 
 foreach ($commandes as $commande) 
 {   
     echo "<div class='lignecommande' id=".$commande->idCommande."><div id=".$commande->idCommande." class='commande'><p>Commande N°".$commande->idCommande."</p></div><div class='trash'> <i class='fas fa-trash-alt'></i><br></div></div>"; 

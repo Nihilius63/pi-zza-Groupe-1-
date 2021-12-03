@@ -184,28 +184,34 @@ window.onload=function()
         requestPost.send(jsonencode);
     }
 
-    function addCommand() {
-        let object=new Object();
-        object.idTables=document.getElementById("idTable").value;
-        let jsonencode=JSON.stringify(object);
-        console.log(jsonencode)
-        let requestPost=new XMLHttpRequest();
-        requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) 
-            {
-                if (requestPost.status == 200) 
+    function addCommand() 
+    {
+        let idcommande=document.querySelector("div.result");
+        if(lastid>idcommande.id)
+        {
+            let object=new Object();
+            object.idTables=document.getElementById("idTable").value;
+            let jsonencode=JSON.stringify(object);
+            console.log(jsonencode)
+            let requestPost=new XMLHttpRequest();
+            requestPost.addEventListener("readystatechange",function(){
+                if (requestPost.readyState== 4) 
                 {
-                    addContient();
+                    if (requestPost.status == 200) 
+                    {
+                        supprContient();
+                        addContient();
+                    }
+                    else 
+                    {
+                        console.log(requestPost.status);
+                    }
                 }
-                else 
-                {
-                    console.log(requestPost.status);
-                }
-            }
-        });
+            });
 
-        requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/commande");
-        requestPost.send(jsonencode);
+            requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/commande");
+            requestPost.send(jsonencode);
+        }
     }
     function updateQuantite(idProduit) {
         let qteProduit=document.getElementById("quantiteProduit"+idProduit).innerHTML
@@ -293,6 +299,7 @@ window.onload=function()
                     let divligne=document.createElement("div");
                     divligne.setAttribute("class","result");
                     divligne.setAttribute("id",objet.idCommande);
+                    var lastid=objet.idCommande
                     let conteneur=document.querySelector("div#gauche")
                     conteneur.appendChild(divligne)
                 }
@@ -316,7 +323,6 @@ window.onload=function()
             object.idProduit=el.id.substring(9);
             object.quantite=document.querySelector("p#quantiteProduit"+object.idProduit).innerHTML;
             let jsonencode=JSON.stringify(object);
-            console.log(jsonencode);
             let requestPost=new XMLHttpRequest();
             requestPost.addEventListener("readystatechange",function(){
             if (requestPost.readyState== 4) 
@@ -352,7 +358,9 @@ window.onload=function()
     function selectCommande(id)
     {
         let Commande=document.querySelectorAll("div.lignecommande");
+        let commande=document.querySelector("div.commande");
         let Gauche=document.querySelector("div#gauche");
+        Gauche.removeChild(commande);
         Commande.forEach((el)=> 
         {
             Gauche.removeChild(el);
@@ -362,7 +370,8 @@ window.onload=function()
         {
             el.setAttribute("id", "hid");
         });
-        if (typeof(id)=='string')
+        console.log(id);
+        if (typeof(id)=='string' && id!="")
         {
             let idcommande=document.querySelector("div.result");
             idcommande.setAttribute("id",id)
@@ -408,6 +417,34 @@ window.onload=function()
         });
         requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/commande/"+el.parentNode.id);
         requestPost.send();
+    }
+    function supprContient()
+    {
+        var idcommande=document.querySelector("div.result");
+        let produitpanier=document.querySelectorAll("div.del");
+        produitpanier.forEach((el)=>
+        {
+            let object= new Object();
+            object.idCommande=idcommande.id;
+            object.idProduit=el.id.substring(9);
+            let jsonencode=JSON.stringify(object);
+            console.log(jsonencode);
+            let requestPost=new XMLHttpRequest();
+            requestPost.addEventListener("readystatechange",function(){
+            if (requestPost.readyState== 4) 
+            {
+                if (requestPost.status == 200) 
+                {
+                    
+                }
+                else {
+                    console.log(requestPost1.status);
+                }
+            }
+        });
+        requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+object.idCommande+"/"+object.idProduit);
+        requestPost.send();
+        });
     }
     let form = document.querySelector("select#categorie");
     let id=null;

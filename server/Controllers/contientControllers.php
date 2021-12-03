@@ -1,5 +1,4 @@
 <?php
-
 include_once('tools/DataBaseLinker.php');
 include_once('DAO/contientDAO.php');
 class contientControllers 
@@ -113,10 +112,6 @@ class contientControllers
             $result = contientDAO::getByCommande($id);
             $response['body'] = json_encode($result);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
-            if ($result == null) 
-            {
-                return null;
-            }
             return $response;
         }
         private function getContientProduit($id) {	
