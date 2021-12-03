@@ -36,7 +36,6 @@ window.onload=function()
             }
             else {
                 changeNbPlaces()
-                addCommand()
                 let elementParent=modif.parentNode
                 modif.setAttribute("value","Modifier")
                 let input=document.createElement("input");
@@ -186,8 +185,8 @@ window.onload=function()
 
     function addCommand() 
     {
-        let idcommande=document.querySelector("div.result");
-        if(lastid>idcommande.id)
+        let nouv=document.querySelector("div.nouv")
+        if(nouv)
         {
             let object=new Object();
             object.idTables=document.getElementById("idTable").value;
@@ -299,7 +298,6 @@ window.onload=function()
                     let divligne=document.createElement("div");
                     divligne.setAttribute("class","result");
                     divligne.setAttribute("id",objet.idCommande);
-                    var lastid=objet.idCommande
                     let conteneur=document.querySelector("div#gauche")
                     conteneur.appendChild(divligne)
                 }
@@ -343,6 +341,7 @@ window.onload=function()
     function valide()
     {
         addCommand();
+        returner();
     }
     function selectCommandeEvent()
     {
@@ -370,11 +369,17 @@ window.onload=function()
         {
             el.setAttribute("id", "hid");
         });
-        console.log(id);
         if (typeof(id)=='string' && id!="")
         {
             let idcommande=document.querySelector("div.result");
             idcommande.setAttribute("id",id)
+        }
+        else if(id=="")
+        {
+            let divligne=document.createElement("div");
+            divligne.setAttribute("class","nouv");
+            let conteneur=document.querySelector("div#gauche")
+            conteneur.appendChild(divligne)
         }
         let requestPost=new XMLHttpRequest();
         requestPost.addEventListener("readystatechange",function(){
@@ -446,12 +451,87 @@ window.onload=function()
         requestPost.send();
         });
     }
+    function returner()
+    {
+        let produit=document.querySelectorAll("div.produit");
+        let gauche=document.querySelector("div#gauche");
+        let valid=document.querySelector("div.valider");
+        gauche.removeChild(valid);
+        gauche.removeChild(document.querySelector("div.result"));
+        gauche.removeChild(document.querySelector("br"));
+        produit.forEach((el)=>
+        {
+            gauche.removeChild(el)
+        });
+        let hidden=document.querySelectorAll("div#hid");
+        hidden.forEach((el)=>
+        {
+            el.setAttribute("id", "hidden");
+        });
+        let divligne=document.createElement("div");
+        divligne.setAttribute("class","commande");
+        let p=document.createElement("p");
+        p.innerHTML="Nouvelle Commande"
+        divligne.appendChild(p)
+        gauche.appendChild(divligne)
+        gauche.appendChild(document.createElement("br"))
+        let requestPost=new XMLHttpRequest();
+        requestPost.addEventListener("readystatechange",function(){
+            if (requestPost.readyState== 4) 
+            {
+                if (requestPost.status == 200) 
+                {
+                    let objet=JSON.parse(requestPost.responseText);
+                    objet.forEach((obj)=>
+                    {
+                        let divmaster=document.createElement("div");
+                        divmaster.setAttribute("class","lignecommande");
+                        divmaster.setAttribute("id",obj.idCommande);
+                        let divligne=document.createElement("div");
+                        divligne.setAttribute("class","commande");
+                        divligne.setAttribute("id",obj.idCommande);
+                        let divtrash=document.createElement("div");
+                        divtrash.setAttribute("class","trash");
+                        let i=document.createElement("i");
+                        i.setAttribute("class","fas fa-trash-alt");
+                        let p=document.createElement("p");
+                        p.innerHTML="Commande N°"+obj.idCommande;
+                        divligne.appendChild(p);
+                        divtrash.appendChild(i);
+                        divmaster.appendChild(divligne);
+                        divmaster.appendChild(divtrash);
+                        gauche.appendChild(divmaster);
+                    });
+                    let divvalid=document.createElement("div");
+                    divvalid.setAttribute("class","valider");
+                    divvalid.setAttribute("id","hidden");
+                    let p2=document.createElement("p");
+                    p2.innerHTML="Valider";
+                    divvalid.appendChild(p2);
+                    gauche.appendChild(divvalid);
+                    selectCommandeEvent();
+                    addValide();
+                    getlastid();
+                }
+                else 
+                {
+                    console.log(requestPost.status);
+                }
+            }
+        });
+        requestPost.open("GET","http://localhost/pi-zza-Groupe-1-/server/commande/tables/"+document.getElementById("idTable").value);
+        requestPost.send();
+    }
+    function addValide()
+    {
+        let valid=document.querySelector("div.valider")
+        valid.addEventListener("click",function()
+        {
+            valide();
+        });
+    }
     let form = document.querySelector("select#categorie");
     let id=null;
-    let valid=document.querySelector("div.valider")
-    valid.addEventListener("click",function(){
-        valide();
-    });
     form.addEventListener("click",function(){
         let option = document.querySelectorAll("option");
         option.forEach((op)=>{
@@ -474,6 +554,7 @@ window.onload=function()
     }
     ajouterEvent();
     selectCommandeEvent();
+    addValide();
     getlastid();
     update(id);
 }
