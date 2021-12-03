@@ -211,6 +211,11 @@ window.onload=function()
             requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/commande");
             requestPost.send(jsonencode);
         }
+        else
+        {
+            supprContient();
+            addContient();
+        }
     }
     function updateQuantite(idProduit) {
         let qteProduit=document.getElementById("quantiteProduit"+idProduit).innerHTML
@@ -512,6 +517,7 @@ window.onload=function()
                     selectCommandeEvent();
                     addValide();
                     getlastid();
+                    trash();
                 }
                 else 
                 {
@@ -542,19 +548,23 @@ window.onload=function()
         });
             update(id);
     });
-    let suppr=document.querySelectorAll("div.trash")
+    function trash()
     {
-        suppr.forEach((el)=> 
+        let suppr=document.querySelectorAll("div.trash")
         {
-            el.addEventListener("click", function() 
+            suppr.forEach((el)=> 
             {
-                supprcommande(el);
+                el.addEventListener("click", function() 
+                {
+                    supprcommande(el);
+                });
             });
-        });
+        }
     }
     ajouterEvent();
     selectCommandeEvent();
     addValide();
     getlastid();
+    trash();
     update(id);
 }
