@@ -1,276 +1,53 @@
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: "Roboto Light";
-}
-
-body header {
-    height: 100px;
-    background-color: #00A2D3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media (min-width: 750px) {
-    body header {
-        height: 75px;
-        justify-content: normal;
-    }
-}
-
-body header a {
-    text-decoration: none;
-}
-
-body header a .header {
-    display: flex;
-    color: white;
-    font-size: 60px;
-}
-
-body header a .header img {
-    max-height: 75px;
-}
-
-@media (min-width: 750px) {
-    body header a .header img {
-        margin-left: 30px;
-    }
-}
-
-body header a .header p {
-    margin: 0;
-    margin-left: 30px;
-}
-
-body .content {
-    display: block;
-}
-
-@media (min-width: 750px) {
-    body .content {
-        display: flex;
-    }
-}
-
-body .content #gauche {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-}
-
-@media (min-width: 750px) {
-    body .content #gauche {
-        width: 70%;
-    }
-}
-
-body .content #gauche .produit {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-self: center;
-}
-
-@media (min-width: 750px) {
-    body .content #gauche .produit {
-        width: 80%;
-    }
-}
-
-body .content #gauche .produit .ligne2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-@media (min-width: 750px) {
-    body .content #gauche .produit .ligne2 {
-        justify-content: center;
-        margin-top: 20px;
-    }
-}
-
-body .content #gauche .produit .ligne2 .imgdelete {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-
-body .content #gauche .produit .ligne2 .colonne {
-    width: 15%;
-}
-
-body .content #gauche .produit .ligne2 img {
-    width: 75px;
-    height: 75px;
-    border-radius: 50px;
-    margin-right: 20px;
-}
-
-body .content #gauche .valider {
-    background-color: greenyellow;
-    height: 50px;
-    width: 200px;
-    margin-top: 10px;
-}
-
-body .content #gauche .valider:hover {
-    background-color: #cffa89;
-    height: 50px;
-    width: 200px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-body .content .droite {
-    background: white;
-    margin-top: 20px;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    border-radius: 15px 15px 0px 0px;
-}
-
-body .content .droite .affichageTable {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-}
-
-@media (min-width: 700px) {
-    body .content .droite .affichageTable {
-        justify-content: normal;
-        margin-left: 40px;
-        margin-right: 40px;
-    }
-}
-
-body .content .droite .affichageTable a {
-    text-decoration: none;
-    color: black;
-}
-
-body .content .droite .affichageTable .carte {
-    margin-top: 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    height: 100px;
-    width: 125px;
-}
-
-@media (min-width: 750px) {
-    body .content .droite .affichageTable .carte {
-        height: 150px;
-        width: 200px;
-    }
-}
-
-body .content .droite .affichageTable .carte .red {
-    color: #d51919;
-}
-
-body .content .droite .affichageTable .carte p {
-    margin: 0;
-    padding: 0;
-}
-
-body .content .droite .affichageTable .carte img {
-    height: 80%;
-    width: 80%;
-}
-
-body .droitetable {
-    background-color: #202332;
-    width: 100%;
-    height: 100%;
-    color: white;
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-@media (min-width: 750px) {
-    body .droitetable {
-        width: 30%;
-    }
-}
-
-body .droitetable .nbPersonne {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-body .droitetable .nbPersonne p {
-    margin-right: 10px;
-}
-
-body .droitetable .nbPersonne #inputFondBlanc {
-    background: white;
-    color: black;
-}
-
-body .droitetable .nbPersonne input:hover {
-    background: white;
-    border: none;
-    color: #00A2D3;
-    cursor: pointer;
-}
-
-body .droitetable .nbPersonne input {
-    background: #00A2D3;
-    border: none;
-    color: white;
-}
-
-body .droitetable .ligne {
-    display: flex;
-    margin: 10px 0px 10px 15px;
-    align-items: center;
-}
-
-body .droitetable .ligne .ajouterProduit {
-    width: 30px;
-    height: 30px;
-    align-self: center;
-    cursor: pointer;
-}
-
-body .droitetable .ligne img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-}
-
-body .droitetable .ligne .colonne {
-    display: flex;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 70%;
-}
-
-body .droitetable .ligne .colonne p {
-    margin-left: 10px;
-}
-
-#hidden {
-    visibility: hidden;
-}
-
-.lignecommande p:hover {
-    color: red;
-    cursor: pointer;
-}
-
-.trash:hover {
-    color: #00A2D3;
-    cursor: pointer;
-}
+html { height: 100%; }
+html body { height: 100%; margin: 0; padding: 0; font-family: "Roboto Light"; }
+html body header { height: 15%; background-color: #00A2D3; display: flex; justify-content: center; align-items: center; }
+@media (min-width: 750px) { html body header { justify-content: normal; } }
+html body header a { text-decoration: none; }
+html body header a .header { display: flex; color: white; font-size: 60px; }
+html body header a .header img { max-height: 75px; }
+@media (min-width: 750px) { html body header a .header img { margin-left: 30px; } }
+html body header a .header p { margin: 0; margin-left: 30px; }
+html body .content { display: block; height: 85%; }
+@media (min-width: 750px) { html body .content { display: flex; } }
+html body .content #gauche { display: flex; width: 100%; flex-direction: column; text-align: center; align-items: center; }
+html body .content #gauche #hidden { display: none; }
+@media (min-width: 750px) { html body .content #gauche { width: 70%; } }
+html body .content #gauche .commande { font-size: 25px; }
+@media (min-width: 750px) { html body .content #gauche .commande { font-size: unset; } }
+html body .content #gauche .commande:hover { color: red; cursor: pointer; }
+html body .content #gauche .lignecommande p:hover { color: blue; cursor: pointer; }
+html body .content #gauche .lignecommande .trash:hover { color: red; cursor: pointer; }
+html body .content #gauche .lignecommande .trash:active { color: red; }
+html body .content #gauche .produit { display: flex; flex-direction: column; width: 100%; align-self: center; }
+@media (min-width: 750px) { html body .content #gauche .produit { width: 80%; } }
+html body .content #gauche .produit .ligne2 { display: flex; justify-content: space-between; align-items: center; }
+@media (min-width: 750px) { html body .content #gauche .produit .ligne2 { justify-content: center; margin-top: 20px; } }
+html body .content #gauche .produit .ligne2 .imgdelete { width: 30px; height: 30px; cursor: pointer; }
+html body .content #gauche .produit .ligne2 .colonne { width: 15%; }
+html body .content #gauche .produit .ligne2 img { width: 75px; height: 75px; border-radius: 50px; margin-right: 20px; }
+html body .content #gauche .valider { background-color: #9fe820; height: 50px; width: 200px; cursor: pointer; margin-top: 10px; }
+html body .content #gauche .valider:hover { background-color: #83be1e; }
+html body .content .droite { background: white; margin-top: 20px; justify-content: center; flex-direction: column; text-align: center; border-radius: 15px 15px 0px 0px; }
+html body .content .droite .affichageTable { justify-content: center; display: flex; flex-wrap: wrap; margin-bottom: 30px; }
+@media (min-width: 700px) { html body .content .droite .affichageTable { justify-content: normal; margin-left: 40px; margin-right: 40px; } }
+html body .content .droite .affichageTable a { text-decoration: none; color: black; }
+html body .content .droite .affichageTable .carte { margin-top: 20px; cursor: pointer; margin-bottom: 20px; height: 100px; width: 125px; }
+@media (min-width: 750px) { html body .content .droite .affichageTable .carte { height: 150px; width: 200px; } }
+html body .content .droite .affichageTable .carte .red { color: #d51919; }
+html body .content .droite .affichageTable .carte p { margin: 0; padding: 0; }
+html body .content .droite .affichageTable .carte img { height: 80%; width: 80%; }
+html body .droitetable { height: 100%; background-color: #202332; width: 100%; color: white; text-align: center; padding-bottom: 20px; }
+@media (min-width: 750px) { html body .droitetable { width: 30%; } }
+html body .droitetable #hidden { display: none; }
+html body .droitetable .nbPersonne { justify-content: center; align-items: center; display: flex; }
+html body .droitetable .nbPersonne p { margin-right: 10px; font-size: 25px; }
+@media (min-width: 750px) { html body .droitetable .nbPersonne p { font-size: unset; } }
+html body .droitetable .nbPersonne #inputFondBlanc { background: white; color: black; }
+html body .droitetable .nbPersonne input { padding: 10px; background: #00A2D3; border: none; color: white; }
+@media (min-width: 750px) { html body .droitetable .nbPersonne input { padding: 5px; } }
+html body .droitetable select { padding: 5px; }
+html body .droitetable .ligne { display: flex; padding: 10px; align-items: center; background-color: #202332; }
+html body .droitetable .ligne .ajouterProduit { width: 30px; height: 30px; align-self: center; cursor: pointer; }
+html body .droitetable .ligne img { width: 50px; height: 50px; border-radius: 50px; }
+html body .droitetable .ligne .colonne { display: flex; margin-left: 10px; margin-right: 10px; width: 70%; }
+html body .droitetable .ligne .colonne p { margin-left: 10px; }

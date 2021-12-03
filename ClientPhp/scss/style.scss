@@ -1,200 +1,247 @@
-body {
-  margin: 0;
-  padding: 0;
+html {
   height: 100%;
-  font-family: "Roboto Light" ;
-  header {
-    @media (min-width: 750px) {
-      height: 75px;
-      justify-content: normal;
-    }
-    height: 100px;
-    background-color: #00A2D3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    a {
-      text-decoration: none;
-      .header {
-        display: flex;
-        color: white;
-        font-size: 60px;
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Light" ;
+    header {
+      @media (min-width: 750px) {
+        justify-content: normal;
+      }
+      height: 15%;
+      background-color: #00A2D3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a {
+        text-decoration: none;
+        .header {
+          display: flex;
+          color: white;
+          font-size: 60px;
 
-        img {
-          @media (min-width: 750px) {
+          img {
+            @media (min-width: 750px) {
+              margin-left: 30px;
+            }
+            max-height: 75px;
+          }
+
+          p {
+            margin: 0;
             margin-left: 30px;
           }
-          max-height: 75px;
-        }
-
-        p {
-          margin: 0;
-          margin-left: 30px;
         }
       }
     }
-  }
-  .content {
-    display: block;
-    @media (min-width: 750px) {
-      display: flex;
-    }
-    #gauche {
+    .content {
+      display: block;
+      height: 85%;
       @media (min-width: 750px) {
-        width: 70% ;
-      }
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-      .produit {
-        @media (min-width: 750px) {
-          width: 80% ;
-        }
         display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-self: center;
-        .ligne2 {
-          display: flex;
-          justify-content: space-between;
+      }
+      #gauche {
+        #hidden {
+          display: none;
+        }
+        @media (min-width: 750px) {
+          width: 70% ;
+        }
+        .commande {
+          font-size: 25px;
           @media (min-width: 750px) {
-            justify-content: center;
-            margin-top: 20px;
+            font-size: unset;
           }
-          align-items: center;
-          .delete {
-
-          }
-          .imgdelete {
-            width: 30px;
-            height: 30px;
+          &:hover {
+            color: red;
             cursor: pointer;
           }
-          .colonne {
-            width: 15%;
-          }
-          img {
-            width: 75px;
-            height: 75px;
-            border-radius: 50px;
-            margin-right: 20px;
-          }
         }
 
+        .lignecommande {
+          p:hover {
+            color: blue;
+            cursor : pointer;
+          }
+          .trash:hover {
+            color: red;
+            cursor: pointer;
+          }
+          .trash:active {
+            color: red;
+          }
+        }
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        .produit {
+          @media (min-width: 750px) {
+            width: 80% ;
+          }
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          align-self: center;
+          .ligne2 {
+            display: flex;
+            justify-content: space-between;
+            @media (min-width: 750px) {
+              justify-content: center;
+              margin-top: 20px;
+            }
+            align-items: center;
+            .delete {
+
+            }
+            .imgdelete {
+              width: 30px;
+              height: 30px;
+              cursor: pointer;
+            }
+            .colonne {
+              width: 15%;
+            }
+            img {
+              width: 75px;
+              height: 75px;
+              border-radius: 50px;
+              margin-right: 20px;
+            }
+          }
+
+        }
+        .valider {
+          background-color: #9fe820;
+          height: 50px;
+          width: 200px;
+          cursor: pointer;
+          margin-top: 10px;
+          &:hover {
+            background-color: #83be1e;
+          }
+        }
       }
-      .valider {
-        background-color: greenyellow;
-        height: 50px;
-        width: 200px;
-        margin-top: 10px;
+      .droite {
+
+        background: white;
+        margin-top: 20px;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 15px 15px 0px 0px ;
+        .affichageTable {
+          @media (min-width: 700px) {
+            justify-content: normal;
+            margin-left: 40px;
+            margin-right: 40px;
+          }
+          a{
+            text-decoration: none;
+            color: black;
+          }
+          justify-content: center;
+          display: flex;
+          flex-wrap: wrap;
+          margin-bottom: 30px;
+          .carte {
+            @media (min-width: 750px) {
+              height: 150px;
+              width: 200px;
+            }
+            margin-top: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            height: 100px;
+            width: 125px;
+            .red {
+              color: #d51919;
+            }
+            p {
+              margin:0;
+              padding: 0;
+            }
+            img {
+              height: 80%;
+              width: 80%;
+            }
+          }
+        }
       }
     }
-    .droite {
-      background: white;
-      margin-top: 20px;
+    .droitetable{
+      @media (min-width: 750px) {
+        width: 30% ;
+      }
+      #hidden {
+        display: none;
+      }
       height: 100%;
+      background-color: #202332;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
+      color: white;
       text-align: center;
-      border-radius: 15px 15px 0px 0px ;
-      .affichageTable {
-        @media (min-width: 700px) {
-          justify-content: normal;
-          margin-left: 40px;
-          margin-right: 40px;
+      padding-bottom: 20px;
+      .nbPersonne {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        p {
+          @media (min-width: 750px) {
+            font-size: unset;
+          }
+          margin-right: 10px;
+          font-size: 25px;
         }
-        a{
-          text-decoration: none;
+        #inputFondBlanc {
+          background: white;
           color: black;
         }
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
-        .carte {
+        input {
           @media (min-width: 750px) {
-            height: 150px;
-            width: 200px;
+            padding: 5px;
           }
-          margin-top: 20px;
-          cursor: pointer;
-          margin-bottom: 20px;
-          height: 100px;
-          width: 125px;
-          .red {
-            color: #d51919;
-          }
-          p {
-            margin:0;
-            padding: 0;
-          }
-          img {
-            height: 80%;
-            width: 80%;
-          }
+          padding: 10px;
+          background: #00A2D3;
+          border: none;
+          color: white;
         }
       }
-    }
-  }
-  .droitetable{
-    @media (min-width: 750px) {
-      width: 30% ;
-    }
-    background-color: #202332;
-    width: 100%;
-    height: 100%;
-    color: white;
-    text-align: center;
-    padding-bottom: 20px;
-    .nbPersonne {
-      justify-content: center;
-      align-items: center;
-      display: flex;
-      p {
-        margin-right: 10px;
+      select {
+        padding: 5px;
       }
-      #inputFondBlanc {
-        background: white;
-        color: black;
-      }
-      input {
-        background: #00A2D3;
-        border: none;
-        color: white;
-      }
-    }
-    .ligne {
-
-      display: flex;
-      margin: 10px 0px 10px 15px;
-      align-items: center;
-      .ajouterProduit {
-        width: 30px;
-        height: 30px;
-        align-self: center;
-        cursor: pointer;
-      }
-      img{
+      .ligne {
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        background-color: #202332;
+        .ajouterProduit {
+          width: 30px;
+          height: 30px;
+          align-self: center;
+          cursor: pointer;
+        }
+        img{
           width: 50px;
           height: 50px;
           border-radius: 50px;
 
-      }
-      .colonne {
-        display: flex;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 70%;
-        p {
+        }
+        .colonne {
+          display: flex;
           margin-left: 10px;
+          margin-right: 10px;
+          width: 70%;
+          p {
+            margin-left: 10px;
+          }
         }
       }
-    }
 
+    }
   }
 }
+
 
