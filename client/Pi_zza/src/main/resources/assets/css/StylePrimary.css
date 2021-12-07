@@ -235,9 +235,17 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
     -fx-font-size: 14px;
-    -fx-padding: 9px 0px 0px 65px;
-    -fx-border-insets: 9px 0px 0px 65px;
-    -fx-background-insets: 9px 0px 0px 65px;
+    -fx-padding: 9px;
+    -fx-border-insets: 9px;
+    -fx-background-insets: 9px;
+}
+
+.imgClose:hover {
+    -fx-image: url("../../../../imgTools/close_hover.png");
+}
+
+.imgClose {
+    -fx-image: url("../../../../imgTools/close.png");
 }
 
 .boxHistoryInfoLittle {

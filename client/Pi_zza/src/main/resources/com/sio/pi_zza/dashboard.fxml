@@ -37,7 +37,7 @@
                   <Insets left="15.0" />
                </padding>
             </Label>
-            <ImageView fx:id="closeImg" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closeImg" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" styleClass="imgClose">
                <HBox.margin>
                   <Insets right="25.0" top="25.0" />
                </HBox.margin>

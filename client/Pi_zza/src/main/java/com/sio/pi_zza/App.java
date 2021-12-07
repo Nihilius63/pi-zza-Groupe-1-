@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 import java.io.IOException;
@@ -23,7 +24,8 @@ public class App extends Application {
         scene.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        //stage.setTitle("πzza");
+        stage.setTitle("πzza");
+        stage.getIcons().add(new Image("file:imgTools/pizza_logo.png"));
 
         scene.setOnMousePressed(event -> {
             x = event.getSceneX();

@@ -51,15 +51,15 @@ public class HistoriquesController extends DashboardController implements Initia
             String date = (String) json.get("dateCommande");
             int numeroTable = Integer.parseInt((String) json.get("numeroTables"));
 
-            Pane boxHistorique = new Pane();
             VBox vb = new VBox();
+
             Label Produit = new Label("Produit: " + nomProduit);
             Label Prix = new Label("Prix: " + prixProduit + "€");
             Label DateHistory = new Label("Date: " + date);
             Label Quantite = new Label("Quantite: " + quantite);
             Label Table = new Label("Table numéro: " + numeroTable);
 
-            boxHistorique.getStyleClass().add("boxHistory");
+            vb.getStyleClass().add("boxHistory");
 
             if(nomProduit.length() <= 15) {
                 Produit.getStyleClass().add("boxHistoryInfo");
@@ -80,9 +80,8 @@ public class HistoriquesController extends DashboardController implements Initia
             vb.getChildren().add(Quantite);
             vb.getChildren().add(Table);
 
-            boxHistorique.getChildren().add(vb);
             historiques.setPrefHeight(taille);
-            historiques.add(boxHistorique, cpt % 3, cpt / 3);
+            historiques.add(vb, cpt % 3, cpt / 3);
 
             if (cpt < jsonArray.length() ) {
                 cpt++;
