@@ -9,11 +9,16 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import org.json.JSONArray;
@@ -26,9 +31,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class AddProduitsController extends DashboardController implements Initializable {
 
+    @FXML private VBox boxAll;
     @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
     @FXML private Label errorMsg;
@@ -42,6 +49,10 @@ public class AddProduitsController extends DashboardController implements Initia
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        FadeTransition();
+        ImageTransition();
+
         JSONArray categorieJsonList = categorieDAO.getCategorie();
         ObservableList<String> listNameCategorie = FXCollections.observableArrayList();
 
@@ -88,46 +99,88 @@ public class AddProduitsController extends DashboardController implements Initia
 
     public void addProduits(String nomProduits, String prixProduits, String imageProduits, String categorieProduits) {
 
-        if (nomProduits == "" || prixProduits == "" || imageProduits == "" || categorieProduits == "") {
+        boolean verif = false;
+        String verifNum = prixProduits.replace(".", "");
+        verifNum.replace(",", "");
 
+        if (nomProduits == "" || prixProduits == "" || imageProduits == "" || categorieProduits == "") {
+            errorMsg.getStyleClass().add("errorMsg");
             errorMsg.setText("Une erreur est survenue, veuillez remplir tout les champs!");
 
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
             pause.setOnFinished(time -> {
                         errorMsg.setText("");
-                        imageSave = "";
                     }
             );
             pause.play();
 
         } else {
             try {
-                if (categorieProduits.equals("Pizzas")) {
-                    categorieProduits = "1";
-                } else if (categorieProduits.equals("Boissons")) {
-                    categorieProduits = "2";
-                } else {
-                    categorieProduits = "3";
-                }
+                Integer.parseInt(verifNum);
+                verif = true;
+            } catch (NumberFormatException e) {
+                errorMsg.getStyleClass().add("errorMsg");
+                errorMsg.setText("Il est impossible d'avoir un String en prix!");
 
-                String image = "images/" + nomProduits.replace(" ", "_") + ".png";
-
-                produitDAO.createProduit(nomProduits, Float.parseFloat(prixProduits), image, Integer.parseInt(categorieProduits));
-
-                Path copied = Paths.get("images/" + nomProduits.replace(" ", "_") + ".png");
-                Path originalPath = Paths.get(imageSave.replace("file:/", ""));
-
-                Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-
-                imageSave = "";
-                App.setRoot("addProduit");
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+                pause.setOnFinished(time -> {
+                            errorMsg.setText("");
+                        }
+                );
+                pause.play();
             }
 
-        }
+            if(verif) {
+                try {
+                    if (categorieProduits.equals("Pizzas")) {
+                        categorieProduits = "1";
+                    } else if (categorieProduits.equals("Boissons")) {
+                        categorieProduits = "2";
+                    } else {
+                        categorieProduits = "3";
+                    }
 
+                    String image = "images/" + nomProduits.replace(" ", "_") + ".png";
+
+                    produitDAO.createProduit(nomProduits, Float.parseFloat(prixProduits), image, Integer.parseInt(categorieProduits));
+
+                    Path copied = Paths.get("images/" + nomProduits.replace(" ", "_") + ".png");
+                    Path originalPath = Paths.get(imageSave.replace("file:/", ""));
+
+                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                    imageSave = "";
+
+                    Stage produitadd = new Stage();
+                    produitadd.initStyle(StageStyle.UNDECORATED);
+                    VBox box = new VBox();
+                    FadeScene(box);
+                    box.setAlignment(Pos.CENTER);
+                    box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
+                    box.getStyleClass().add("boxNo");
+                    Label msgView = new Label("Votre produit à bien était ajouté!");
+                    msgView.getStyleClass().add("titleBar");
+                    box.getChildren().add(msgView);
+                    Scene suprCommandeScene = new Scene(box, 720, 110);
+                    produitadd.setScene(suprCommandeScene);
+                    produitadd.show();
+
+                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                    pause.setOnFinished(time -> {
+                        try {
+                            produitadd.hide();
+                            App.setRoot("addProduit");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    pause.play();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void importImages(Button importImage) {

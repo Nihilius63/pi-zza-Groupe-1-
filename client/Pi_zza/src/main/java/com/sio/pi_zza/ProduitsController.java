@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import com.sio.pi_zza.DAO.produitDAO;
 import com.sio.pi_zza.DAO.categorieDAO;
+import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,7 @@ import java.util.ResourceBundle;
 
 public class ProduitsController extends DashboardController implements Initializable {
 
+    @FXML private VBox boxAll;
     @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
     @FXML private HBox produitsHBox;
@@ -42,9 +44,13 @@ public class ProduitsController extends DashboardController implements Initializ
     private String img2 = "";
     private String img3 = "";
     private ImageView imageSerieNew;
+    private Label errorText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        FadeTransition();
+        ImageTransition();
 
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
@@ -105,6 +111,9 @@ public class ProduitsController extends DashboardController implements Initializ
 
                 Button buttonModif = new Button("Modifier");
                 Button buttonSupr = new Button("Supprimer");
+
+                TransitionButton(buttonModif);
+                TransitionButton(buttonSupr);
 
                 buttonModif.getStyleClass().add("buttonProduit");
                 buttonSupr.getStyleClass().add("buttonProduit");
@@ -181,8 +190,8 @@ public class ProduitsController extends DashboardController implements Initializ
         Stage newStage = new Stage();
         newStage.initStyle(StageStyle.UNDECORATED);
         newStage.initModality(Modality.APPLICATION_MODAL);
-        //newStage.setAlwaysOnTop(true); Permet a la fenêtre d'être tjrs devant tout
         VBox box = new VBox();
+        FadeScene(box);
         box.setAlignment(Pos.TOP_CENTER);
         box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
         box.getStyleClass().add("boxModif");
@@ -226,10 +235,10 @@ public class ProduitsController extends DashboardController implements Initializ
         Label egal = new Label("  =====  ");
         egal.getStyleClass().add("textSlideBar");
         imageSerieNew = new ImageView("file:"+img2);
-        imageSerie.setFitHeight(150);
-        imageSerie.setFitWidth(200);
-        imageSerieNew.setFitHeight(150);
-        imageSerieNew.setFitWidth(200);
+        imageSerie.setFitHeight(180);
+        imageSerie.setFitWidth(190);
+        imageSerieNew.setFitHeight(180);
+        imageSerieNew.setFitWidth(190);
         ImageHbox.getStyleClass().add("espace");
 
         box.getChildren().add(imageSerieT);
@@ -272,6 +281,10 @@ public class ProduitsController extends DashboardController implements Initializ
         huBox.getChildren().add(retour);
         box.getChildren().add(huBox);
 
+        errorText = new Label("");
+        errorText.getStyleClass().add("errorMsg");
+
+        box.getChildren().add(errorText);
 
         EventHandler<MouseEvent> eventHandler2 = new EventHandler<MouseEvent>()
         {
@@ -296,82 +309,97 @@ public class ProduitsController extends DashboardController implements Initializ
         modif.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
         retour.setOnAction(actionEvent -> newStage.hide());
-        Scene stageScene = new Scene(box, 500, 600);
+        Scene stageScene = new Scene(box, 500, 700);
         newStage.setScene(stageScene);
         newStage.show();
 
     }
 
     public void clickModif(Stage newStage, String namePr, String nomProduit, String prixProduit, String imageProduit, String categorieProduit, int idProduit) {
-        int categorieId = 0;
-        if(imageProduit.equals("imgTools/interoImgAdd.png")) {
-            img2 = img3;
-        }
-        System.out.println(categorieProduit);
-        if(categorieProduit.equals("Pizzas")) {
-            categorieId = 1;
-        } else if(categorieProduit.equals("Boissons")) {
-            categorieId = 2;
+
+        String verifNum = prixProduit.replace(".", "");
+        verifNum.replace(",", "");
+
+        System.out.println(nomProduit + " et " + prixProduit + " et " + imageProduit + " et " + categorieProduit);
+
+        if(nomProduit.equals("") || prixProduit.equals("") || imageProduit.equals("") || categorieProduit.equals("") ) {
+
+            errorText.setText("Veuillez remplir les cases vides!");
+
         } else {
-            categorieId = 3;
-        }
+            try {
+                Integer.parseInt(verifNum);
+                int categorieId = 0;
+                if(imageProduit.equals("imgTools/interoImgAdd.png")) {
+                    img2 = img3;
+                }
 
-        String image = "images/" + nomProduit.replace(" ", "_") + ".png";
-
-        JSONObject update = new JSONObject();
-        update.put("idProduit", idProduit);
-        update.put("nomProduit", nomProduit);
-        update.put("prixProduit",prixProduit);
-        update.put("imageProduit",image);
-        update.put("idCategorie",categorieId);
-        produitDAO.updateProduitById(idProduit, nomProduit, Float.parseFloat(prixProduit), image, categorieId);
-        newStage.hide();
-
-        try {
-            if(!img2.equals(img3)) {
-                if(!namePr.equals(nomProduit)) {
-                    Path pathDelete = Paths.get("images/"+namePr.replace(" ", "_")+".png");
-                    Files.delete(pathDelete);
-
-                    Path copied = Paths.get("images/" + nomProduit.replace(" ", "_") + ".png");
-                    Path originalPath = Paths.get(img2.replace("file:/", ""));
-
-                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-
-                    img2 = "";
-                    App.setRoot("produit");
+                if(categorieProduit.equals("Pizzas")) {
+                    categorieId = 1;
+                } else if(categorieProduit.equals("Boissons")) {
+                    categorieId = 2;
                 } else {
-                    Path copied = Paths.get("images/" + nomProduit.replace(" ", "_") + ".png");
-                    Path originalPath = Paths.get(img2.replace("file:/", ""));
-
-                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-
-                    img2 = "";
-                    App.setRoot("produit");
-                }
-            } else {
-                if(!namePr.equals(nomProduit)) {
-                    Path originalPath = Paths.get("images/"+namePr.replace(" ", "_")+".png");
-                    Path copied = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
-
-                    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-
-                    Path pathDelete = Paths.get("images/"+namePr.replace(" ", "_")+".png");
-                    Files.delete(pathDelete);
-
-                    img2 = "";
+                    categorieId = 3;
                 }
 
-                App.setRoot("produit");
+                String image = "images/" + nomProduit.replace(" ", "_") + ".png";
 
+                JSONObject update = new JSONObject();
+                update.put("idProduit", idProduit);
+                update.put("nomProduit", nomProduit);
+                update.put("prixProduit",prixProduit);
+                update.put("imageProduit",image);
+                update.put("idCategorie",categorieId);
+                produitDAO.updateProduitById(idProduit, nomProduit, Float.parseFloat(prixProduit), image, categorieId);
+                newStage.hide();
+
+                try {
+                    if(!img2.equals(img3)) {
+                        if(!namePr.equals(nomProduit)) {
+                            Path pathDelete = Paths.get("images/"+namePr.replace(" ", "_")+".png");
+                            Files.delete(pathDelete);
+
+                            Path copied = Paths.get("images/" + nomProduit.replace(" ", "_") + ".png");
+                            Path originalPath = Paths.get(img2.replace("file:/", ""));
+
+                            Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                            img2 = "";
+                            App.setRoot("produit");
+                        } else {
+                            Path copied = Paths.get("images/" + nomProduit.replace(" ", "_") + ".png");
+                            Path originalPath = Paths.get(img2.replace("file:/", ""));
+
+                            Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                            img2 = "";
+                            App.setRoot("produit");
+                        }
+                    } else {
+                        if(!namePr.equals(nomProduit)) {
+                            Path originalPath = Paths.get("images/"+namePr.replace(" ", "_")+".png");
+                            Path copied = Paths.get("images/"+nomProduit.replace(" ", "_")+".png");
+
+                            Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
+                            Path pathDelete = Paths.get("images/"+namePr.replace(" ", "_")+".png");
+                            Files.delete(pathDelete);
+
+                            img2 = "";
+                        }
+
+                        App.setRoot("produit");
+
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (NumberFormatException e) {
+                errorText.setText("Un prix, n'est pas un String, veuillez réessayer!");
             }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-
     }
 
     public void suprProduit(int idProduit, String nomProduit) {
@@ -379,13 +407,17 @@ public class ProduitsController extends DashboardController implements Initializ
         newStage.initStyle(StageStyle.UNDECORATED);
 
         VBox box = new VBox();
+        FadeScene(box);
         box.setAlignment(Pos.CENTER);
         box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
 
         HBox bo = new HBox();
-        Label title = new Label("Vous êtes sur de vouloir suprimmé ?");
+        Label title = new Label("Etes vous sur de vouloir supprimer?");
         Button yes = new Button("Oui");
         Button no = new Button("Non");
+
+        TransitionButton(yes);
+        TransitionButton(no);
 
         box.getStyleClass().add("boxNo");
         title.getStyleClass().add("titleBarProduitSupr");
@@ -412,7 +444,9 @@ public class ProduitsController extends DashboardController implements Initializ
 
         yes.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-        no.setOnAction(actionEvent -> newStage.hide());
+        no.setOnAction(actionEvent -> {
+            newStage.hide();
+        });
 
         Scene stageScene = new Scene(box, 500, 200);
         newStage.setScene(stageScene);

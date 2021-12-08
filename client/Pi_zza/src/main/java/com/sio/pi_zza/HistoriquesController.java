@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class HistoriquesController extends DashboardController implements Initializable {
 
+    @FXML private VBox boxAll;
     private int cpt = 0;
     @FXML private ImageView imgReloadSync;
     @FXML private GridPane historiques;
@@ -29,6 +30,9 @@ public class HistoriquesController extends DashboardController implements Initia
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        FadeTransition();
+        ImageTransition();
 
         EventHandler<MouseEvent> closeButtonEvent = new EventHandler<MouseEvent>() {
             @Override

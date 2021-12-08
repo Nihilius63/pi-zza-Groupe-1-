@@ -94,12 +94,12 @@
 
 .boxHistory, .boxTable {
     -fx-background-color: #2969c0;
-    -fx-background-radius: 50px;
+    -fx-background-radius: 15px;
     -fx-padding: 10px;
     -fx-border-insets: 10px;
     -fx-background-insets: 10px;
     -fx-border-color: white;
-    -fx-border-radius: 50px;
+    -fx-border-radius: 15px;
     -fx-border-width: 1px;
 }
 
@@ -214,14 +214,16 @@
 }
 
 .infoButton {
+    -fx-background-color: #04081F;
     -fx-font-size: 15px;
     -fx-text-fill: white;
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-background-color: #04081F;
+
 }
 
 .infoButton:hover {
-    -fx-background-color: #182254;
+    -fx-background-color: white;
+    -fx-text-fill: #04081F;
 }
 
 .buttonAdd {
@@ -255,7 +257,7 @@
 }
 
 .boxProduit {
-    -fx-background-color: #00369B;
+    -fx-background-color: #2969c0;
     -fx-padding: 10px;
     -fx-border-insets: 10px;
     -fx-background-insets: 10px;
@@ -302,7 +304,8 @@
 }
 
 .buttonProduit:hover, .buttonProduitSupr:hover {
-    -fx-background-color: #181f56;
+    -fx-background-color: white;
+    -fx-text-fill: #04081F;
 }
 
 .textfieldsModif {
@@ -342,4 +345,10 @@
 .space {
     -fx-padding: 30px 0px 0px 0px;
     -fx-spacing: 15px;
+}
+
+.errorMsg {
+    -fx-text-fill: #c12020;
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial Rounded MT Bold";
 }

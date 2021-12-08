@@ -2,6 +2,7 @@ package com.sio.pi_zza;
 
 import com.sio.pi_zza.DTO.tableInfoDTO;
 import com.sio.pi_zza.DAO.tablesDAO;
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
@@ -27,10 +28,78 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
+    @FXML private VBox boxAll;
     @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
     private int cpt = 0;
     @FXML private GridPane tables;
+
+    public void FadeTransition(){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(1000));
+        fadeTransition.setNode(boxAll);
+        fadeTransition.setFromValue(0.8);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
+    public void FadeScene(VBox vbox) {
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(650));
+        fadeTransition.setNode(vbox);
+        fadeTransition.setFromValue(0.8);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
+    public void TransitionButton(Button button){
+        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                FadeTransition fadeTransition = new FadeTransition();
+                fadeTransition.setDuration(Duration.millis(500));
+                fadeTransition.setNode(button);
+                fadeTransition.setFromValue(0.2);
+                fadeTransition.setToValue(1);
+                fadeTransition.play();
+            }
+        });
+
+        button.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                FadeTransition fadeTransition = new FadeTransition();
+                fadeTransition.setDuration(Duration.millis(500));
+                fadeTransition.setNode(button);
+                fadeTransition.setFromValue(0.2);
+                fadeTransition.setToValue(1);
+                fadeTransition.play();
+            }
+        });
+    }
+    public void ImageTransition() {
+        closeImg.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                FadeTransition fadeTransition = new FadeTransition();
+                fadeTransition.setDuration(Duration.millis(700));
+                fadeTransition.setNode(closeImg);
+                fadeTransition.setFromValue(0.2);
+                fadeTransition.setToValue(1);
+                fadeTransition.play();
+            }
+        });
+
+        closeImg.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                FadeTransition fadeTransition = new FadeTransition();
+                fadeTransition.setDuration(Duration.millis(700));
+                fadeTransition.setNode(closeImg);
+                fadeTransition.setFromValue(0.2);
+                fadeTransition.setToValue(1);
+                fadeTransition.play();
+            }
+        });
+    }
 
     @FXML
     public void closeButton() {
@@ -39,6 +108,8 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        FadeTransition();
+        ImageTransition();
 
         EventHandler<MouseEvent> closeButtonEvent = new EventHandler<MouseEvent>() {
             @Override
@@ -75,6 +146,7 @@ public class DashboardController implements Initializable {
             nbrPlace.getStyleClass().add("textTable");
             nbrPersonne.getStyleClass().add("textTable");
             infoSupl.getStyleClass().add("infoButton");
+            TransitionButton(infoSupl);
 
             vbo.getChildren().add(numTable);
             vbo.getChildren().add(nbrPlace);
@@ -107,6 +179,7 @@ public class DashboardController implements Initializable {
                 Stage errorTable = new Stage();
                 errorTable.initStyle(StageStyle.UNDECORATED);
                 VBox box = new VBox();
+                FadeScene(box);
                 box.setAlignment(Pos.CENTER);
                 box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
                 box.getStyleClass().add("boxNo");

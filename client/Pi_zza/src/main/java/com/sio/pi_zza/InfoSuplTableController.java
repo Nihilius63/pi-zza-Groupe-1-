@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 
 public class InfoSuplTableController extends DashboardController implements Initializable {
 
+    @FXML private VBox boxAll;
     @FXML private ImageView imgReloadSync;
     @FXML private ImageView closeImg;
     @FXML public Label numeroTable;
@@ -50,6 +51,10 @@ public class InfoSuplTableController extends DashboardController implements Init
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        FadeTransition();
+        ImageTransition();
+
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -92,13 +97,14 @@ public class InfoSuplTableController extends DashboardController implements Init
         imgTables.setImage(imgTable);
         gridInfoCommande = new GridPane();
         compteur = 0;
-        bloc = new VBox();
 
         if(totalCommande != 0) {
             for (int i = 0; i < jsonCommande.length(); i++) {
                 JSONObject json1 = new JSONObject(jsonCommande.get(i).toString());
                 int idCommande = Integer.parseInt((String) json1.get("idCommande"));
                 int idTable = Integer.parseInt((String) json1.get("idTables"));
+
+                bloc = new VBox();
 
                 bloc.setPrefWidth(311);
                 bloc.maxWidth(311);
@@ -197,9 +203,10 @@ public class InfoSuplTableController extends DashboardController implements Init
                         };
                         suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
 
+                        gridInfoCommande.add(bloc, 0, compteur);
                         compteur++;
                     }
-                    gridInfoCommande.add(bloc, 0, compteur);
+
                 } else {
                     VBox blocProduit = new VBox();
                     blocProduit.setAlignment(Pos.TOP_CENTER);
@@ -250,6 +257,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         Stage suprCommandeStage = new Stage();
         suprCommandeStage.initStyle(StageStyle.UNDECORATED);
         VBox box = new VBox();
+        FadeScene(box);
         box.setAlignment(Pos.CENTER);
         box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
         box.getStyleClass().add("boxNo");
@@ -260,7 +268,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         suprCommandeStage.setScene(suprCommandeScene);
         suprCommandeStage.show();
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(time -> {
             try {
                 suprCommandeStage.hide();
@@ -274,15 +282,12 @@ public class InfoSuplTableController extends DashboardController implements Init
     }
 
     public void suprProduitCommande(int idCommande, int idProduit, int idTables) {
-        if(contientDAO.getContientByIdCommande(idCommande).length() == 1) {
-            commandeDAO.deleteByIdCommande(idCommande);
-        } else {
-            contientDAO.deleteContientByIdCommandeProduit(idCommande, idProduit);
-        }
+        contientDAO.deleteContientByIdCommandeProduit(idCommande, idProduit);
 
         Stage suprProduitCommande = new Stage();
         suprProduitCommande.initStyle(StageStyle.UNDECORATED);
         VBox box = new VBox();
+        FadeScene(box);
         box.setAlignment(Pos.CENTER);
         box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
         box.getStyleClass().add("boxNo");
@@ -293,7 +298,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         suprProduitCommande.setScene(suprCommandeScene);
         suprProduitCommande.show();
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(time -> {
                     try {
                         suprProduitCommande.hide();
@@ -338,6 +343,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         Stage innocupeTable = new Stage();
         innocupeTable.initStyle(StageStyle.UNDECORATED);
         VBox box = new VBox();
+        FadeScene(box);
         box.setAlignment(Pos.CENTER);
         box.getStylesheets().add(String.valueOf(getClass().getResource("/assets/css/StylePrimary.css")));
         box.getStyleClass().add("boxNo");
@@ -348,7 +354,7 @@ public class InfoSuplTableController extends DashboardController implements Init
         innocupeTable.setScene(suprCommandeScene);
         innocupeTable.show();
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(time -> {
                     try {
                         innocupeTable.hide();
