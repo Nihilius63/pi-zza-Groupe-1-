@@ -67,7 +67,7 @@ window.onload=function()
 
     function addProduit(event)
     {
-        getProduit(event.alt,1)
+        getProduit(event.alt,1,0)
     }
 
     function supprimerProduit(event)
@@ -81,7 +81,7 @@ window.onload=function()
         gauche.appendChild(parent);
     }
 
-    function getProduit(id,quantites){
+    function getProduit(id,quantites,old){
         let prod=document.getElementById("idProduit"+id)
         if (prod) 
         {
@@ -128,9 +128,10 @@ window.onload=function()
                         colonne3.setAttribute("class","colonne");
                         let quantite=document.createElement("p");
                         quantite.innerHTML="Quantite";
-                        let quantiteProduit=document.createElement("p");
+                        let quantiteProduit=document.createElement("input");
+                        quantiteProduit.setAttribute("type","number");
                         quantiteProduit.setAttribute("id","quantiteProduit"+id)
-                        quantiteProduit.innerHTML=quantites;
+                        quantiteProduit.value=quantites;
                         colonne3.appendChild(quantite)
                         colonne3.appendChild(quantiteProduit)
                         divligne.appendChild(colonne3)
@@ -205,9 +206,14 @@ window.onload=function()
                         colonne3.setAttribute("class","colonne");
                         let quantite=document.createElement("p");
                         quantite.innerHTML="Quantite";
-                        let quantiteProduit=document.createElement("p");
+                        let quantiteProduit=document.createElement("input");
+                        quantiteProduit.setAttribute("type","number");
                         quantiteProduit.setAttribute("id","quantiteProduit"+id)
-                        quantiteProduit.innerHTML=quantites;
+                        if (old==1)
+                        {
+                            quantiteProduit.setAttribute("class","old")
+                        }
+                        quantiteProduit.value=quantites;
                         colonne3.appendChild(quantite)
                         colonne3.appendChild(quantiteProduit)
                         divligne.appendChild(colonne3)
@@ -291,7 +297,7 @@ window.onload=function()
         addContient();
     }
     function updateQuantite(idProduit) {
-        let qteProduit=document.getElementById("quantiteProduit"+idProduit).innerHTML
+        let qteProduit=document.getElementById("quantiteProduit"+idProduit).value
         let produit=document.getElementById("quantiteProduit"+idProduit)
         let object= new Object();
         object.idCommande=1;
@@ -302,7 +308,7 @@ window.onload=function()
         requestPost.addEventListener("readystatechange",function(){
             if (requestPost.readyState== 4) {
                 if (requestPost.status == 200) {
-                    produit.innerHTML=object.quantite
+                    produit.value=object.quantite
                 }
                 else {
                     console.log(requestPost.status);
@@ -311,6 +317,10 @@ window.onload=function()
         });
         requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/contient");
         requestPost.send(jsonencode);
+    }
+    function updateProduit(id)
+    {
+        
     }
     function update(id){
         let produit=document.querySelectorAll("div.ligne");
@@ -402,24 +412,50 @@ window.onload=function()
             let object= new Object();
             object.idCommande=idcommande.id;
             object.idProduit=el.id.substring(9);
-            object.quantite=document.querySelector("p#quantiteProduit"+object.idProduit).innerHTML;
+            object.quantite=document.querySelector("input#quantiteProduit"+object.idProduit).value;
             let jsonencode=JSON.stringify(object);
-            let requestPost=new XMLHttpRequest();
-            console.log(jsonencode);
-            requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) 
+            if (document.querySelector("input#quantiteProduit"+object.idProduit).getAttribute("class")=="old")
             {
-                if (requestPost.status == 200) 
+                let requestPost=new XMLHttpRequest();
+                console.log(jsonencode);
+                requestPost.addEventListener("readystatechange",function()
                 {
-                    
-                }
-                else {
-                    console.log(requestPost1.status);
-                }
+                    if (requestPost.readyState== 4) 
+                    {
+                        if (requestPost.status == 200) 
+                        {
+
+                        }
+                        else 
+                        {
+                            console.log(requestPost1.status);
+                        }
+                    }
+                });
+                requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/contient");
+                requestPost.send(jsonencode);
             }
-        });
-        requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/contient");
-        requestPost.send(jsonencode);
+            else
+            {
+                let requestPost=new XMLHttpRequest();
+                console.log(jsonencode);
+                requestPost.addEventListener("readystatechange",function()
+                {
+                    if (requestPost.readyState== 4) 
+                    {
+                        if (requestPost.status == 200) 
+                        {
+
+                        }
+                        else 
+                        {
+                            console.log(requestPost1.status);
+                        }
+                    }
+                });
+                requestPost.open("POST","http://localhost/pi-zza-Groupe-1-/server/contient");
+                requestPost.send(jsonencode);
+            }
         });
     }
     function valide()
@@ -474,7 +510,7 @@ window.onload=function()
                     let objet=JSON.parse(requestPost.responseText);
                     objet.forEach((obj)=>
                     {
-                        getProduit(obj.idProduit,obj.quantite);
+                        getProduit(obj.idProduit,obj.quantite,1);
                     });
                 }
                 else 
