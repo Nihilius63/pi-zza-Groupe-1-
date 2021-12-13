@@ -1,6 +1,5 @@
 window.onload=function()
 {
-    var nouv=0;
     function addsupprevent(){
         let supprimer=document.querySelectorAll(".imgdelete");
         supprimer.forEach((el)=> {
@@ -26,6 +25,7 @@ window.onload=function()
         });
 
         let modif=document.getElementById("modifNbPersonne");
+        let nbPlaces=document.querySelector("input#nbPlaces").value
         modif.addEventListener("click",function(){
             if (modif.getAttribute("value","Modifier")=="Modifier") {
                 modif.previousElementSibling.remove();
@@ -43,7 +43,14 @@ window.onload=function()
                 let inputhidden1=document.createElement("input")
                 let inputhidden2=document.createElement("input")
                 let p = document.createElement("p")
-                p.innerHTML=document.getElementById("inputFondBlanc").value
+                if (document.getElementById("inputFondBlanc").value<=nbPlaces && document.getElementById("inputFondBlanc").value>=0)
+                {
+                    p.innerHTML=document.getElementById("inputFondBlanc").value
+                }
+                else
+                {
+                    p.innerHTML="Erreur NbPersonne"
+                }
                 elementParent.append(p)
                 input.setAttribute("id","modifNbPersonne")
                 input.setAttribute("type","button")
@@ -52,7 +59,7 @@ window.onload=function()
                 inputhidden2.setAttribute("value",document.getElementById("idTable").value)
                 inputhidden2.setAttribute("type","hidden")
                 inputhidden1.setAttribute("id","nbPlaces")
-                inputhidden1.setAttribute("value",document.getElementById("inputFondBlanc").value)
+                inputhidden1.setAttribute("value",nbPlaces)
                 inputhidden1.setAttribute("type","hidden")
                 elementParent.innerHTML="";
                 elementParent.append(p)
@@ -226,7 +233,8 @@ window.onload=function()
                         imgDelete.setAttribute("alt",obj.idProduit)
                         divdelete.appendChild(imgDelete)
                         divligne.appendChild(divdelete)
-                        divdelete.addEventListener("click", function() {
+                        divdelete.addEventListener("click", function() 
+                        {
                             supprimerProduit(divdelete)
                         });
 
@@ -243,34 +251,73 @@ window.onload=function()
             requestPost.send();
         }
     }
-    function changeNbPlaces() {
-
+    function changeNbPlaces() 
+    {
         let object= new Object();
         object.idTables=document.getElementById("idTable").value;
         object.nbPlaces=document.getElementById("nbPlaces").value;
         object.nbPersonne=document.getElementById("inputFondBlanc").value;
-
         let jsonencode=JSON.stringify(object);
         console.log(jsonencode)
-        let requestPost=new XMLHttpRequest();
-        requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) {
-                if (requestPost.status == 200) {
+        if(object.nbPersonne<=object.nbPlaces)
+        {
+            let requestPost=new XMLHttpRequest();
+            requestPost.addEventListener("readystatechange",function(){
+                if (requestPost.readyState== 4) {
+                    if (requestPost.status == 200) {
+                    }
+                    else 
+                    {
+                        console.log(requestPost.status);
+                    }
                 }
-                else {
-                    console.log(requestPost.status);
-                }
-            }
-        });
+            });
 
-        requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/tables");
-        requestPost.send(jsonencode);
+            requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/tables");
+            requestPost.send(jsonencode);
+            let commande=document.querySelector("div.commande");
+            let gauche=document.querySelector("div#gauche");
+            if (commande)
+            {
+                gauche.removeChild(commande)
+            }
+            let lignecommande=document.querySelectorAll("div.lignecommande")
+            if (lignecommande)
+            {
+                lignecommande.forEach((el)=>
+                {
+                    gauche.removeChild(el);
+                });
+            }
+            if(object.nbPersonne>0)
+            {
+                returner();
+            }
+        }
+        else
+        {
+            let commande=document.querySelector("div.commande");
+            let gauche=document.querySelector("div#gauche");
+            if (commande)
+            {
+                gauche.removeChild(commande)
+            }
+            let lignecommande=document.querySelectorAll("div.lignecommande")
+            if (lignecommande)
+            {
+                lignecommande.forEach((el)=>
+                {
+                    gauche.removeChild(el);
+                });
+            }
+        }
     }
 
     function addCommand() 
     {
         let nouv=document.querySelector("div.nouv")
-        if(nouv)
+        let produit=document.querySelectorAll("div.produit");
+        if(nouv && typeof(produit[0])=='object')
         {
             let object=new Object();
             object.idTables=document.getElementById("idTable").value;
@@ -317,10 +364,6 @@ window.onload=function()
         });
         requestPost.open("PUT","http://localhost/pi-zza-Groupe-1-/server/contient");
         requestPost.send(jsonencode);
-    }
-    function updateProduit(id)
-    {
-        
     }
     function update(id){
         let produit=document.querySelectorAll("div.ligne");
@@ -414,7 +457,7 @@ window.onload=function()
             object.idProduit=el.id.substring(9);
             object.quantite=document.querySelector("input#quantiteProduit"+object.idProduit).value;
             let jsonencode=JSON.stringify(object);
-            if (document.querySelector("input#quantiteProduit"+object.idProduit).getAttribute("class")=="old")
+            if (document.querySelector("input#quantiteProduit"+object.idProduit).getAttribute("class")=="old" && object.quantite>=1)
             {
                 let requestPost=new XMLHttpRequest();
                 console.log(jsonencode);
@@ -555,21 +598,42 @@ window.onload=function()
             let jsonencode=JSON.stringify(object);
             console.log(jsonencode);
             let requestPost=new XMLHttpRequest();
-            requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) 
+            requestPost.addEventListener("readystatechange",function()
             {
-                if (requestPost.status == 200) 
+                if (requestPost.readyState== 4) 
                 {
-                    
+                    if (requestPost.status == 200) 
+                    {
+
+                    }
+                    else {
+                        console.log(requestPost1.status);
+                    }
                 }
-                else {
-                    console.log(requestPost1.status);
+            });
+            requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+object.idCommande+"/"+object.idProduit);
+            requestPost.send();
+        });
+        let reste=document.querySelectorAll("div.produit");
+        if(typeof(reste[0])!='object')
+        {
+            let requestPost=new XMLHttpRequest();
+            requestPost.addEventListener("readystatechange",function(){
+                if (requestPost.readyState== 4) 
+                {
+                    if (requestPost.status == 200) 
+                    {
+
+                    }
+                    else 
+                    {
+                        console.log(requestPost.status);
+                    }
                 }
-            }
-        });
-        requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/contient/"+object.idCommande+"/"+object.idProduit);
-        requestPost.send();
-        });
+            });
+            requestPost.open("DELETE","http://localhost/pi-zza-Groupe-1-/server/commande/"+idcommande.id);
+            requestPost.send();
+        }    
     }
     function returner()
     {
@@ -583,7 +647,10 @@ window.onload=function()
         }
         gauche.removeChild(valid);
         gauche.removeChild(document.querySelector("div.result"));
-        gauche.removeChild(document.querySelector("br"));
+        if (document.querySelector("br"))
+        {
+            gauche.removeChild(document.querySelector("br"));
+        }
         produit.forEach((el)=>
         {
             gauche.removeChild(el)
