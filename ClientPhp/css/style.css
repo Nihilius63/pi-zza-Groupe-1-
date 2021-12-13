@@ -39,6 +39,7 @@ html body .content .droite .affichageTable .carte img { height: 80%; width: 80%;
 html body .droitetable { height: 100%; background-color: #202332; width: 100%; color: white; text-align: center; padding-bottom: 20px; }
 @media (min-width: 750px) { html body .droitetable { width: 30%; } }
 html body .droitetable #hidden { display: none; }
+html body .droitetable .hidden { display: none; }
 html body .droitetable .nbPersonne { justify-content: center; align-items: center; display: flex; }
 html body .droitetable .nbPersonne p { margin-right: 10px; font-size: 25px; }
 @media (min-width: 750px) { html body .droitetable .nbPersonne p { font-size: unset; } }

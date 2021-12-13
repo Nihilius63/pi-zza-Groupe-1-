@@ -79,12 +79,17 @@ window.onload=function()
 
     function supprimerProduit(event)
     {
-        let parent=event.parentNode.parentNode
+        let parent=event.parentNode.parentNode.parentNode
         let gauche=document.querySelector("div#gauche");
-        gauche.removeChild(parent);
         parent.setAttribute("class","del");
-        let child=parent.querySelector('div.ligne2');
-        parent.removeChild(child);
+        if (document.querySelector("input#quantiteProduit"+parent.id.substring(9)).getAttribute("class")=="old")
+        {
+           parent.setAttribute("alt","old");
+        }
+        while (parent.firstChild) 
+        {
+            parent.removeChild(parent.lastChild);
+        }
         gauche.appendChild(parent);
     }
 
@@ -138,6 +143,10 @@ window.onload=function()
                         let quantiteProduit=document.createElement("input");
                         quantiteProduit.setAttribute("type","number");
                         quantiteProduit.setAttribute("id","quantiteProduit"+id)
+                        if (prod.getAttribute("alt")=="old")
+                        {
+                            quantiteProduit.setAttribute("class","old");
+                        }
                         quantiteProduit.value=quantites;
                         colonne3.appendChild(quantite)
                         colonne3.appendChild(quantiteProduit)
@@ -352,12 +361,16 @@ window.onload=function()
         object.quantite=parseInt(qteProduit)+1;
         let jsonencode=JSON.stringify(object);
         let requestPost=new XMLHttpRequest();
-        requestPost.addEventListener("readystatechange",function(){
-            if (requestPost.readyState== 4) {
-                if (requestPost.status == 200) {
+        requestPost.addEventListener("readystatechange",function()
+        {
+            if (requestPost.readyState== 4) 
+            {
+                if (requestPost.status == 200) 
+                {
                     produit.value=object.quantite
                 }
-                else {
+                else 
+                {
                     console.log(requestPost.status);
                 }
             }
@@ -527,6 +540,8 @@ window.onload=function()
         {
             Gauche.removeChild(el);
         });
+        let acache=document.querySelector("input#modifNbPersonne");
+        acache.setAttribute("class", "hidden");
         let cache=document.querySelectorAll("div#hidden");
         cache.forEach((el)=> 
         {
@@ -646,6 +661,8 @@ window.onload=function()
             gauche.removeChild(nouv);
         }
         gauche.removeChild(valid);
+        let acache=document.querySelector("input#modifNbPersonne");
+        acache.setAttribute("class", "hid");
         gauche.removeChild(document.querySelector("div.result"));
         if (document.querySelector("br"))
         {
