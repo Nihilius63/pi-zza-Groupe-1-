@@ -76,14 +76,15 @@ public class InfoSuplTableController extends DashboardController implements Init
         retour.addEventHandler(MouseEvent.MOUSE_CLICKED, eventReturn);
 
         int idTables = tableInfoDTO.idTable;
-        int nbPersonne = tableInfoDTO.nbPersonne;
-        int nbPlaces = tableInfoDTO.nbPlace;
+
+        JSONObject jsonTables = tablesDAO.getTablesById(idTables);
+        int nbPersonne = Integer.parseInt((String) jsonTables.get("nbPersonne"));
+        int nbPlaces = Integer.parseInt((String) jsonTables.get("nbPlaces"));
 
         float sommeCommande = 0;
         int totalCommande = 0;
 
         JSONArray jsonCommande = commandeDAO.getCommandeByIdTables(idTables);
-
         totalCommande = jsonCommande.length();
 
         if(nbPlaces <= 2) {
@@ -202,10 +203,10 @@ public class InfoSuplTableController extends DashboardController implements Init
                             }
                         };
                         suprProduct.addEventHandler(MouseEvent.MOUSE_CLICKED, eventSuprProduct);
-
-                        gridInfoCommande.add(bloc, 0, compteur);
-                        compteur++;
                     }
+
+                    gridInfoCommande.add(bloc, 0, compteur);
+                    compteur++;
 
                 } else {
                     VBox blocProduit = new VBox();
@@ -223,13 +224,14 @@ public class InfoSuplTableController extends DashboardController implements Init
             scrollCommande.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         } else {
-            bloc.setAlignment(Pos.TOP_CENTER);
-            bloc.getStyleClass().add("boxListeCommande");
+            VBox blocs = new VBox();
+            blocs.setAlignment(Pos.TOP_CENTER);
+            blocs.getStyleClass().add("boxListeCommande");
             Label ttile = new Label("   Aucune commande effectué !   ");
             ttile.setAlignment(Pos.CENTER);
             ttile.getStyleClass().add("textProduitLitlle");
-            bloc.getChildren().add(ttile);
-            gridInfoCommande.add(bloc, 0, compteur);
+            blocs.getChildren().add(ttile);
+            gridInfoCommande.add(blocs, 0, compteur);
             compteur++;
         }
 

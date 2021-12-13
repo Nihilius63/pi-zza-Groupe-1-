@@ -150,17 +150,18 @@
                   <RowConstraints />
                </rowConstraints>
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="730.0" styleClass="titleBar" text="HISTORIQUE" textAlignment="CENTER">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </Label>
+                  <VBox alignment="TOP_CENTER" prefHeight="53.0" prefWidth="754.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="730.0" styleClass="titleBar" text="HISTORIQUE" textAlignment="CENTER">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
                   <ScrollPane prefHeight="486.0" prefWidth="780.0" styleClass="scrollPane" GridPane.rowIndex="1">
                      <content>
                         <GridPane fx:id="historiques" prefHeight="0.0" prefWidth="739.0">
