@@ -4,38 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c242255a-46d9-4123-909b-a0a4cb4793c4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/InfoSuplTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sio/pi_zza/InfoSuplTableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/AddProduitsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/HistoriquesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/InfoSuplTableController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sio/pi_zza/ProduitsController.class" afterDir="false" />
-    </list>
+    <list default="true" id="c242255a-46d9-4123-909b-a0a4cb4793c4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +42,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ClientPhp" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -140,6 +109,7 @@
       <workItem from="1638571678358" duration="1974000" />
       <workItem from="1638910468741" duration="2562000" />
       <workItem from="1639405222148" duration="2912000" />
+      <workItem from="1639678320046" duration="603000" />
     </task>
     <servers />
   </component>

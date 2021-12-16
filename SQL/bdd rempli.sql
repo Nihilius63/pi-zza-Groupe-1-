@@ -88,7 +88,7 @@ CREATE TABLE `tables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `tables` (`idTables`, `nbPlaces`, `nbPersonne`) VALUES
-(1, 10, 0),
+(1, 9, 0),
 (2, 2, 0),
 (3, 2, 0),
 (4, 4, 0),
@@ -97,7 +97,7 @@ INSERT INTO `tables` (`idTables`, `nbPlaces`, `nbPersonne`) VALUES
 (7, 6, 0),
 (8, 8, 0),
 (9, 5, 0),
-(10, 12, 0),
+(10, 9, 0),
 (11, 4, 0),
 (12, 4, 0),
 (13, 6, 0),
