@@ -10,7 +10,7 @@ include_once ("php/DAOCategorie.php");
 <div class="content" >
     <div id="gauche">
         <h1> Commandes </h1>
-        <div class='errCommandeInfo'>Veuillez rentrer un nombre de personnes !</div>
+        
 <?php
 $commandes=DAOCommande::getCommandeByIdTable($_GET["idTable"]);
 $tables=DAOTables::getTableById($_GET['idTable']);
@@ -21,6 +21,10 @@ if ($tables->nbPersonne >=1)
     {   
         echo "<div class='lignecommande' id=".$commande->idCommande."><div id=".$commande->idCommande." class='commande'><p>Commande N°".$commande->idCommande."</p></div><div class='trash'> <i class='fas fa-trash-alt'></i><br></div></div>"; 
     }
+}
+else
+{
+    echo "<div class='errCommandeInfo'>Veuillez rentrer un nombre de personnes !</div>";
 }
 ?>
         <div class="valider" id="hidden">

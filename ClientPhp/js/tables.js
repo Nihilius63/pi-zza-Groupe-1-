@@ -309,6 +309,11 @@ window.onload=function()
             requestPost.send(jsonencode);
             let commande=document.querySelector("div.commande");
             let gauche=document.querySelector("div#gauche");
+            let msg=document.querySelector("div.errCommandeInfo")
+            if (msg)
+            {
+                gauche.removeChild(msg)
+            }
             if (commande)
             {
                 gauche.removeChild(commande)
@@ -325,11 +330,25 @@ window.onload=function()
             {
                 returner();
             }
+            if(object.nbPersonne==0)
+            {
+                let colonne1=document.createElement("div");
+                colonne1.setAttribute("class","errCommandeInfo");
+                colonne1.innerText="Veuillez rentrer un nombre de personnes !";
+                gauche.appendChild(colonne1)
+            }
         }
         else
         {
-            let commande=document.querySelector("div.commande");
             let gauche=document.querySelector("div#gauche");
+            if (object.nbPersonne!=0)
+            {
+                let colonne1=document.createElement("div");
+                colonne1.setAttribute("class","errCommandeInfo");
+                colonne1.innerText="Nombre de Personne invalide";
+                gauche.appendChild(colonne1)
+            }
+            let commande=document.querySelector("div.commande");
             if (commande)
             {
                 gauche.removeChild(commande)
