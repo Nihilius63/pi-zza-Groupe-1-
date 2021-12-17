@@ -43,7 +43,7 @@ window.onload=function()
                 let inputhidden1=document.createElement("input")
                 let inputhidden2=document.createElement("input")
                 let p = document.createElement("p")
-                if (document.getElementById("inputFondBlanc").value<=nbPlaces && document.getElementById("inputFondBlanc").value>=0)
+                if (parseInt(document.getElementById("inputFondBlanc").value)<=parseInt(nbPlaces) && parseInt(document.getElementById("inputFondBlanc").value)>=0)
                 {
                     p.innerHTML=document.getElementById("inputFondBlanc").value
                 }
@@ -163,8 +163,16 @@ window.onload=function()
                         divdelete.addEventListener("click", function() {
                             supprimerProduit(divdelete)
                         });
-
                         gauche.appendChild(prod)
+                        gauche.removeChild(document.querySelector("div.valider"))
+                        let valider = document.createElement("div");
+                        valider.setAttribute("class","valider");
+                        valider.setAttribute("id","hid");
+                        let pvalider = document.createElement("p");
+                        pvalider.innerHTML="Valider";
+                        valider.appendChild(pvalider);
+                        gauche.appendChild(valider);
+                        addValide()
                     }
                     else 
                     {
@@ -248,8 +256,18 @@ window.onload=function()
                         });
 
                         gauche.appendChild(divproduit)
+                        gauche.removeChild(document.querySelector("div.valider"))
+                        let valider = document.createElement("div");
+                        valider.setAttribute("class","valider");
+                        valider.setAttribute("id","hid");
+                        let pvalider = document.createElement("p");
+                        pvalider.innerHTML="Valider";
+                        valider.appendChild(pvalider);
+                        gauche.appendChild(valider);
+                        addValide()
                     }
-                    else {
+                    else 
+                    {
                         console.log(requestPost.status);
                     }
                 }
@@ -263,9 +281,9 @@ window.onload=function()
     function changeNbPlaces() 
     {
         let object= new Object();
-        object.idTables=document.getElementById("idTable").value;
-        object.nbPlaces=document.getElementById("nbPlaces").value;
-        object.nbPersonne=document.getElementById("inputFondBlanc").value;
+        object.idTables=parseInt(document.getElementById("idTable").value);
+        object.nbPlaces=parseInt(document.getElementById("nbPlaces").value);
+        object.nbPersonne=parseInt(document.getElementById("inputFondBlanc").value);
         let jsonencode=JSON.stringify(object);
         console.log(jsonencode)
         if(object.nbPersonne<=object.nbPlaces)
