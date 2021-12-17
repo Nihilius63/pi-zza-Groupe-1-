@@ -10,7 +10,7 @@ include_once ("php/DAOCategorie.php");
 <div class="content" >
     <div id="gauche">
         <h1> Commandes </h1>
-
+        <div class='errCommandeInfo'>Veuillez rentrer un nombre de personnes !</div>
 <?php
 $commandes=DAOCommande::getCommandeByIdTable($_GET["idTable"]);
 $tables=DAOTables::getTableById($_GET['idTable']);

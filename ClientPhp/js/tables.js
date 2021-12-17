@@ -230,6 +230,7 @@ window.onload=function()
                         colonne3.setAttribute("class","colonne");
                         let quantite=document.createElement("p");
                         quantite.innerHTML="Quantite";
+                        let pInput = document.createElement("p");
                         let quantiteProduit=document.createElement("input");
                         quantiteProduit.setAttribute("type","number");
                         quantiteProduit.setAttribute("id","quantiteProduit"+id)
@@ -238,10 +239,13 @@ window.onload=function()
                             quantiteProduit.setAttribute("class","old")
                         }
                         quantiteProduit.value=quantites;
+                        pInput.appendChild(quantiteProduit)
                         colonne3.appendChild(quantite)
-                        colonne3.appendChild(quantiteProduit)
+                        colonne3.appendChild(pInput)
                         divligne.appendChild(colonne3)
 
+                        let colonneDelete = document.createElement("div");
+                        colonneDelete.setAttribute("class", "colonne");
                         let divdelete = document.createElement("div");
                         divdelete.setAttribute("class","delete");
                         let imgDelete=document.createElement("img")
@@ -249,7 +253,8 @@ window.onload=function()
                         imgDelete.setAttribute("src","img/delete.png");
                         imgDelete.setAttribute("alt",obj.idProduit)
                         divdelete.appendChild(imgDelete)
-                        divligne.appendChild(divdelete)
+                        colonneDelete.appendChild(divdelete)
+                        divligne.appendChild(colonneDelete)
                         divdelete.addEventListener("click", function() 
                         {
                             supprimerProduit(divdelete)

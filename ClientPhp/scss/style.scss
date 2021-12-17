@@ -43,6 +43,10 @@ html {
         display: flex;
       }
       #gauche {
+        .errCommandeInfo {
+          font-size: 30px;
+          color: red;
+        }
         #hidden {
           display: none;
         }
@@ -114,6 +118,9 @@ html {
             }
             .colonne {
               width: 15%;
+              .old {
+                width: 75px;
+              }
             }
             img {
               width: 75px;
@@ -166,6 +173,7 @@ html {
             margin-right: 40px;
           }
           a{
+            margin-top: 35px;
             text-decoration: none;
             color: black;
           }

@@ -25,6 +25,7 @@ class DAOTables {
         foreach($liste as $value){
             $string ="<a href='table.php?idTable=".$value->idTables."'>";
             $string=$string.'<div class="carte">';
+            $string=$string.'<p> Table '.$value->idTables.'</p>';
             if ($value->nbPlaces>3 && $value->nbPlaces<6){
                 $string=$string.'<img src="img/table4p.png" alt="">';
             }
@@ -34,7 +35,7 @@ class DAOTables {
             elseif ($value->nbPlaces>=6) {
                 $string=$string.'<img src="img/table6.png" alt="">';
             }
-            $string=$string.'<p> Table '.$value->idTables.'  </p>';
+            $string=$string.'<p>'. $value->nbPlaces .' Places </p>';
             if ($value->nbPersonne>0){
                 $string=$string. '<i class="fas fa-exclamation-triangle red"> Occupé '.$value->nbPersonne.' Personne</i> </div>';
             }
